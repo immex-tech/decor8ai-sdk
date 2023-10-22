@@ -30,3 +30,4 @@ response = generate_designs(
 )
 
 # The response is a JSON object containing the generated designs and other information.
+```
