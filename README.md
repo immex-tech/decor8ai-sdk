@@ -12,14 +12,16 @@ You can install the Decor8 AI Python SDK using pip:
 pip install decor8ai
 ```
 
+## Add Decor8 AI API key
+
+```bash
+export DECOR8AI_API_KEY='<YOUR_API_KEY>'
+```
+
 ## Usage
 
 ```python
 from decor8ai import generate_designs
-
-# Set the Decor8 AI API key in your environment
-import os
-os.environ['DECOR8AI_API_KEY'] = '<YOUR_API_KEY>'
 
 # Generate designs
 response = generate_designs(
