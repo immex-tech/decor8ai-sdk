@@ -11,7 +11,7 @@ num_images = 1
 response_json = generate_designs(input_image, room_type, design_style, num_images)
 
 # Now you can work with response_json as a normal dictionary
-# print(response_json)
+print(response_json)
 
 # Show the images
 images = response_json.get("info", {}).get("images", [])
