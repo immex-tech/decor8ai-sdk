@@ -10,6 +10,7 @@ You can install the Decor8 AI Python SDK using pip:
 
 ```bash
 pip install decor8ai
+```bash
 
 ## Usage
 
