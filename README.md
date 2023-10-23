@@ -14,7 +14,14 @@ pip install decor8ai
 
 ## Add Decor8 AI API key
 
-Sign in to ![Decor8 AI](https://prod-app.decor8.ai)
+Sign in to [Decor8 AI](https://prod-app.decor8.ai)
+
+Click on Profile Photo on Top Left
+
+![Navigate To Generate API Key] 
+
+Click Generate API Key
+![Generate API Key]
 
 ```bash
 export DECOR8AI_API_KEY='<YOUR_API_KEY>'
