@@ -12,7 +12,7 @@ def generate_designs(input_image, room_type, design_style, num_captions = None, 
         except ValueError:
             return False
     
-    url = 'http://localhost:8000/generate_designs'
+    url = 'https://prod-app.decor8.ai:8000/generate_designs'
     token = os.environ.get('DECOR8AI_API_KEY')
     if not token:
         raise Exception("DECOR8AI_API_KEY environment variable is not set.")
