@@ -14,6 +14,8 @@ pip install decor8ai
 
 ## Add Decor8 AI API key
 
+Sign in to ![Decor8 AI](https://prod-app.decor8.ai)
+
 ```bash
 export DECOR8AI_API_KEY='<YOUR_API_KEY>'
 ```
