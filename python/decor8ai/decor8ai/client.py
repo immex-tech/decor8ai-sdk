@@ -40,7 +40,6 @@ def prime_the_room_walls(input_image):
         }
         
         response = requests.post(url + '/prime_the_room_walls', headers=headers, files=files)
-        print (response.text)
         response_json = json.loads(response.text)
         
         return response_json
