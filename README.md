@@ -1,7 +1,7 @@
 # Decor8 AI SDK
 Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
 
-You can choose from 35+ interior design styles and 20+ room types to create unique interior design styles for your space.
+You can choose from [35+ interior design styles](https://www.decor8.ai/ai-interior-design-styles) and [20+ room types](https://www.decor8.ai/ai-interior-design-room-types) to create unique interior design styles for your space.
 
 The app specializes in virtual staging, transforming empty spaces into vivid, attractive interiors, enhancing their appeal for better marketability. 
 
@@ -135,7 +135,7 @@ response_json = prime_the_room_walls(input_image=input_image)
 
 ## <a id="design-styles"> Supported Design Styles
 
-Decor8 AI supports following design styles. Learn more about these styles at [Decor8 AI Decoration Styles](https://www.decor8.ai/interior-decoration-styles/)
+Decor8 AI supports following design styles. Learn more about these styles at [Decor8 AI Decoration Styles](https://www.decor8.ai/ai-interior-design-styles)
 
 | **Design Styles**           |                    |                    |                    |
 |---------------------|--------------------|--------------------|--------------------|
@@ -149,7 +149,7 @@ Decor8 AI supports following design styles. Learn more about these styles at [De
 | arabic              | japandi            | retrofuturism      | artnouveau         |
 
 ## <a id="room-types"> Supported Room Types
-Decor8 AI supports following room types. Learn more about these room types at [Decor8 AI Room Types](https://www.decor8.ai/rooms)
+Decor8 AI supports following room types. Learn more about these room types at [Decor8 AI Room Types](https://www.decor8.ai/ai-interior-design-room-types)
 
 | **Room Type**  |               |               |               |
 |----------------|---------------|---------------|---------------|
