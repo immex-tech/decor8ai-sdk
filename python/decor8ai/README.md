@@ -1,10 +1,32 @@
 # Decor8 AI Python SDK
 
-## Overview
+## Table of Contents
+- [Overview](#python-sdk-overview)
+- [Installation](#installation)
+- [Configuration](#configure-sdk)
+- [Usage](#using-this-sdk)
+  - [Design With Photo](#design-with-photo)
+  - [Design Without Photo](#design-without-photo)
+  - [Priming the walls](#prime-the-walls)
+- [Design Styles](#design-styles)
+- [Room Types](#room-types)
 
-The Decor8 AI Python SDK is a powerful tool to integrate and utilize Decor8 AI’s design generation capabilities seamlessly within your Python environment. With this SDK, you can easily generate designs by providing room images in various formats, specifying room types, design styles, and various other parameters.
 
-## Installation
+## <a id="python-sdk-overview"></a>Overview
+
+Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
+
+You can choose from 35+ interior design styles and 20+ room types to create unique interior design styles for your space.
+
+The app specializes in virtual staging, transforming empty spaces into vivid, attractive interiors, enhancing their appeal for better marketability. 
+
+Equipped with a powerful Python SDK, Decor8 AI facilitates seamless integrations, enabling enhanced design generation capabilities directly within your Python environment. Its user-friendly interface is optimized for performance on smaller screens, ensuring that your design process is as effortless and efficient as possible.
+
+This documentation describes how you can use Decor8 AI Python SDK to integrate Decor8 AI's powerful features in your application. 
+
+Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions.
+
+## <a id="installation"></a>Installation
 
 You can install the Decor8 AI Python SDK using pip:
 
@@ -12,7 +34,7 @@ You can install the Decor8 AI Python SDK using pip:
 pip install decor8ai
 ```
 
-## Configure Decor8 AI API key
+## <a id="configure-sdk"></a>Configure Decor8 AI API key
 
 ### Sign in to [Decor8 AI](https://prod-app.decor8.ai)
 
@@ -24,11 +46,13 @@ pip install decor8ai
 ![](https://github.com/immex-tech/decor8ai-sdk/blob/main/media/step_2.jpg?raw=true)
 
 
-## Usage
+## <a id="using-this-sdk">Usage
 
 ```bash
 export DECOR8AI_API_KEY='<YOUR_API_KEY>'
 ```
+
+## <a id="design-with-photo"> Generating Interior Design with a Photo of the room
 
 ```python
 from decor8ai.client import generate_designs
@@ -75,7 +99,40 @@ response_json = generate_designs(input_image=input_image, room_type=room_type, d
 
 ```
 
-## Supported Design Styles
+
+## <a id="design-without-photo"> Generating Inspirational Interior Design Ideas without using a photo of the room
+
+```Python
+from decor8ai.client import generate_designs
+
+# Here, we don't provide input image. The API generates a new interior design using following parameters.
+room_type = 'livingroom' # See below for all supported room types
+design_style = 'frenchcountry' # See below for all supported design Styles
+num_images = 1 # Up to 4 images can be generated at a time
+
+# Optional Parameters
+num_captions = None # Choose 1 or 2 for number of image captions to generate
+
+response_json = generate_designs(room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1)
+```
+
+## <a id="prime-the-walls">Priming the walls
+
+If your room contains unfinished walls, unpainted walls or walls which need touch-up, use this API to get walls with basic white colored, smooth textured walls or as it's called 'primed walls'. 
+
+You can use the returned image as input to generate_designs API for filling it with furniture. 
+
+```Python
+from decor8ai.client import prime_the_room_walls
+
+input_image = 'path/to/your/image.png'  #local-file-path or URL or bytes
+response_json = prime_the_room_walls(input_image=input_image)
+
+```
+
+## <a id="design-styles"> Supported Design Styles
+
+Decor8 AI supports following design styles. Learn more about these styles at [Decor8 AI Decoration Styles](https://www.decor8.ai/interior-decoration-styles/)
 
 | **Design Styles**           |                    |                    |                    |
 |---------------------|--------------------|--------------------|--------------------|
@@ -88,7 +145,8 @@ response_json = generate_designs(input_image=input_image, room_type=room_type, d
 | moroccan            | southwestern       | transitional       | maximalist         |
 | arabic              | japandi            | retrofuturism      | artnouveau         |
 
-## Supported Room Types
+## <a id="room-types"> Supported Room Types
+Decor8 AI supports following room types. Learn more about these room types at [Decor8 AI Room Types](https://www.decor8.ai/rooms)
 
 | **Room Type**  |               |               |               |
 |----------------|---------------|---------------|---------------|
