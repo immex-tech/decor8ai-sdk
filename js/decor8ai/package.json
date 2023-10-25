@@ -1,0 +1,33 @@
+{
+  "name": "decor8ai",
+  "version": "1.0.0",
+  "description": "Decor8 AI is an AI Interior Design Platform. With Decor8 AI Javascript SDK, you can automate various interior design generation tasks such as virtually staging an empty room or re-designing a room with its photo. You can also use Decor8 AI Javascript SDK to generate interior design ideas for a room based on your preferences.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/immex-tech/decor8ai-sdk.git"
+  },
+  "keywords": [
+    "Decor8AI",
+    "AI",
+    "Interior",
+    "Design",
+    "Decoration",
+    "Virtual",
+    "Property",
+    "Staging"
+  ],
+  "author": "Akhilesh Joshi <akhilesh@immex.tech>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/immex-tech/decor8ai-sdk/issues"
+  },
+  "homepage": "https://github.com/immex-tech/decor8ai-sdk#readme",
+  "dependencies": {
+    "axios": "^1.5.1",
+    "form-data": "^4.0.0"
+  }
+}
