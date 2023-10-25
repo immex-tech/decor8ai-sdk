@@ -22,6 +22,7 @@ Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or
     - [Design Styles](#design-styles)
     - [Room Types](#room-types)
 - [Javascript SDK](#javascript-sdk)
+- [Flutter/Dart SDK](#dart-sdk)
 - [HTTP](#http-api)
     - [Design With Photo](#http-api-design-with-photo)
 
@@ -165,6 +166,9 @@ Decor8 AI supports following room types. Learn more about these room types at [D
 
 # <a id="javascript-sdk">Javascript SDK
 [Refer to Javascript SDK Readme](js/decor8ai/README.md)
+
+# <a id="dart-sdk">Flutter/Dart SDK
+[Refer to Dart SDK Readme](dart/decor8ai/README.md)
 
 # <a id="http-api">HTTP
 
