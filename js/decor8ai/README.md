@@ -1,7 +1,7 @@
 # Decor8 AI Javascript SDK
 
 ## Table of Contents
-- [Overview](#python-sdk-overview)
+- [Overview](#javascript-sdk-overview)
 - [Installation](#installation)
 - [Configuration](#configure-sdk)
 - [Usage](#using-this-sdk)
