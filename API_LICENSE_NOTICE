@@ -1,0 +1,46 @@
+SDK Licensing Information:
+
+The SDK for Decor8 AI is released under the MIT License. The full text of the license can be found in the LICENSE file included with the SDK distribution or source code repository. This license governs your use of the SDK itself, allowing for modification, distribution, and private use.
+
+API Licensing Information:
+
+The use of the Decor8 AI API is subject to a separate licensing agreement which governs your use of the API provided by ImmEx Technologies, Inc. By obtaining an API key and using the API, you agree to be bound by the terms of this custom license. The full text of this license is available in our API documentation and as part of the API key generation process on the Decor8 AI platform.
+
+Please ensure that you read and understand both licenses. The MIT License allows for broad use of the SDK, while the custom API license places restrictions on how the API can be used with that SDK. It is your responsibility to ensure that your use of both the SDK and the API complies with the respective licenses.
+
+ImmEx Technologies, Inc. API License Agreement
+
+Copyright (c) [year] ImmEx Technologies, Inc. All rights reserved.
+
+1. Definitions
+"API" refers to the application programming interface provided by ImmEx Technologies, Inc., any accompanying or related documentation, source code, executable applications and other materials.
+
+2. Grant of License
+ImmEx Technologies, Inc. grants you a revocable, non-exclusive, non-transferable, limited license to access and use the API solely to develop, test, and support your software application or service, and to allow customers of your application or service to access the functionality of the API from your application or service.
+
+3. Use of API
+You shall use the API solely as described in the accompanying documentation and in accordance with the terms of this Agreement. You shall not modify, reverse engineer, hack, decode, decompile, or otherwise attempt to derive the source code or underlying ideas or algorithms of the API, except to the extent allowed by applicable law.
+
+4. Restrictions
+The license granted hereunder is conditioned upon your compliance with the following restrictions:
+(a) You shall not use the API in any manner that could damage, disable, overburden, or impair ImmEx Technologies, Inc. services.
+(b) You shall not use the API in a manner that violates the rights of others, or that is illegal, offensive, or deemed objectionable by ImmEx Technologies, Inc. in its sole discretion.
+(c) You shall not sell, lease, share, transfer, or sublicense the API or access or authorization to the API.
+
+5. Ownership and Intellectual Property
+ImmEx Technologies, Inc. retains all right, title, and interest in and to the API, any updates, or derivatives thereof. No rights are granted to you hereunder other than as expressly set forth herein.
+
+6. Termination
+ImmEx Technologies, Inc. reserves the right to terminate your license to use the API with or without cause and with or without notice, for any reason or no reason, or for any action that ImmEx Technologies, Inc. determines is inappropriate or disruptive to the API or to any ImmEx Technologies, Inc. service.
+
+7. Disclaimer of Warranties
+THE API IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+8. Limitation of Liability
+ImmEx Technologies, Inc. shall not be liable for any damages suffered as a result of using, modifying, contributing, copying, distributing, or downloading the API. You have the sole responsibility to protect adequately and backup your data and/or equipment used in connection with the API.
+
+9. General
+You agree to comply with all laws and regulations applicable to your use of the API. This Agreement shall be governed by the laws of the State of [Your State], without regard to its conflict of law principles.
+
+BY USING THE API, YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS AND CONDITIONS.
+
