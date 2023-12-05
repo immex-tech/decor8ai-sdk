@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "decor8ai"
-version = "0.13"
+version = "0.14"
 description = "Decor8 AI is an AI Interior Design Tool. With Decor8 AI Python SDK, you can automate interior design generation tasks for room photos."
 authors = ["Akhilesh Joshi <akhilesh@immex.tech>"]
 license = "MIT"
