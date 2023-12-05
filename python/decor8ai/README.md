@@ -8,11 +8,11 @@
   - [Design With Photo](#design-with-photo)
   - [Design Without Photo](#design-without-photo)
   - [Priming the walls](#prime-the-walls)
+  - [Upscale the image](#upscale-the-image)
+  - [Generate Captions for the image](#generate-captions-for-the-interior-image)
 - [Design Styles](#design-styles)
 - [Room Types](#room-types)
 
-
-## <a id="python-sdk-overview"></a>Overview
 
 Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
 
@@ -68,35 +68,39 @@ num_captions = None # Choose 1 or 2 for number of image captions to generate
 
 response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1)
 
-# The response is a JSON object containing the generated designs and other information.
-# Sample response for successful design generation
-# {
-#     "error": "",
-#     "message": "Successfully generated designs.",
-#     "info":
-#     {
-#         "images":
-#         [
-#             {
-#                 "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
-#                 "data": "<base64-encoded_data>",
-#                 "width": 768,
-#                 "height": 512,
-#                 "captions":
-#                 [
-#                     "Unveiling the art of rustic elegance in this French Country haven, where warmth and sophistication meet effortlessly."
-#                 ]
-#             }
-#         ]
-#     }
-# }
+```
 
-# Sample response when unsuccessful. "error" will be non-empty value.
-# {
-#     "error": "InvalidInput",
-#     "message": "Invalid input image. Please check the input image and try again.",
-# }
+```
+The response is a JSON object containing the generated designs and other information.
 
+Sample response for successful design generation
+
+{
+    "error": "",
+    "message": "Successfully generated designs.",
+    "info":
+    {
+        "images":
+        [
+            {
+                "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
+                "data": "<base64-encoded_data>",
+                "width": 768,
+                "height": 512,
+                "captions":
+                [
+                    "Unveiling the art of rustic elegance in this French Country haven, where warmth and sophistication meet effortlessly."
+                ]
+            }
+        ]
+    }
+}
+
+Sample response when unsuccessful. "error" will be non-empty value.
+{
+    "error": "InvalidInput",
+    "message": "Invalid input image. Please check the input image and try again.",
+}
 ```
 
 
@@ -129,6 +133,48 @@ input_image = 'path/to/your/image.png'  #local-file-path or URL or bytes
 response_json = prime_the_room_walls(input_image=input_image)
 
 ```
+## <a id="upscale-the-image">Upscale the image
+AI generated designs may have a smaller resolution for some use-cases. Use this API to get upto 4x the original resolution of the image. Original images of upto maximum 1024px width or height or both are supported. 
+
+```Python
+from decor8ai.client import upscale_image
+
+input_image = 'path/to/your/image.png'  #local-file-path or URL or bytes
+scale_factor = 2
+
+response = upscale_image(input_image, scale_factor)
+```
+
+## <a id="image-caption-generator">Generate captions for the interior image
+If you need apt captions for an image depicting a specific interior design style in a room, use this API. 
+
+```Python
+from decor8ai.client import generate_image_captions
+
+room_type = 'livingroom'
+design_style = 'frenchcountry'
+num_captions = 2
+
+response = generate_image_captions(room_type, design_style, num_captions)
+
+```
+
+```Text
+Sample output
+
+{
+    "error": "",
+    "message": "Successfully generated image captions.",
+    "info":
+    {
+        "captions":
+        [
+            "\"Enchanting French Country Charm: Where cozy meets elegance in the heart of the living room.\"",
+            "\"Step into a Parisian dream - where charm, elegance, and comfort seamlessly blend in this enchanting French country living room retreat. Get ready to indulge in rustic sophistication and let the cozy embrace of timeless design whisk you away to provincial bliss.\""
+        ]
+    }
+}
+```
 
 ## <a id="design-styles"> Supported Design Styles
 
@@ -157,5 +203,3 @@ Decor8 AI supports following room types. Learn more about these room types at [D
 | gym            | basement      | garage        | balcony       |
 | cafe           | homebar       | study_room    | front_porch   |
 | back_porch     | back_patio    |               |               |
-
-
