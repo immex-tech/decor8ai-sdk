@@ -8,6 +8,8 @@
   - [Design With Photo](#design-with-photo)
   - [Design Without Photo](#design-without-photo)
   - [Priming the walls](#prime-the-walls)
+  - [Upscale the image](#upscale-the-image)
+  - [Generate image captions](#image-caption-generator)
 - [Design Styles](#design-styles)
 - [Room Types](#room-types)
 
@@ -167,11 +169,57 @@ You can use the returned image as input to generate_designs API for filling it w
 
 ```Javascript
 const Decor8AI = require('decor8ai');
+const decor8 = new Decor8AI();
 
 decor8.primeTheRoomWalls('/path_to_your_image.jpg')
     .then(response => console.log(response))
     .catch(error => console.error(error));
 
+```
+
+## <a id="upscale-the-image">Upscale the image
+AI generated designs may have a smaller resolution for some use-cases. Use this API to get upto 4x the original resolution of the image. Original images of upto maximum 1024px width or height or both are supported. 
+
+```Javascript
+const Decor8AI = require('decor8ai');
+const decor8 = new Decor8AI();
+
+const input_image_path_for_upscaling = './sdk_upscale_this_image.jpg';
+const scale_factor = 2;
+decor8.upscaleImage(input_image_path_for_upscaling, scale_factor)
+    .then(response => console.log(response))
+    .catch(error => console.error(error));
+```
+
+## <a id="image-caption-generator">Generate captions for the interior image
+If you need apt captions for an image depicting a specific interior design style in a room, use this API. 
+
+```Javascript
+const Decor8AI = require('decor8ai');
+const decor8 = new Decor8AI();
+
+room_type = 'livingroom'
+design_style = 'frenchcountry'
+
+decor8.generateImageCaptions(room_type, design_style, num_captions = 2)
+
+```
+
+```Text
+Sample output
+
+{
+    "error": "",
+    "message": "Successfully generated image captions.",
+    "info":
+    {
+        "captions":
+        [
+            "\"Enchanting French Country Charm: Where cozy meets elegance in the heart of the living room.\"",
+            "\"Step into a Parisian dream - where charm, elegance, and comfort seamlessly blend in this enchanting French country living room retreat. Get ready to indulge in rustic sophistication and let the cozy embrace of timeless design whisk you away to provincial bliss.\""
+        ]
+    }
+}
 ```
 
 ## <a id="design-styles"> Supported Design Styles

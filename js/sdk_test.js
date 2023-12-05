@@ -88,3 +88,58 @@ decor8.primeTheRoomWalls(input_image_path_for_priming)
         console.error("An error occurred while generating designs:", error);
     });
 
+
+// Example using upscaleImage with a file path
+const input_image_path_for_upscaling = './sdk_upscale_this_image.jpg';
+const scale_factor = 2;
+console.log ("Upscaling the image at path " + input_image_path_for_upscaling + " by a factor of " + scale_factor);
+decor8.upscaleImage(input_image_path_for_upscaling, scale_factor)
+    .then(response => {
+        if (response.error) {
+            console.error("An error occurred:", response.error);
+        } else {
+            console.log("Message:", response.message);
+            const upscaled_image_data = response.info.upscaled_image;
+
+            // If you want to save the image data as a file
+            // Check if output-data directory exists, if not, create it
+            const outputDir = path.join(__dirname, 'output-data');
+            if (!fs.existsSync(outputDir)){
+                fs.mkdirSync(outputDir);
+            }
+            
+            // Save the image data as a file in the output-data directory
+            fs.writeFileSync(path.join(outputDir, `upscaled_image.jpg`), upscaled_image_data, 'base64', (err) => {
+                if (err) {
+                    console.error("An error occurred while saving the image:", err);
+                } else {
+                    console.log(`Image saved as upscaled_image.jpg`);
+                }
+            });
+
+
+        }
+    })
+    .catch(error => {
+        console.error("An error occurred while generating designs:", error);
+    });
+
+
+// Example using generateImageCaptions
+// console.log ("Generating captions for room type " + room_type + " and design style " + design_style);
+decor8.generateImageCaptions(room_type, design_style, num_captions = 2)
+    .then(response => {
+        if (response.error) {
+            console.error("An error occurred:", response.error);
+        } else {
+            console.log("Message:", response.message);
+            const captions = response.info.captions;
+            captions.forEach((caption, index) => {
+                console.log(`[${index + 1}] : ${caption}`);
+            });
+        }
+    })
+    .catch(error => {
+        console.error("An error occurred while generating captions:", error);
+    });
+

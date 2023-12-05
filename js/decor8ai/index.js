@@ -51,6 +51,24 @@ class Decor8AI {
         }
     }
 
+    async upscaleImage(inputImage, scaleFactor = 2) {
+        try {
+            const headers = {
+                Authorization: `Bearer ${this.apiKey}`,
+                'Content-Type': 'multipart/form-data'
+            };
+
+            const formData = this.createFormData(inputImage);
+            formData.append('scale_factor', scaleFactor);
+
+            const response = await axios.post(`${this.baseUrl}/upscale_image`, formData, { headers });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
     createFormData(inputImage) {
         let formData = new FormData();
 
@@ -69,6 +87,26 @@ class Decor8AI {
         }
 
         return formData;
+    }
+
+    async generateImageCaptions(room_type, design_style, num_captions = 1) {
+        try {
+            const headers = {
+                Authorization: `Bearer ${this.apiKey}`,
+                'Content-Type': 'application/json'
+            };
+
+            const input = {
+                'room_type': room_type,
+                'design_style': design_style,
+                'num_captions': num_captions}
+
+            const response = await axios.post(`${this.baseUrl}/generate_image_captions`, input, { headers });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
 }
 
