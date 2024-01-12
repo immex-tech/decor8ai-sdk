@@ -38,6 +38,7 @@ NUM_CAPTIONS="your_num_captions_value"  # Optional
 INPUT_IMAGE_PATH="path/to/your/input/image.jpg"
 TOKEN="your_decor8ai_api_key"
 URL="https://prod-app.decor8.ai:8000/generate_designs"
+KEEP_ORIGINAL_DIMENSIONS="False" # Optional. "True" or "False"
 
 # Base curl command
 curl -X POST $URL \
@@ -45,7 +46,8 @@ curl -X POST $URL \
      -F "room_type=$ROOM_TYPE" \
      -F "design_style=$DESIGN_STYLE" \
      -F "num_images=$NUM_IMAGES" \
-     -F "input_image=@$INPUT_IMAGE_PATH"
+     -F "input_image=@$INPUT_IMAGE_PATH" \
+     -F "keep_original_dimensions=@$KEEP_ORIGINAL_DIMENSIONS"
 
 # If you have num_captions
 # -F "num_captions=$NUM_CAPTIONS" \
