@@ -68,10 +68,11 @@ const input_image_path = 'path/to/your/room-photo.png';
 const room_type = 'bedroom';
 const design_style = 'farmhouse';
 const num_images = 1;
+const keep_original_dimensions = false; // Optional. true or false. If true, then generated designs have same dimensions as the original image. Although, it takes bit longer to generate the design. If false, generated designs have dimensions are chosen by the API.
 
 // Example using generateDesigns with a file path
 console.log ("Generating designs for image at path " + input_image_path);
-decor8.generateDesigns(input_image_path, room_type, design_style, null, num_images)
+decor8.generateDesigns(input_image_path, room_type, design_style, null, num_images, keep_original_dimensions)
     .then(response => {
         if (response.error) {
             console.error("An error occurred:", response.error);

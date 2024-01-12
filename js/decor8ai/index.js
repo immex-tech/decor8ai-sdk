@@ -28,7 +28,7 @@ class Decor8AI {
         }
     }
 
-    async generateDesigns(inputImage, roomType, designStyle, numCaptions = null, numImages = 1) {
+    async generateDesigns(inputImage, roomType, designStyle, numCaptions = null, numImages = 1, keep_original_dimensions = false) {
         try {
             const headers = {
                 Authorization: `Bearer ${this.apiKey}`,
@@ -42,6 +42,7 @@ class Decor8AI {
             if (numCaptions) {
                 formData.append('num_captions', numCaptions);
             }
+            formData.append('keep_original_dimensions', String(keep_original_dimensions));
 
             const response = await axios.post(`${this.baseUrl}/generate_designs`, formData, { headers });
             return response.data;
