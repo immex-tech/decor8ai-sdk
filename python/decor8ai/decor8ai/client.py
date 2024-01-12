@@ -44,7 +44,7 @@ def prime_the_room_walls(input_image):
         
         return response_json
 
-def generate_designs(input_image, room_type, design_style, num_captions = None, num_images=1):
+def generate_designs(input_image, room_type, design_style, num_captions = None, num_images=1, keep_original_dimensions=False):
     
     def is_url(path):
         try:
@@ -81,6 +81,8 @@ def generate_designs(input_image, room_type, design_style, num_captions = None, 
     }
     if num_captions:
         data['num_captions'] = num_captions
+    if keep_original_dimensions:
+        data['keep_original_dimensions'] = keep_original_dimensions
         
     response = requests.post(url + '/generate_designs', headers=headers, files=files, data=data)
     

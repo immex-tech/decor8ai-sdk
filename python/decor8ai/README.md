@@ -65,8 +65,9 @@ num_images = 1 # Up to 4 images can be generated at a time
 
 # Optional Parameters
 num_captions = None # Choose 1 or 2 for number of image captions to generate
+keep_original_dimensions = False # True or False. Generated designs retain original image's dimensions (and aspect ratio)
 
-response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1)
+response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=True)
 
 ```
 

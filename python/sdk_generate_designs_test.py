@@ -7,8 +7,9 @@ input_image = './sdk_test_image.png'  # or URL or bytes
 room_type = 'livingroom'
 design_style = 'frenchcountry'
 num_images = 1
+keep_original_dimensions = False
 
-response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1)
+response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=keep_original_dimensions)
 # Sample response when successful
 # {
 #     "error": "",
@@ -36,8 +37,6 @@ response_json = generate_designs(input_image=input_image, room_type=room_type, d
 #     "error": "InvalidInput",
 #     "message": "Invalid input image. Please check the input image and try again.",
 # }
-
-
 if response_json['error'] != '': 
     print('Error : ' + response_json['error'] + ' : ' + response_json['message'])
 else:
