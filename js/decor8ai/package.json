@@ -1,6 +1,6 @@
 {
   "name": "decor8ai",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Decor8 AI is an AI Interior Design Platform. With Decor8 AI Javascript SDK, you can automate various interior design generation tasks such as virtually staging an empty room or re-designing a room with its photo. You can also use Decor8 AI Javascript SDK to generate interior design ideas for a room based on your preferences.",
   "main": "index.js",
   "scripts": {
