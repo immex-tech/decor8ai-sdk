@@ -28,7 +28,7 @@ class Decor8AI {
         }
     }
 
-    async generateDesigns(inputImage, roomType, designStyle, numCaptions = null, numImages = 1, keep_original_dimensions = false) {
+    async generateDesigns(inputImage, roomType, designStyle, numCaptions = null, numImages = 1, keep_original_dimensions = false, color_scheme = null, speciality_decor = null) {
         try {
             const headers = {
                 Authorization: `Bearer ${this.apiKey}`,
@@ -41,6 +41,12 @@ class Decor8AI {
             formData.append('num_images', numImages);
             if (numCaptions) {
                 formData.append('num_captions', numCaptions);
+            }
+            if (color_scheme) {
+                formData.append('color_scheme', color_scheme);
+            }
+            if (speciality_decor) {
+                formData.append('speciality_decor', speciality_decor);
             }
             formData.append('keep_original_dimensions', String(keep_original_dimensions));
 

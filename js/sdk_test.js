@@ -6,14 +6,18 @@ const path = require('path');
 const decor8 = new Decor8AI();
 
 const input_image_path = './sdk_test_image.png';
+const num_images = 1;
+const keep_original_dimensions = false;
+
+// Refer to https://github.com/immex-tech/decor8ai-sdk/edit/main/js/decor8ai/README.md for all supported values
 const room_type = 'bedroom';
 const design_style = 'farmhouse';
-const num_images = 1;
-const keep_original_dimensions = true;
+const color_scheme = 'COLOR_SCHEME_2'; 
+const speciality_decor = 'SPECIALITY_DECOR_5'; 
 
 // Example using generateDesigns with a file path
 console.log ("Generating designs for image at path " + input_image_path);
-decor8.generateDesigns(input_image_path, room_type, design_style, null, num_images, keep_original_dimensions)
+decor8.generateDesigns(input_image_path, room_type, design_style, null, num_images, keep_original_dimensions, color_scheme, speciality_decor)
     .then(response => {
         if (response.error) {
             console.error("An error occurred:", response.error);

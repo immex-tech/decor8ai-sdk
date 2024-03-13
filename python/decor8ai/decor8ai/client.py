@@ -44,7 +44,7 @@ def prime_the_room_walls(input_image):
         
         return response_json
 
-def generate_designs(input_image, room_type, design_style, num_captions = None, num_images=1, keep_original_dimensions=False):
+def generate_designs(input_image, room_type, design_style, num_captions = None, num_images=1, keep_original_dimensions=False, color_scheme=None, speciality_decor=None):
     
     def is_url(path):
         try:
@@ -61,18 +61,19 @@ def generate_designs(input_image, room_type, design_style, num_captions = None, 
     }
     
     # Handling various input types for the image
-    if isinstance(input_image, bytes):
-        input_image_content = input_image
-    elif is_url(input_image):
-        response = requests.get(input_image)
-        input_image_content = response.content
-    else:  # Assuming it's a file path
-        with open(input_image, 'rb') as img_file:
-            input_image_content = img_file.read()
-    
-    files = {
-        'input_image': ('input_image.jpg', input_image_content)
-    }
+    if input_image is not None:
+        if isinstance(input_image, bytes):
+            input_image_content = input_image
+        elif is_url(input_image):
+            response = requests.get(input_image)
+            input_image_content = response.content
+        else:  # Assuming it's a file path
+            with open(input_image, 'rb') as img_file:
+                input_image_content = img_file.read()
+        
+        files = {
+            'input_image': ('input_image.jpg', input_image_content)
+        }
     
     data = {
         'room_type': room_type,
@@ -83,6 +84,10 @@ def generate_designs(input_image, room_type, design_style, num_captions = None, 
         data['num_captions'] = num_captions
     if keep_original_dimensions:
         data['keep_original_dimensions'] = keep_original_dimensions
+    if color_scheme:
+        data['color_scheme'] = color_scheme
+    if speciality_decor:
+        data['speciality_decor'] = speciality_decor
         
     response = requests.post(url + '/generate_designs', headers=headers, files=files, data=data)
     

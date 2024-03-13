@@ -4,12 +4,16 @@ import base64
 
 # Mandatory Parameters
 input_image = './sdk_test_image.png'  # or URL or bytes
-room_type = 'livingroom'
-design_style = 'frenchcountry'
 num_images = 1
 keep_original_dimensions = False
 
-response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=keep_original_dimensions)
+# Refer to https://github.com/immex-tech/decor8ai-sdk/tree/main/python/decor8ai for supported values
+room_type = 'livingroom'
+design_style = 'frenchcountry'
+color_scheme = 'COLOR_SCHEME_5'; 
+speciality_decor = 'SPECIALITY_DECOR_5'; 
+
+response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=keep_original_dimensions, color_scheme=color_scheme, speciality_decor=speciality_decor)
 # Sample response when successful
 # {
 #     "error": "",

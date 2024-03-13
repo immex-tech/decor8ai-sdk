@@ -12,6 +12,8 @@
   - [Generate Captions for the image](#generate-captions-for-the-interior-image)
 - [Design Styles](#design-styles)
 - [Room Types](#room-types)
+- [Color Schemes](#color-schemes)
+- [Seasonal Décor](#speciality-decor)
 
 
 Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
@@ -65,9 +67,12 @@ num_images = 1 # Up to 4 images can be generated at a time
 
 # Optional Parameters
 num_captions = None # Choose 1 or 2 for number of image captions to generate
-keep_original_dimensions = False # True or False. Generated designs retain original image's dimensions (and aspect ratio)
+keep_original_dimensions = False # Optional. True or False. Generated designs retain original image's dimensions (and aspect ratio)
+color_scheme = 'COLOR_SCHEME_5' # Optional
+speciality_decor = 'SPECIALITY_DECOR_5'; # Optional
 
-response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=True)
+
+response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=True, color_scheme=color_scheme, speciality_decor=speciality_decor)
 
 ```
 
@@ -204,3 +209,45 @@ Decor8 AI supports following room types. Learn more about these room types at [D
 | gym            | basement      | garage        | balcony       |
 | cafe           | homebar       | study_room    | front_porch   |
 | back_porch     | back_patio    |               |               |
+
+
+## <a id="color-schemes"> Supported Color Schemes
+Decor8 AI supports following color schemes.
+
+| Color Scheme Value | Description                 |
+|--------------------|-----------------------------|
+| COLOR_SCHEME_0     | Default                     |
+| COLOR_SCHEME_1     | Moss Green, Tan, White      |
+| COLOR_SCHEME_2     | Gray, Sand, Blue            |
+| COLOR_SCHEME_3     | Hunter Green, Red           |
+| COLOR_SCHEME_4     | White, Pops of Color        |
+| COLOR_SCHEME_5     | Blue, Neon                  |
+| COLOR_SCHEME_6     | Light Blue, Emerald         |
+| COLOR_SCHEME_7     | Blue, Grass Green           |
+| COLOR_SCHEME_8     | Blue, Beige                 |
+| COLOR_SCHEME_9     | Gray, Brown                 |
+| COLOR_SCHEME_10    | Black, Red                  |
+| COLOR_SCHEME_11    | Gray-Green, White, Black    |
+| COLOR_SCHEME_12    | Blue, Gray, Taupe           |
+| COLOR_SCHEME_13    | Black, Navy                 |
+| COLOR_SCHEME_14    | Emerald, Tan                |
+| COLOR_SCHEME_15    | Forest Green, Light Gray    |
+| COLOR_SCHEME_16    | Yellow, Gray                |
+| COLOR_SCHEME_17    | Pink, Green                 |
+| COLOR_SCHEME_18    | Blush Pink, Black           |
+| COLOR_SCHEME_19    | Black, White                |
+| COLOR_SCHEME_20    | Blue, White                 |
+
+## <a id="speciality-decor"> Supported Seasonal / Special Décor
+Decor8 AI supports following seasonal décor.
+
+| Speciality Decor Value | Description                                                          |
+|------------------------|----------------------------------------------------------------------|
+| SPECIALITY_DECOR_0     | None                                                                 |
+| SPECIALITY_DECOR_1     | Halloween Decor with Spooky Ambiance, Eerie Elements, Dark Colors, and Festive Accents |
+| SPECIALITY_DECOR_2     | Christmas Decor with Christmas Tree, Ornaments, and Lights            |
+| SPECIALITY_DECOR_3     | Thanksgiving Decor, Fall Season Decor                                 |
+| SPECIALITY_DECOR_4     | Fall Season Decor                                                     |
+| SPECIALITY_DECOR_5     | Spring Season Decor                                                   |
+| SPECIALITY_DECOR_6     | Summer Season Decor                                                   |
+| SPECIALITY_DECOR_7     | Winter Season Decor                                                   |

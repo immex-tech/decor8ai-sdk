@@ -12,6 +12,8 @@
   - [Generate image captions](#image-caption-generator)
 - [Design Styles](#design-styles)
 - [Room Types](#room-types)
+- [Color Schemes](#color-schemes)
+- [Seasonal Décor](#speciality-decor)
 
 
 ## <a id="javascript-sdk-overview"></a>Overview
@@ -69,10 +71,12 @@ const room_type = 'bedroom';
 const design_style = 'farmhouse';
 const num_images = 1;
 const keep_original_dimensions = false; // Optional. true or false. If true, then generated designs have same dimensions as the original image. Although, it takes bit longer to generate the design. If false, generated designs have dimensions are chosen by the API.
+const color_scheme = 'COLOR_SCHEME_4'; //Optional. 
+const speciality_decor = 'SPECIALITY_DECOR_5'; // Optional. 
 
 // Example using generateDesigns with a file path
 console.log ("Generating designs for image at path " + input_image_path);
-decor8.generateDesigns(input_image_path, room_type, design_style, null, num_images, keep_original_dimensions)
+decor8.generateDesigns(input_image_path, room_type, design_style, null, num_images, keep_original_dimensions, color_scheme, speciality_decor)
     .then(response => {
         if (response.error) {
             console.error("An error occurred:", response.error);
@@ -250,5 +254,47 @@ Decor8 AI supports following room types. Learn more about these room types at [D
 | gym            | basement      | garage        | balcony       |
 | cafe           | homebar       | study_room    | front_porch   |
 | back_porch     | back_patio    |               |               |
+
+
+## <a id="color-schemes"> Supported Color Schemes
+Decor8 AI supports following color schemes.
+
+| Color Scheme Value | Description                 |
+|--------------------|-----------------------------|
+| COLOR_SCHEME_0     | Default                     |
+| COLOR_SCHEME_1     | Moss Green, Tan, White      |
+| COLOR_SCHEME_2     | Gray, Sand, Blue            |
+| COLOR_SCHEME_3     | Hunter Green, Red           |
+| COLOR_SCHEME_4     | White, Pops of Color        |
+| COLOR_SCHEME_5     | Blue, Neon                  |
+| COLOR_SCHEME_6     | Light Blue, Emerald         |
+| COLOR_SCHEME_7     | Blue, Grass Green           |
+| COLOR_SCHEME_8     | Blue, Beige                 |
+| COLOR_SCHEME_9     | Gray, Brown                 |
+| COLOR_SCHEME_10    | Black, Red                  |
+| COLOR_SCHEME_11    | Gray-Green, White, Black    |
+| COLOR_SCHEME_12    | Blue, Gray, Taupe           |
+| COLOR_SCHEME_13    | Black, Navy                 |
+| COLOR_SCHEME_14    | Emerald, Tan                |
+| COLOR_SCHEME_15    | Forest Green, Light Gray    |
+| COLOR_SCHEME_16    | Yellow, Gray                |
+| COLOR_SCHEME_17    | Pink, Green                 |
+| COLOR_SCHEME_18    | Blush Pink, Black           |
+| COLOR_SCHEME_19    | Black, White                |
+| COLOR_SCHEME_20    | Blue, White                 |
+
+## <a id="speciality-decor"> Supported Seasonal / Special Décor
+Decor8 AI supports following seasonal décor.
+
+| Speciality Decor Value | Description                                                          |
+|------------------------|----------------------------------------------------------------------|
+| SPECIALITY_DECOR_0     | None                                                                 |
+| SPECIALITY_DECOR_1     | Halloween Decor with Spooky Ambiance, Eerie Elements, Dark Colors, and Festive Accents |
+| SPECIALITY_DECOR_2     | Christmas Decor with Christmas Tree, Ornaments, and Lights            |
+| SPECIALITY_DECOR_3     | Thanksgiving Decor, Fall Season Decor                                 |
+| SPECIALITY_DECOR_4     | Fall Season Decor                                                     |
+| SPECIALITY_DECOR_5     | Spring Season Decor                                                   |
+| SPECIALITY_DECOR_6     | Summer Season Decor                                                   |
+| SPECIALITY_DECOR_7     | Winter Season Decor                                                   |
 
 
