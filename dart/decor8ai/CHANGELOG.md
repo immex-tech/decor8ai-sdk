@@ -1,3 +1,6 @@
+## 1.0.4
+- Dropping http dependency to 0.13.5 (from 1.1.0) as we don't really need the latest
+
 ## 1.0.3
 - Removed package version reference from README.md
 
