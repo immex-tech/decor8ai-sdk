@@ -1,6 +1,6 @@
 name: decor8ai
 description: Decor8 AI is an AI Interior Design Platform. With Decor8 AI Dart SDK, you can automate various interior design generation tasks such as virtually staging an empty room or re-designing a room with its photo. You can also use Decor8 AI Dart SDK to generate interior design ideas for a room based on your preferences.
-version: 1.0.4
+version: 1.0.5
 repository: https://github.com/immex-tech/decor8ai-sdk.git
 homepage: https://www.decor8.ai
 issue_tracker: https://github.com/immex-tech/decor8ai-sdk/issues

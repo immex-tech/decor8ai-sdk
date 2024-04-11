@@ -1,3 +1,5 @@
+## 1.0.5
+- Republshing the package to include missing lib directory.
 ## 1.0.4
 - Dropping http dependency to 0.13.5 (from 1.1.0) as we don't really need the latest
 
