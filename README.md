@@ -14,7 +14,7 @@ Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or
 - [Python SDK](#python-sdk)    
 - [Javascript SDK](#javascript-sdk)
 - [Flutter/Dart SDK](#dart-sdk)
-- [HTTP](#rest-api)
+- [HTTP/Rest API](#rest-api)
 
 # <a id="python-sdk">Python SDK
 [Refer to Python SDK Docs](python/decor8ai/README.md)
