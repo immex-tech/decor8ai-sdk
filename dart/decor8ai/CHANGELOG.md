@@ -1,3 +1,5 @@
+## 1.0.6
+- Added two new apis which use HTTP URL of the input image. Future additions will be made to this API. 1. generate_designs_for_room 2. prime_walls_for_room - they should replace generate_designs and prime_the_room_walls APIs
 ## 1.0.5
 - Republshing the package to include missing lib directory.
 ## 1.0.4
