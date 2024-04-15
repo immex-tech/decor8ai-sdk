@@ -52,12 +52,12 @@ export ROOM_TYPE="livingroom"
 export DESIGN_STYLE="minimalist"
 export NUM_IMAGES="1"
 export INPUT_IMAGE_PATH="/path/to/your/input-image.png"
-export URL="https://prod-app.decor8.ai:8000/generate_designs"
+export SERVER_URL="https://prod-app.decor8.ai:8000/generate_designs"
 export COLOR_SCHEME="COLOR_SCHEME_5"
 export SPECIALITY_DECOR="SPECIALITY_DECOR_5"
 
 # Base curl command
-curl -X POST $URL \
+curl -X POST $SERVER_URL \
      -H "Authorization: Bearer $DECOR8AI_API_KEY" \
      -F "room_type=$ROOM_TYPE" \
      -F "design_style=$DESIGN_STYLE" \
@@ -66,6 +66,21 @@ curl -X POST $URL \
      -F "color_scheme=@$COLOR_SCHEME" \
      -F "speciality_decor=@$SPECIALITY_DECOR" \
      -F "keep_original_dimensions=false"
+
+
+# Using input_image_url parameter
+export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
+export SERVER_URL="https://prod-app.decor8.ai:8000/generate_designs_for_room"
+curl -X POST $SERVER_URLL \
+     -H "Authorization: Bearer $DECOR8AI_API_KEY" \
+     -F "room_type=$ROOM_TYPE" \
+     -F "design_style=$DESIGN_STYLE" \
+     -F "num_images=$NUM_IMAGES" \
+     -F "input_image_url=@$INPUT_IMAGE_URL" \
+     -F "color_scheme=@$COLOR_SCHEME" \
+     -F "speciality_decor=@$SPECIALITY_DECOR" \
+     -F "keep_original_dimensions=false"
+
 
 ```
 
@@ -105,12 +120,12 @@ Sample response when unsuccessful. "error" will be non-empty value.
 export ROOM_TYPE="livingroom"
 export DESIGN_STYLE="minimalist"
 export NUM_IMAGES="1"
-export URL="https://prod-app.decor8.ai:8000/generate_designs"
+export SERVER_URL="https://prod-app.decor8.ai:8000/generate_designs"
 export COLOR_SCHEME="COLOR_SCHEME_5"
 export SPECIALITY_DECOR="SPECIALITY_DECOR_5"
 
 # Base curl command
-curl -X POST $URL \
+curl -X POST $SERVER_URL \
      -H "Authorization: Bearer $DECOR8AI_API_KEY" \
      -F "room_type=$ROOM_TYPE" \
      -F "design_style=$DESIGN_STYLE" \
@@ -123,25 +138,25 @@ curl -X POST $URL \
 ## <a id="prime-the-walls">Priming the walls
 
 ```bash
-export URL="https://prod-app.decor8.ai:8000/prime_the_room_walls"
-export INPUT_IMAGE_PATH="/path/to/your/input-image.png"
+export SERVER_URL="https://prod-app.decor8.ai:8000/prime_walls_for_room"
+export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
 
 # Base curl command
-curl -X POST $URL \
+curl -X POST $SERVER_URL \
      -H "Authorization: Bearer $DECOR8AI_API_KEY" \
-     -F "input_image=@$INPUT_IMAGE_PATH" \
+     -F "input_image_url=@$INPUT_IMAGE_URL" \
 ```
 
 ## <a id="upscale-the-image">Upscale the image
 AI generated designs may have a smaller resolution for some use-cases. Use this API to get upto 4x the original resolution of the image. Original images of upto maximum 1024px width or height or both are supported. 
 
 ```bash
-export URL="https://prod-app.decor8.ai:8000/upscale_image"
+export SERVER_URL="https://prod-app.decor8.ai:8000/upscale_image"
 export INPUT_IMAGE_PATH="/path/to/your/input-image.png"
 export SCALE_FACTOR=2
 
 # Base curl command
-curl -X POST $URL \
+curl -X POST $SERVER_URL \
      -H "Authorization: Bearer $DECOR8AI_API_KEY" \
      -F "input_image=@$INPUT_IMAGE_PATH" \
      -F "scale_factor=@$SCALE_FACTOR"

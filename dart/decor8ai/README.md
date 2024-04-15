@@ -72,6 +72,39 @@ dependencies:
     await outputFile.writeAsBytes(base64Decode(data));
     print('Image saved: output-data/$uuid.jpg');
   }
+
+  // Generate designs for input image's HTTP URL
+  import 'dart:io';
+  import 'dart:convert';
+  import 'dart:async';
+  import 'package:http/http.dart' as http;
+
+  var generateDesignsResponse = await decor8.generateDesignsForRoom(
+    'https://prod-files.decor8.ai/test-images/sdk_test_image.png',
+    'livingroom',
+    'modern',
+  );
+
+  var designImages = generateDesignsResponse['info']['images'];
+  for (var image in designImages) {
+    var uuid = image['uuid'];
+    var url = image['url'];
+
+    // Define the output file path
+    var outputFile = File('output-data/$uuid.jpg');
+    await outputFile.create(recursive: true); // This will create the directory if it does not exist
+
+    // Fetch the image data from the URL
+    var response = await http.get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      // Write the bytes to the file
+      await outputFile.writeAsBytes(response.bodyBytes);
+      print('Image saved: output-data/$uuid.jpg');
+    } else {
+      print('Failed to download image: $url');
+    }
+  }
+
 ```
 
 
@@ -110,6 +143,8 @@ You can use the returned image as input to generate_designs API for filling it w
   // Example using primeTheRoomWalls with a file path
   // Priming operation applies white paint to the room walls. This is useful if the input image has dark walls or unfinished walls.
   var primeWallsResponse = await decor8.primeTheRoomWalls('path/to/your/image.jpg');
+  // Use primeWallsForRoom API if you're using http url for input_image
+  // var primeWallsResponse = await decor8.primeWallsForRoom('https://prod-files.decor8.ai/test-images/sdk_test_image.png');
 
   // Save generated image to local directory
   var images = primeWallsResponse['info']['images'];
@@ -154,3 +189,43 @@ Decor8 AI supports following room types. Learn more about these room types at [D
 | back_porch     | back_patio    |               |               |
 
 
+## <a id="color-schemes"> Supported Color Schemes
+Decor8 AI supports following color schemes.
+
+| Color Scheme Value | Description                 |
+|--------------------|-----------------------------|
+| COLOR_SCHEME_0     | Default                     |
+| COLOR_SCHEME_1     | Moss Green, Tan, White      |
+| COLOR_SCHEME_2     | Gray, Sand, Blue            |
+| COLOR_SCHEME_3     | Hunter Green, Red           |
+| COLOR_SCHEME_4     | White, Pops of Color        |
+| COLOR_SCHEME_5     | Blue, Neon                  |
+| COLOR_SCHEME_6     | Light Blue, Emerald         |
+| COLOR_SCHEME_7     | Blue, Grass Green           |
+| COLOR_SCHEME_8     | Blue, Beige                 |
+| COLOR_SCHEME_9     | Gray, Brown                 |
+| COLOR_SCHEME_10    | Black, Red                  |
+| COLOR_SCHEME_11    | Gray-Green, White, Black    |
+| COLOR_SCHEME_12    | Blue, Gray, Taupe           |
+| COLOR_SCHEME_13    | Black, Navy                 |
+| COLOR_SCHEME_14    | Emerald, Tan                |
+| COLOR_SCHEME_15    | Forest Green, Light Gray    |
+| COLOR_SCHEME_16    | Yellow, Gray                |
+| COLOR_SCHEME_17    | Pink, Green                 |
+| COLOR_SCHEME_18    | Blush Pink, Black           |
+| COLOR_SCHEME_19    | Black, White                |
+| COLOR_SCHEME_20    | Blue, White                 |
+
+## <a id="speciality-decor"> Supported Seasonal / Special Décor
+Decor8 AI supports following seasonal décor.
+
+| Speciality Decor Value | Description                                                          |
+|------------------------|----------------------------------------------------------------------|
+| SPECIALITY_DECOR_0     | None                                                                 |
+| SPECIALITY_DECOR_1     | Halloween Decor with Spooky Ambiance, Eerie Elements, Dark Colors, and Festive Accents |
+| SPECIALITY_DECOR_2     | Christmas Decor with Christmas Tree, Ornaments, and Lights            |
+| SPECIALITY_DECOR_3     | Thanksgiving Decor, Fall Season Decor                                 |
+| SPECIALITY_DECOR_4     | Fall Season Decor                                                     |
+| SPECIALITY_DECOR_5     | Spring Season Decor                                                   |
+| SPECIALITY_DECOR_6     | Summer Season Decor                                                   |
+| SPECIALITY_DECOR_7     | Winter Season Decor                                                   |

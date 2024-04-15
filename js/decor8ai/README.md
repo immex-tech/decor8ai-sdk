@@ -66,7 +66,7 @@ const path = require('path');
 // Make sure DECOR8AI_API_KEY is set in your environment variables before running this script
 const decor8 = new Decor8AI();
 
-const input_image_path = 'path/to/your/room-photo.png';
+const input_image_path = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png';
 const room_type = 'bedroom';
 const design_style = 'farmhouse';
 const num_images = 1;
@@ -76,7 +76,7 @@ const speciality_decor = 'SPECIALITY_DECOR_5'; // Optional.
 
 // Example using generateDesigns with a file path
 console.log ("Generating designs for image at path " + input_image_path);
-decor8.generateDesigns(input_image_path, room_type, design_style, null, num_images, keep_original_dimensions, color_scheme, speciality_decor)
+decor8.generateDesignsForRoom(input_image_path, room_type, design_style, null, null, num_images, keep_original_dimensions, color_scheme, speciality_decor)
     .then(response => {
         if (response.error) {
             console.error("An error occurred:", response.error);
@@ -93,7 +93,7 @@ decor8.generateDesigns(input_image_path, room_type, design_style, null, num_imag
             //          [
             //              {
             //                  "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
-            //                  "data": "<base64-encoded_data>",
+            //                  "url": "<file-to-download>",
             //                  "width": 768,
             //                  "height": 512,
             //                  "captions":
@@ -126,12 +126,9 @@ decor8.generateDesigns(input_image_path, room_type, design_style, null, num_imag
                 }
                 
                 // Save the image data as a file in the output-data directory
-                fs.writeFileSync(path.join(outputDir, `design_${design.uuid}.jpg`), design.data, 'base64', (err) => {
-                    if (err) {
-                        console.error("An error occurred while saving the image:", err);
-                    } else {
-                        console.log(`Image saved as design_${design.uuid}.jpg`);
-                    }
+                const filename = `design_${design.uuid}.jpg`;
+                downloadAndSaveImage(design.url, outputDir, filename).catch(err => {
+                console.error(err);
                 });
             });
 
@@ -176,7 +173,7 @@ You can use the returned image as input to generate_designs API for filling it w
 const Decor8AI = require('decor8ai');
 const decor8 = new Decor8AI();
 
-decor8.primeTheRoomWalls('/path_to_your_image.jpg')
+decor8.primeWallsForRoom('https://prod-files.decor8.ai/test-images/sdk_test_image.png')
     .then(response => console.log(response))
     .catch(error => console.error(error));
 

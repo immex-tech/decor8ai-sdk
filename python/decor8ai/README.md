@@ -57,10 +57,10 @@ export DECOR8AI_API_KEY='<YOUR_API_KEY>'
 ## <a id="design-with-photo"> Generating Interior Design with a Photo of the room
 
 ```python
-from decor8ai.client import generate_designs
+from decor8ai.client import generate_designs_for_room
 
 # Mandatory Parameters
-input_image = 'path/to/your/image.png'  #local-file-path or URL or bytes
+input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'  #local-file-path or URL or bytes
 room_type = 'livingroom' # See below for all supported room types
 design_style = 'frenchcountry' # See below for all supported design Styles
 num_images = 1 # Up to 4 images can be generated at a time
@@ -69,10 +69,10 @@ num_images = 1 # Up to 4 images can be generated at a time
 num_captions = None # Choose 1 or 2 for number of image captions to generate
 keep_original_dimensions = False # Optional. True or False. Generated designs retain original image's dimensions (and aspect ratio)
 color_scheme = 'COLOR_SCHEME_5' # Optional
-speciality_decor = 'SPECIALITY_DECOR_5'; # Optional
+speciality_decor = 'SPECIALITY_DECOR_5' # Optional
+mask_info = None #Optional. Use mask_info string returned by first invocation of generate_designs_for_room api. Helpful in speeding up api response time.
 
-
-response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=True, color_scheme=color_scheme, speciality_decor=speciality_decor)
+response_json = generate_designs_for_room(input_image_url=input_image_url, mask_info=mask_info, room_type=room_type, design_style=design_style, num_images=num_images, keep_original_dimensions=True, color_scheme=color_scheme, speciality_decor=speciality_decor)
 
 ```
 
@@ -90,13 +90,9 @@ Sample response for successful design generation
         [
             {
                 "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
-                "data": "<base64-encoded_data>",
+                "url": "http://<generated-image-path>",
                 "width": 768,
-                "height": 512,
-                "captions":
-                [
-                    "Unveiling the art of rustic elegance in this French Country haven, where warmth and sophistication meet effortlessly."
-                ]
+                "height": 512
             }
         ]
     }
@@ -133,10 +129,10 @@ If your room contains unfinished walls, unpainted walls or walls which need touc
 You can use the returned image as input to generate_designs API for filling it with furniture. 
 
 ```Python
-from decor8ai.client import prime_the_room_walls
+from decor8ai.client import prime_walls_for_room
 
-input_image = 'path/to/your/image.png'  #local-file-path or URL or bytes
-response_json = prime_the_room_walls(input_image=input_image)
+input_image_url = 'http://example.com/path/to/your/image.png'  #local-file-path or URL or bytes
+response_json = prime_walls_for_room(input_image_url=input_image_url)
 
 ```
 ## <a id="upscale-the-image">Upscale the image

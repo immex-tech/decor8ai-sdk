@@ -46,8 +46,8 @@ def generate_image(image_id):
 
 
 # Define the number of workers (threads) you want in your pool
-num_workers = 50
-max_images = 100
+num_workers = 10
+max_images = 10
 # Using ThreadPoolExecutor to manage a pool of workers
 with concurrent.futures.ThreadPoolExecutor(max_workers=num_workers) as executor:
     # Submitting tasks to the thread pool

@@ -28,6 +28,23 @@ class Decor8AI {
         }
     }
 
+    async primeWallsForRoom(inputImageUrl) {
+        try {
+            const headers = {
+                Authorization: `Bearer ${this.apiKey}`,
+                'Content-Type': 'application/json'
+            };
+
+            const payload = {input_image_url: inputImageUrl}
+
+            const response = await axios.post(`${this.baseUrl}/prime_walls_for_room`, payload, { headers });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }    
+
     async generateDesigns(inputImage, roomType, designStyle, numCaptions = null, numImages = 1, keep_original_dimensions = false, color_scheme = null, speciality_decor = null) {
         try {
             const headers = {
@@ -57,6 +74,39 @@ class Decor8AI {
             throw error;
         }
     }
+    async generateDesignsForRoom(inputImageUrl, roomType, designStyle, maskInfo = null, numCaptions = null, numImages = 1, keep_original_dimensions = false, color_scheme = null, speciality_decor = null) {
+        try {
+            const headers = {
+                Authorization: `Bearer ${this.apiKey}`,
+                'Content-Type': 'application/json',
+            };
+
+            // Constructing the JSON payload
+            const payload = {
+                input_image_url: inputImageUrl,
+                room_type: roomType,
+                design_style: designStyle,
+                num_images: numImages
+            };
+
+            // Conditionally adding optional fields
+            if (color_scheme) {
+                payload.color_scheme = color_scheme;
+            }
+            if (speciality_decor) {
+                payload.speciality_decor = speciality_decor;
+            }
+
+            // This payload can now be used in an HTTP request
+
+
+            const response = await axios.post(`${this.baseUrl}/generate_designs_for_room`, payload, { headers });
+            return response.data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }    
 
     async upscaleImage(inputImage, scaleFactor = 2) {
         try {

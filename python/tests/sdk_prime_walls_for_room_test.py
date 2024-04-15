@@ -1,19 +1,12 @@
-from decor8ai.client import generate_designs
+from decor8ai.client import prime_walls_for_room
 import os
 import base64
+import requests
 
 # Mandatory Parameters
-input_image = './sdk_test_image.png'  # or URL or bytes
-num_images = 1
-keep_original_dimensions = False
+input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'
 
-# Refer to https://github.com/immex-tech/decor8ai-sdk/tree/main/python/decor8ai for supported values
-room_type = 'livingroom'
-design_style = 'frenchcountry'
-color_scheme = 'COLOR_SCHEME_5'; 
-speciality_decor = 'SPECIALITY_DECOR_5'; 
-
-response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=keep_original_dimensions, color_scheme=color_scheme, speciality_decor=speciality_decor)
+response_json = prime_walls_for_room(input_image_url=input_image_url)
 # Sample response when successful
 # {
 #     "error": "",
@@ -25,12 +18,6 @@ response_json = generate_designs(input_image=input_image, room_type=room_type, d
 #             {
 #                 "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
 #                 "data": "<base64-encoded_data>",
-#                 "width": 768,
-#                 "height": 512,
-#                 "captions":
-#                 [
-#                     "Unveiling the art of rustic elegance in this French Country haven, where warmth and sophistication meet effortlessly."
-#                 ]
 #             }
 #         ]
 #     }
@@ -41,6 +28,8 @@ response_json = generate_designs(input_image=input_image, room_type=room_type, d
 #     "error": "InvalidInput",
 #     "message": "Invalid input image. Please check the input image and try again.",
 # }
+
+
 if response_json['error'] != '': 
     print('Error : ' + response_json['error'] + ' : ' + response_json['message'])
 else:
@@ -48,11 +37,12 @@ else:
     images = response_json.get("info", {}).get("images", [])
     for image in images:
         uuid = image.get("uuid")
-        data = image.get("data")
+        image_url = image.get("url")
         
-        if uuid and data:
-            # Decode the base64 data
-            image_data = base64.b64decode(data)
+        if uuid and image_url:
+            # Get image file at image_url
+            response = requests.get(image_url)
+            image_data = response.content
             
             # Save the image in the specified directory
             output_directory = "output-data"
@@ -63,14 +53,6 @@ else:
                 image_file.write(image_data)
 
             print (f"Saved Image  : {output_directory}/{uuid}.jpg")
-
-    # Show the captions
-    captions = response_json.get("info", {}).get("captions", [])
-    for caption in captions:
-        print(caption)
-
-
-
 
 
 
