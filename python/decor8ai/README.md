@@ -26,7 +26,7 @@ Equipped with a powerful Python SDK, Decor8 AI facilitates seamless integrations
 
 This documentation describes how you can use Decor8 AI Python SDK to integrate Decor8 AI's powerful features in your application. 
 
-Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions.
+See [complete documentation for Decor8 AI api for Virtual Staging and Interior Design](https://api-docs.decor8.ai/). Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions. 
 
 ## <a id="installation"></a>Installation
 
@@ -120,6 +120,10 @@ num_images = 1 # Up to 4 images can be generated at a time
 num_captions = None # Choose 1 or 2 for number of image captions to generate
 
 response_json = generate_designs(room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1)
+
+# If you like HTTP URLs for output, use new API
+from decor8ai.client import generate_inspirational_designs
+response_json = generate_inspirational_designs(room_type=room_type, design_style=design_style, num_images=num_images)
 ```
 
 ## <a id="prime-the-walls">Priming the walls

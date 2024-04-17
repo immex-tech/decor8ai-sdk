@@ -1,13 +1,13 @@
 # Decor8 AI SDK
 Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
 
-You can choose from [35+ interior design styles](https://www.decor8.ai/ai-interior-design-styles) and [20+ room types](https://www.decor8.ai/ai-interior-design-room-types) to create unique interior design styles for your space.
+You can choose from 35+ interior design styles and 20+ room types to create unique interior design styles for your space.
 
 The app specializes in virtual staging, transforming empty spaces into vivid, attractive interiors, enhancing their appeal for better marketability. 
 
 This documentation describes how you can use Decor8 AI Python SDK to integrate Decor8 AI's powerful features in your application. In addition to Python SDK, Decor8 AI also exposes simple HTTP based API for easy integration with language of your choice.
 
-Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions.
+See [complete documentation for Decor8 AI api for Virtual Staging and Interior Design](https://api-docs.decor8.ai/). Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions. 
 
 
 ## Table of Contents

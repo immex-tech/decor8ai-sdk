@@ -23,9 +23,9 @@ The app specializes in virtual staging, transforming empty spaces into vivid, at
 
 Equipped with a powerful Python SDK, Decor8 AI facilitates seamless integrations, enabling enhanced design generation capabilities directly within your Python environment. Its user-friendly interface is optimized for performance on smaller screens, ensuring that your design process is as effortless and efficient as possible.
 
-This documentation describes how you can use Decor8 AI HTTP API to integrate Decor8 AI's powerful features in your application. 
+This documentation describes how you can use Decor8 AI http API to integrate Decor8 AI's powerful features in your application. 
 
-Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions.
+See [complete documentation for Decor8 AI api for Virtual Staging and Interior Design](https://api-docs.decor8.ai/). Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions. 
 
 ## <a id="configure-sdk"></a>Configure Decor8 AI API key
 

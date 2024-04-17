@@ -148,6 +148,30 @@ def generate_designs_for_room(input_image_url,room_type, design_style,  mask_inf
     
     return response_json
 
+def generate_inspirational_designs(room_type, design_style, num_images=1,color_scheme=None, speciality_decor=None):
+    
+    if not token:
+        raise Exception("DECOR8AI_API_KEY environment variable is not set.")
+    
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+    data = {
+        'room_type': room_type,
+        'design_style': design_style,
+        'num_images': num_images
+    }
+    if color_scheme:
+        data['color_scheme'] = color_scheme
+    if speciality_decor:
+        data['speciality_decor'] = speciality_decor
+
+    response = requests.post(url + '/generate_inspirational_designs', headers=headers, data=data)
+    
+    response_json = json.loads(response.text)
+    
+    return response_json
+
 def generate_image_captions(design_style, room_type, num_captions):
     
     if not token:

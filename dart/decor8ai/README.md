@@ -24,7 +24,7 @@ Equipped with a powerful Dart SDK, Decor8 AI facilitates seamless integrations, 
 
 This documentation describes how you can use Decor8 AI Dart SDK to integrate Decor8 AI's powerful features in your application. 
 
-Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions.
+See [complete documentation for Decor8 AI api for Virtual Staging and Interior Design](https://api-docs.decor8.ai/). Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions. 
 
 ## <a id="installation"></a>Installation
 
