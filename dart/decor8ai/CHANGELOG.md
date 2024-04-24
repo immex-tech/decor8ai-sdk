@@ -1,3 +1,5 @@
+## 1.0.8
+- Using new API endpoint api.decor8.ai
 ## 1.0.7
 - updates to readme.
 ## 1.0.6

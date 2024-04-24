@@ -4,7 +4,7 @@ import json
 from urllib.parse import urlparse
 
 dev_server_url = 'http://localhost:8000'
-prod_server_url = 'https://prod-app.decor8.ai:8000'
+prod_server_url = 'https://api.decor8.ai'
 url = prod_server_url
 token = os.environ.get('DECOR8AI_API_KEY')
 

@@ -3,7 +3,7 @@ const fs = require('fs');
 const FormData = require('form-data');
 
 class Decor8AI {
-    constructor( baseUrl = 'https://prod-app.decor8.ai:8000') {
+    constructor( baseUrl = 'https://api.decor8.ai') {
         this.apiKey = process.env.DECOR8AI_API_KEY;
         if (!this.apiKey) {
             throw new Error("DECOR8AI_API_KEY environment variable is not set.");
