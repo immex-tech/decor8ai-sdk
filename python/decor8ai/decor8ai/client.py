@@ -61,6 +61,24 @@ def prime_walls_for_room(input_image_url):
     
     return response_json
 
+def replace_sky_behind_house(input_image_url, sky_type):
+            
+    if not token:
+        raise Exception("DECOR8AI_API_KEY environment variable is not set.")
+    
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+
+    data = {
+        'input_image_url': input_image_url,
+        'sky_type': sky_type
+    }
+    
+    response = requests.post(url + '/replace_sky_behind_house', headers=headers, data=data)
+    response_json = json.loads(response.text)
+    
+    return response_json
 def generate_designs(input_image, room_type, design_style, num_captions = None, num_images=1, keep_original_dimensions=False, color_scheme=None, speciality_decor=None):
     def is_url(path):
         try:
