@@ -55,6 +55,7 @@ export INPUT_IMAGE_PATH="/path/to/your/input-image.png"
 export SERVER_URL="https://api.decor8.ai/generate_designs"
 export COLOR_SCHEME="COLOR_SCHEME_5"
 export SPECIALITY_DECOR="SPECIALITY_DECOR_5"
+export SCALE_FACTOR="2"
 
 # Base curl command
 curl -X POST $SERVER_URL \
@@ -79,7 +80,21 @@ curl -X POST $SERVER_URLL \
      -F "input_image_url=@$INPUT_IMAGE_URL" \
      -F "color_scheme=@$COLOR_SCHEME" \
      -F "speciality_decor=@$SPECIALITY_DECOR" \
-     -F "keep_original_dimensions=false"
+     -F "keep_original_dimensions=false" 
+
+
+# Using input_image_url parameter and scale_factor
+export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
+export SERVER_URL="https://api.decor8.ai/generate_designs_for_room"
+curl -X POST $SERVER_URLL \
+     -H "Authorization: Bearer $DECOR8AI_API_KEY" \
+     -F "room_type=$ROOM_TYPE" \
+     -F "design_style=$DESIGN_STYLE" \
+     -F "num_images=$NUM_IMAGES" \
+     -F "input_image_url=@$INPUT_IMAGE_URL" \
+     -F "color_scheme=@$COLOR_SCHEME" \
+     -F "speciality_decor=@$SPECIALITY_DECOR" \
+     -F "scale_factor=@$SCALE_FACTOR" 
 
 
 ```

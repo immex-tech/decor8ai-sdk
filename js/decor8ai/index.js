@@ -74,7 +74,7 @@ class Decor8AI {
             throw error;
         }
     }
-    async generateDesignsForRoom(inputImageUrl, roomType, designStyle, maskInfo = null, numCaptions = null, numImages = 1, keep_original_dimensions = false, color_scheme = null, speciality_decor = null) {
+    async generateDesignsForRoom(inputImageUrl, roomType, designStyle, maskInfo = null, numCaptions = null, numImages = 1, keep_original_dimensions = false, color_scheme = null, speciality_decor = null, scale_factor) {
         try {
             const headers = {
                 Authorization: `Bearer ${this.apiKey}`,
@@ -86,7 +86,8 @@ class Decor8AI {
                 input_image_url: inputImageUrl,
                 room_type: roomType,
                 design_style: designStyle,
-                num_images: numImages
+                num_images: numImages,
+                scale_factor: scale_factor,
             };
 
             // Conditionally adding optional fields

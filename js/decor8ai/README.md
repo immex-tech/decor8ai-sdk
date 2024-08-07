@@ -73,10 +73,10 @@ const num_images = 1;
 const keep_original_dimensions = false; // Optional. true or false. If true, then generated designs have same dimensions as the original image. Although, it takes bit longer to generate the design. If false, generated designs have dimensions are chosen by the API.
 const color_scheme = 'COLOR_SCHEME_4'; //Optional. 
 const speciality_decor = 'SPECIALITY_DECOR_5'; // Optional. 
-
+const scale_factor=2.0 // Mutually exclusive with keep_original_dimensions. Use either scale_factor or keep_original_dimensions
 // Example using generateDesigns with a file path
 console.log ("Generating designs for image at path " + input_image_path);
-decor8.generateDesignsForRoom(input_image_path, room_type, design_style, null, null, num_images, keep_original_dimensions, color_scheme, speciality_decor)
+decor8.generateDesignsForRoom(input_image_path, room_type, design_style, null, null, num_images, keep_original_dimensions, color_scheme, speciality_decor, scale_factor=2)
     .then(response => {
         if (response.error) {
             console.error("An error occurred:", response.error);

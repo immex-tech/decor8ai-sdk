@@ -53,7 +53,7 @@ function downloadAndSaveImage(url, outputDir, filename) {
 // Example using generateDesigns with a file path
 console.log ("Generating designs for image at path " + input_image_path);
 // Assuming decor8.generateDesigns() returns a promise
-    decor8.generateDesignsForRoom(input_image_path, room_type, design_style, null, null, num_images, keep_original_dimensions, color_scheme, speciality_decor)
+    decor8.generateDesignsForRoom(input_image_path, room_type, design_style, null, null, num_images, keep_original_dimensions, color_scheme, speciality_decor, scale_factor = 1)
     .then(response => {
         if (response.error) {
         console.error("An error occurred:", response.error);
