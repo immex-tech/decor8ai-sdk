@@ -1,20 +1,18 @@
-from decor8ai.client import generate_designs
+from decor8ai.client import generate_designs_for_room
 import os
 import base64
 import concurrent.futures
+import requests
 # Specify paths and data
-input_image = './sdk_test_image.png'  # or URL or bytes
+input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'
 room_type = 'livingroom'
 design_style = 'frenchcountry'
 num_images = 1
 
-
-
-
 def generate_image(image_id):
     print(f"Generaring Image {image_id} .")  
     # Call the function
-    response_json = generate_designs(input_image, room_type, design_style, num_images)
+    response_json = generate_designs_for_room(input_image_url, room_type, design_style, num_images=num_images)
 
     # Now you can work with response_json as a normal dictionary
     print(response_json)
@@ -23,12 +21,10 @@ def generate_image(image_id):
     images = response_json.get("info", {}).get("images", [])
     for image in images:
         uuid = image.get("uuid")
-        data = image.get("data")
+        url = image.get("url")
         
-        if uuid and data:
-            # Decode the base64 data
-            image_data = base64.b64decode(data)
-            
+        if uuid and url:
+            image_data = requests.get(url).content
             # Save the image in the specified directory
             output_directory = "output-data"
             if not os.path.exists(output_directory):
