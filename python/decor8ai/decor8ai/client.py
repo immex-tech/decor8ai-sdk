@@ -254,7 +254,7 @@ def upscale_image(input_image, scale_factor=2):
         return response_json
 
 
-def remove_objcts_from_room(input_image_url):
+def remove_objects_from_room(input_image_url):
     
     def is_url(path):
         try:
@@ -273,7 +273,7 @@ def remove_objcts_from_room(input_image_url):
         'input_image_url': input_image_url
     }
 
-    response = requests.post(url + '/remove_objcts_from_room', headers=headers, data=data)
+    response = requests.post(url + '/remove_objects_from_room', headers=headers, data=data)
     
     response_json = json.loads(response.text)
     
