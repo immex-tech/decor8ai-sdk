@@ -14,9 +14,10 @@ room_type = 'bedroom'
 design_style = 'frenchcountry'
 color_scheme = 'COLOR_SCHEME_5'; 
 speciality_decor = 'SPECIALITY_DECOR_5'; 
+keep_original_floor = False
 #scale_factor = 4
 
-response_json = generate_designs_for_room(input_image_url=input_image_url,mask_info=mask_info, room_type=room_type, design_style=design_style, num_images=num_images, color_scheme=color_scheme, speciality_decor=speciality_decor)
+response_json = generate_designs_for_room(input_image_url=input_image_url,mask_info=mask_info, room_type=room_type, design_style=design_style, num_images=num_images, color_scheme=color_scheme, speciality_decor=speciality_decor, keep_original_floor=keep_original_floor)
 # Sample response when successful
 # {
 #     "error": "",

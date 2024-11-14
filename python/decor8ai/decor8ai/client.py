@@ -129,7 +129,7 @@ def generate_designs(input_image, room_type, design_style, num_captions = None, 
     
     return response_json
 
-def generate_designs_for_room(input_image_url,room_type, design_style,  mask_info = None, num_images=1, keep_original_dimensions=False, color_scheme=None, speciality_decor=None, scale_factor=None):
+def generate_designs_for_room(input_image_url,room_type, design_style,  mask_info = None, num_images=1, keep_original_dimensions=False, color_scheme=None, speciality_decor=None, scale_factor=None, keep_original_floor=None):
     
     def is_url(path):
         try:
@@ -158,6 +158,8 @@ def generate_designs_for_room(input_image_url,room_type, design_style,  mask_inf
         data['color_scheme'] = color_scheme
     if speciality_decor:
         data['speciality_decor'] = speciality_decor
+    if keep_original_floor:
+        data['keep_original_floor'] = keep_original_floor
 
     if mask_info:
         data['mask_info'] = mask_info
