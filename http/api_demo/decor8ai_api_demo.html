@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decor8 AI API Demo</title>
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --surface-color: #ffffff;
+      --background-color: #f8fafc;
+      --text-color: #1e293b;
+      --border-color: #e2e8f0;
+      --hover-color: #1d4ed8;
+      --error-color: #ef4444;
+      --success-color: #22c55e;
+      --radius-sm: 0.375rem;
+      --radius-md: 0.5rem;
+      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    }
+
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.5;
+      color: var(--text-color);
+      background: var(--background-color);
+      margin: 0;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1, h2 {
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-size: 1.875rem;
+      color: var(--primary-color);
+    }
+
+    .card {
+      background: var(--surface-color);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    .input-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 0.625rem;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      background: var(--surface-color);
+      color: var(--text-color);
+      font-size: 0.875rem;
+      transition: border-color 0.15s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .file-input {
+      border: 1px dashed var(--border-color);
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .file-input:hover {
+      border-color: var(--primary-color);
+    }
+
+    button {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 0.625rem 1.25rem;
+      border-radius: var(--radius-sm);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    button:hover {
+      background: var(--hover-color);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .image-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .image-box {
+      background: var(--surface-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .image-box h3 {
+      font-size: 0.875rem;
+      padding: 0.75rem;
+      margin: 0;
+      background: var(--background-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .image-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .api-key-section {
+      background: #1e293b;
+      color: #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .api-key-section input {
+      background: #334155;
+      border-color: #475569;
+      color: #e2e8f0;
+    }
+
+    .api-key-section label {
+      color: #e2e8f0;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .tab {
+      padding: 0.5rem 1rem;
+      background: none;
+      border: none;
+      color: var(--text-color);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab.active {
+      border-bottom-color: var(--primary-color);
+      color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
+      }
+      
+      .input-group {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group input:invalid,
+    .form-group input.error {
+      border-color: var(--error-color);
+      background-color: rgba(239, 68, 68, 0.05);
+    }
+
+    .form-group input:invalid:focus,
+    .form-group input.error:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    .form-group input.required {
+      border-color: var(--error-color);
+      background-color: rgba(239, 68, 68, 0.05);
+    }
+
+    .form-group input.required:focus {
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    .form-group input.valid {
+      border-color: var(--success-color);
+      background-color: rgba(34, 197, 94, 0.05);
+    }
+
+    .form-group input.valid:focus {
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .documentation-links {
+      font-size: 0.875rem;
+      color: var(--text-color);
+    }
+
+    .documentation-links a {
+      color: var(--primary-color);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+
+    .documentation-links a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+
+    .input-help-text {
+      font-size: 0.75rem;
+      color: #64748b;
+      margin-top: 0.25rem;
+      line-height: 1.25;
+    }
+
+    .input-help-text a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    .input-help-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <link rel="stylesheet" href="css/image-compare-slider.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Decor8 AI API Demo</h1>
+      <div class="documentation-links">
+        <a href="https://api-docs.decor8.ai" target="_blank" rel="noopener">API Documentation</a> |
+        <a href="https://github.com/immex-tech/decor8ai-sdk/" target="_blank" rel="noopener">SDK Repository</a>
+      </div>
+    </div>
+
+    <div class="api-key-section card">
+      <h2>API Configuration</h2>
+      <div class="input-group">
+        <div class="form-group">
+          <label for="apiKey">API Key</label>
+          <input type="text" 
+                 id="apiKey" 
+                 placeholder="Enter your Decor8 AI API key" 
+                 class="required"
+                 oninput="validateApiKey(this)" />
+          <div class="input-help-text">
+            Need an API key? 
+            <a href="https://prod-app.decor8.ai" target="_blank" rel="noopener">Sign up at prod-app.decor8.ai</a> 
+            and subscribe to pay-as-you-go plan or purchase design credits.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="baseUrl">Base URL</label>
+          <input type="text" id="baseUrl" placeholder="Enter the base URL" 
+            value="https://api.decor8.ai" />
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('generateDesigns')">Generate Designs</button>
+      <button class="tab" onclick="switchTab('generateRoomDesigns')">Generate Room Designs</button>
+    </div>
+
+    <!-- Generate Designs API Section -->
+    <div id="generateDesigns" class="api-section card">
+      <h2>Generate Designs</h2>
+      <div class="input-group">
+        <div class="form-group">
+          <label for="roomType">Room Type</label>
+          <select id="roomType"></select>
+        </div>
+        <div class="form-group">
+          <label for="designStyle">Design Style</label>
+          <select id="designStyle"></select>
+        </div>
+        <div class="form-group">
+          <label for="colorScheme">Color Scheme</label>
+          <select id="colorScheme"></select>
+        </div>
+        <div class="form-group">
+          <label for="specialityDecor">Specialty Decor</label>
+          <select id="specialityDecor"></select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="generateDesignsInput">Upload Image</label>
+        <input type="file" id="generateDesignsInput" accept="image/*" class="file-input" />
+      </div>
+
+      <button id="generateDesignsButton" disabled>Generate Designs</button>
+
+      <div id="generateDesignsOutput"></div>
+    </div>
+
+    <!-- Generate Room Designs API Section -->
+    <div id="generateRoomDesigns" class="api-section card" style="display: none;">
+      <h2>Generate Room Designs</h2>
+      <div class="form-group">
+        <label for="roomImageUrl">Image URL</label>
+        <input 
+          type="text" 
+          id="roomImageUrl" 
+          placeholder="Enter image URL" 
+          value="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
+        />
+      </div>
+
+      <div class="input-group">
+        <div class="form-group">
+          <label for="roomTypeForRoom">Room Type</label>
+          <select id="roomTypeForRoom"></select>
+        </div>
+        <div class="form-group">
+          <label for="designStyleForRoom">Design Style</label>
+          <select id="designStyleForRoom"></select>
+        </div>
+        <div class="form-group">
+          <label for="colorSchemeForRoom">Color Scheme</label>
+          <select id="colorSchemeForRoom"></select>
+        </div>
+        <div class="form-group">
+          <label for="specialityDecorForRoom">Specialty Decor</label>
+          <select id="specialityDecorForRoom"></select>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="form-group">
+          <label for="numImages">Number of Images</label>
+          <input type="number" id="numImages" min="1" max="4" value="1" />
+        </div>
+        <div class="form-group">
+          <label for="scaleFactor">Scale Factor</label>
+          <select id="scaleFactor">
+            <option value="1">1x (Max 768px - 0 credits)</option>
+            <option value="2">2x (Max 1536px - 0 credits)</option>
+            <option value="3">3x (Max 2304px - 1 credit)</option>
+            <option value="4">4x (Max 3072px - 1 credit)</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="generateRoomDesignsButton">Generate Room Designs</button>
+
+      <div id="generateRoomDesignsOutput"></div>
+    </div>
+  </div>
+
+  <script src="js/image-compare-slider.js"></script>
+  <script>
+    // Define shared options
+    const roomTypes = {
+      livingroom: "Living Room",
+      kitchen: "Kitchen",
+      diningroom: "Dining Room",
+      bedroom: "Bedroom",
+      bathroom: "Bathroom",
+      kidsroom: "Kids Room",
+      familyroom: "Family Room",
+      readingnook: "Reading Nook",
+      sunroom: "Sun Room",
+      walkincloset: "Walk-in Closet",
+      mudroom: "Mud Room",
+      toyroom: "Toy Room",
+      office: "Office",
+      foyer: "Foyer",
+      powderroom: "Powder Room",
+      laundryroom: "Laundry Room",
+      gym: "Gym",
+      basement: "Basement",
+      garage: "Garage",
+      balcony: "Balcony",
+      cafe: "Cafe",
+      homebar: "Home Bar",
+      study_room: "Study Room",
+      front_porch: "Front Porch",
+      back_porch: "Back Porch",
+      back_patio: "Back Patio",
+      openplan: "Open Plan",
+      boardroom: "Board Room",
+      meetingroom: "Meeting Room",
+      openworkspace: "Open Workspace",
+      privateoffice: "Private Office"
+    };
+
+    const designStyles = {
+      minimalist: "Minimalist",
+      scandinavian: "Scandinavian",
+      industrial: "Industrial",
+      boho: "Boho",
+      traditional: "Traditional",
+      artdeco: "Art Deco",
+      midcenturymodern: "Mid-Century Modern",
+      coastal: "Coastal",
+      tropical: "Tropical",
+      eclectic: "Eclectic",
+      contemporary: "Contemporary",
+      frenchcountry: "French Country",
+      rustic: "Rustic",
+      shabbychic: "Shabby Chic",
+      vintage: "Vintage",
+      country: "Country",
+      modern: "Modern",
+      asian_zen: "Asian Zen",
+      hollywoodregency: "Hollywood Regency",
+      bauhaus: "Bauhaus",
+      mediterranean: "Mediterranean",
+      farmhouse: "Farmhouse",
+      victorian: "Victorian",
+      gothic: "Gothic",
+      moroccan: "Moroccan",
+      southwestern: "Southwestern",
+      transitional: "Transitional",
+      maximalist: "Maximalist",
+      arabic: "Arabic",
+      japandi: "Japandi",
+      retrofuturism: "Retro-Futurism",
+      artnouveau: "Art Nouveau"
+    };
+
+    const colorSchemes = {
+      COLOR_SCHEME_0: "Default",
+      COLOR_SCHEME_1: "Moss Green, Tan, White",
+      COLOR_SCHEME_2: "Gray, Sand, Blue",
+      COLOR_SCHEME_3: "Hunter Green, Red",
+      COLOR_SCHEME_4: "White, Pops of Color",
+      COLOR_SCHEME_5: "Blue, Neon",
+      COLOR_SCHEME_6: "Light Blue, Emerald",
+      COLOR_SCHEME_7: "Blue, Grass Green",
+      COLOR_SCHEME_8: "Blue, Beige",
+      COLOR_SCHEME_9: "Gray, Brown",
+      COLOR_SCHEME_10: "Black, Red",
+      COLOR_SCHEME_11: "Gray-Green, White, Black",
+      COLOR_SCHEME_12: "Blue, Gray, Taupe",
+      COLOR_SCHEME_13: "Black, Navy",
+      COLOR_SCHEME_14: "Emerald, Tan",
+      COLOR_SCHEME_15: "Forest Green, Light Gray",
+      COLOR_SCHEME_16: "Yellow, Gray",
+      COLOR_SCHEME_17: "Pink, Green",
+      COLOR_SCHEME_18: "Blush Pink, Black",
+      COLOR_SCHEME_19: "Black, White",
+      COLOR_SCHEME_20: "Blue, White"
+    };
+
+    const specialtyDecor = {
+      SPECIALITY_DECOR_0: "None",
+      SPECIALITY_DECOR_1: "Halloween Decor with Spooky Ambiance",
+      SPECIALITY_DECOR_2: "Christmas Decor with Tree & Ornaments",
+      SPECIALITY_DECOR_3: "Thanksgiving Decor",
+      SPECIALITY_DECOR_4: "Fall Season Decor",
+      SPECIALITY_DECOR_5: "Spring Season Decor",
+      SPECIALITY_DECOR_6: "Summer Season Decor",
+      SPECIALITY_DECOR_7: "Winter Season Decor"
+    };
+
+    // Function to populate select elements
+    function populateSelect(selectId, options) {
+      const select = document.getElementById(selectId);
+      select.innerHTML = Object.entries(options)
+        .map(([value, label]) => `<option value="${value}">${label}</option>`)
+        .join('');
+    }
+
+    // Initialize all select elements when the document loads
+    document.addEventListener('DOMContentLoaded', function() {
+      // Populate room types
+      populateSelect('roomType', roomTypes);
+      populateSelect('roomTypeForRoom', roomTypes);
+
+      // Populate design styles
+      populateSelect('designStyle', designStyles);
+      populateSelect('designStyleForRoom', designStyles);
+
+      // Populate color schemes
+      populateSelect('colorScheme', colorSchemes);
+
+      // Populate specialty decor
+      populateSelect('specialityDecor', specialtyDecor);
+
+      // Initialize the image preview with the default URL
+      const defaultImageUrl = document.getElementById('roomImageUrl').value.trim();
+      if (defaultImageUrl) {
+        generateRoomDesignsSlider.setImages(defaultImageUrl);
+      }
+    });
+
+    // Tab switching functionality
+    function switchTab(tabId) {
+      document.querySelectorAll('.api-section').forEach(section => {
+        section.style.display = 'none';
+      });
+      document.getElementById(tabId).style.display = 'block';
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+    }
+
+    // Generate Designs functionality
+    let selectedFile = null;
+    document.getElementById('generateDesignsInput').addEventListener('change', function(event) {
+      selectedFile = event.target.files[0];
+      const generateButton = document.getElementById('generateDesignsButton');
+      generateButton.disabled = !selectedFile;
+      
+      if (selectedFile) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          generateDesignsSlider.setImages(reader.result, reader.result);
+        };
+        reader.readAsDataURL(selectedFile);
+      }
+    });
+
+    // Helper function to handle API errors
+    async function handleApiError(response) {
+      let errorMessage = `HTTP Error: ${response.status}`;
+      try {
+        const errorData = await response.json();
+        if (errorData.error) {
+          // API returns error in a structured format
+          errorMessage = typeof errorData.error === 'object' 
+            ? JSON.stringify(errorData.error, null, 2)
+            : errorData.error;
+        } else {
+          // Fallback if error structure is different
+          errorMessage = JSON.stringify(errorData, null, 2);
+        }
+      } catch (e) {
+        // If JSON parsing fails, use text response
+        errorMessage = await response.text();
+      }
+      throw new Error(errorMessage);
+    }
+
+    // Generate Designs API Call
+    document.getElementById('generateDesignsButton').addEventListener('click', async function() {
+      if (!selectedFile) {
+        alert('Please select an image first');
+        return;
+      }
+
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const baseUrl = document.getElementById('baseUrl').value.trim();
+
+      if (!apiKey || !baseUrl) {
+        alert('Please provide both API Key and Base URL');
+        return;
+      }
+
+      this.disabled = true;
+      this.textContent = 'Generating...';
+
+      const formData = new FormData();
+      formData.append('input_image', selectedFile);
+      formData.append('room_type', document.getElementById('roomType').value);
+      formData.append('design_style', document.getElementById('designStyle').value);
+      formData.append('num_images', '1');
+
+      try {
+        const response = await fetch(`${baseUrl}/generate_designs`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: formData
+        });
+
+        if (!response.ok) {
+          await handleApiError(response);
+        }
+
+        const result = await response.json();
+        console.log('API Response:', result); // For debugging
+
+        // Update the comparison slider with the generated image
+        if (result.info && result.info.images && result.info.images.length > 0) {
+          const reader = new FileReader();
+          reader.onload = function() {
+            generateDesignsSlider.setImages(
+              reader.result, 
+              `data:image/jpeg;base64,${result.info.images[0].data}`
+            );
+          };
+          reader.readAsDataURL(selectedFile);
+        } else {
+          throw new Error('No images received in the API response');
+        }
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert(`Error generating designs:\n\n${error.message}`);
+      } finally {
+        this.disabled = false;
+        this.textContent = 'Generate Designs';
+      }
+    });
+
+    // Generate Room Designs API Call
+    document.getElementById('generateRoomDesignsButton').addEventListener('click', async function() {
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const baseUrl = document.getElementById('baseUrl').value.trim();
+      const imageUrl = document.getElementById('roomImageUrl').value.trim();
+
+      if (!apiKey || !baseUrl || !imageUrl) {
+        alert('Please provide API Key, Base URL, and Image URL');
+        return;
+      }
+
+      this.disabled = true;
+      this.textContent = 'Generating...';
+
+      try {
+        const requestBody = {
+          input_image_url: imageUrl,
+          room_type: document.getElementById('roomTypeForRoom').value,
+          design_style: document.getElementById('designStyleForRoom').value,
+          num_images: parseInt(document.getElementById('numImages').value),
+          scale_factor: parseInt(document.getElementById('scaleFactor').value),
+          color_scheme: document.getElementById('colorScheme').value,
+          speciality_decor: document.getElementById('specialityDecor').value
+        };
+
+        const response = await fetch(`${baseUrl}/generate_designs_for_room`, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+          await handleApiError(response);
+        }
+
+        const result = await response.json();
+        console.log('API Response:', result); // For debugging
+
+        // Update the comparison slider with the generated image
+        if (result.info && result.info.images && result.info.images.length > 0) {
+          generateRoomDesignsSlider.setImages(
+            imageUrl, 
+            `${result.info.images[0].url}`
+          );
+        } else {
+          throw new Error('No images received in the API response');
+        }
+
+      } catch (error) {
+        console.error('Error:', error);
+        alert(`Error generating room designs:\n\n${error.message}`);
+      } finally {
+        this.disabled = false;
+        this.textContent = 'Generate Room Designs';
+      }
+    });
+
+    // Add this function to the existing script section
+    function validateApiKey(input) {
+      if (!input.value.trim()) {
+        input.classList.remove('valid');
+        input.classList.add('required');
+      } else {
+        input.classList.remove('required');
+        input.classList.add('valid');
+      }
+    }
+
+    // Initial validation on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      validateApiKey(document.getElementById('apiKey'));
+    });
+
+    // Initialize sliders
+    const generateDesignsSlider = createImageCompareSlider(
+      document.getElementById('generateDesignsOutput')
+    );
+    const generateRoomDesignsSlider = createImageCompareSlider(
+      document.getElementById('generateRoomDesignsOutput')
+    );
+
+    // Update file input handler
+    document.getElementById('generateDesignsInput').addEventListener('change', function(event) {
+      selectedFile = event.target.files[0];
+      const generateButton = document.getElementById('generateDesignsButton');
+      generateButton.disabled = !selectedFile;
+      
+      if (selectedFile) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          generateDesignsSlider.setImages(reader.result, reader.result);
+        };
+        reader.readAsDataURL(selectedFile);
+      }
+    });
+
+    // Update URL input handler
+    document.getElementById('roomImageUrl').addEventListener('input', function(event) {
+      const imageUrl = event.target.value.trim();
+      if (imageUrl) {
+        generateRoomDesignsSlider.setImages(imageUrl, imageUrl);
+      }
+    });
+
+    // Update API response handlers accordingly
+    // In generate_designs API success handler:
+    generateDesignsSlider.setImages(reader.result, `data:image/jpeg;base64,${result.info.images[0].data}`);
+
+    // In generate_room_designs API success handler:
+    generateRoomDesignsSlider.setImages(imageUrl, `data:image/jpeg;base64,${result.info.images[0].data}`);
+  </script>
+</body>
+</html>
