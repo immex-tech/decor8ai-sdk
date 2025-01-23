@@ -229,3 +229,31 @@ Decor8 AI supports following seasonal décor.
 | SPECIALITY_DECOR_5     | Spring Season Decor                                                   |
 | SPECIALITY_DECOR_6     | Summer Season Decor                                                   |
 | SPECIALITY_DECOR_7     | Winter Season Decor                                                   |
+
+## Use Cases
+
+### Mobile App Integration
+- Perfect for Flutter-based real estate applications
+- Ideal for mobile interior design apps
+- Great for property management mobile solutions
+- Excellent for home improvement retail apps
+
+### Real Estate Virtual Staging
+- Enable real-time virtual staging in your mobile app
+- Allow users to visualize empty spaces with furniture
+- Provide multiple design style options instantly
+- Reduce the need for physical staging
+
+### Interactive Design Services
+- Build interactive design consultation apps
+- Create virtual room planners
+- Develop mobile-first design visualization tools
+- Enable real-time design previews
+
+### Business Solutions
+- Add virtual staging to real estate photography services
+- Create value-added services for property listings
+- Enhance property marketing capabilities
+- Develop custom design visualization solutions
+
+Start integrating professional interior design capabilities into your Flutter applications today with Decor8 AI's Dart SDK. Whether you're building a real estate app, design tool, or business solution, our SDK provides the robust functionality you need.

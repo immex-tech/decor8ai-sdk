@@ -14,6 +14,7 @@
 - [Room Types](#room-types)
 - [Color Schemes](#color-schemes)
 - [Seasonal Décor](#speciality-decor)
+- [Use Cases](#use-cases)
 
 
 ## <a id="javascript-sdk-overview"></a>Overview
@@ -293,5 +294,64 @@ Decor8 AI supports following seasonal décor.
 | SPECIALITY_DECOR_5     | Spring Season Decor                                                   |
 | SPECIALITY_DECOR_6     | Summer Season Decor                                                   |
 | SPECIALITY_DECOR_7     | Winter Season Decor                                                   |
+
+## <a id="use-cases"> Use Cases
+
+### Web-Based Virtual Staging
+- Create interactive virtual staging applications
+- Build real-time design preview systems
+- Develop browser-based staging tools
+- Perfect for:
+  - Real estate websites
+  - Property listing platforms
+  - Virtual staging services
+  - Property marketing tools
+  - Online design portfolios
+
+### Single Page Applications (SPA)
+- Integrate virtual staging into React/Vue/Angular apps
+- Build dynamic design visualization tools
+- Create interactive before/after comparisons
+- Ideal for:
+  - Property management dashboards
+  - Real estate platforms
+  - Interior design applications
+  - Virtual staging services
+  - Design consultation platforms
+
+### Node.js Backend Services
+- Build scalable virtual staging APIs
+- Create design generation microservices
+- Develop real estate photography enhancement services
+- Perfect for:
+  - Photography service providers
+  - Real estate agencies
+  - Property marketing firms
+  - Design consultation services
+  - Virtual staging businesses
+
+### Chatbot Integration
+- Create AI-powered interior design assistants
+- Build interactive design recommendation systems
+- Develop virtual staging chatbots
+- Ideal for:
+  - Customer service platforms
+  - Design consultation services
+  - Property marketing automation
+  - Real estate platforms
+  - Home improvement services
+
+### E-commerce Integration
+- Add virtual staging to furniture websites
+- Create interactive room visualization tools
+- Build design preview systems
+- Perfect for:
+  - Furniture retailers
+  - Home improvement stores
+  - Interior design services
+  - Decor websites
+  - Home staging businesses
+
+Start transforming spaces today with Decor8 AI's JavaScript SDK. Whether you're building a web application, service, or platform, our SDK provides the tools you need to integrate professional virtual staging and interior design capabilities into your JavaScript environment.
 
 

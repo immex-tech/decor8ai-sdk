@@ -28,6 +28,70 @@ This documentation describes how you can use Decor8 AI Python SDK to integrate D
 
 See [complete documentation for Decor8 AI api for Virtual Staging and Interior Design](https://api-docs.decor8.ai/). Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions. 
 
+## Use Cases
+
+### Virtual Staging for Real Estate
+- Transform empty properties into beautifully staged homes instantly
+- Process multiple properties in batch for large real estate portfolios
+- Generate multiple design styles for the same space
+- Reduce traditional staging costs by up to 97%
+- Perfect for:
+  - Real estate listings and marketing
+  - Property websites and portals
+  - Open house presentations
+  - Rental property advertisements
+  - Commercial space visualization
+
+### Photography Service Enhancement
+- Add virtual staging capabilities to existing photography services
+- Differentiate your business with AI-powered staging
+- Provide both traditional photos and virtually staged alternatives
+- Increase revenue per property with minimal additional effort
+- Ideal for:
+  - Real estate photographers
+  - Property marketing agencies
+  - Architectural photographers
+  - Interior design photographers
+  - Commercial property photographers
+
+### Personal Interior Design Chatbots
+- Create AI-powered design assistants using Python's NLP capabilities
+- Integrate Decor8 AI into conversational interfaces
+- Provide instant design visualization through chat
+- Offer personalized design recommendations
+- Perfect for:
+  - Home improvement platforms
+  - Design consultation services
+  - Property management apps
+  - Real estate platforms
+  - Interior design applications
+
+### Website & App Integration
+- Add virtual staging capabilities to any website or application
+- Build scalable design generation systems
+- Create interactive before/after comparisons
+- Enable real-time design visualization
+- Integrate with:
+  - Real estate platforms
+  - Property management systems
+  - Interior design applications
+  - E-commerce furniture sites
+  - Home improvement portals
+
+### Data Science & Enterprise Applications
+- Build automated design recommendation systems
+- Create ML-powered design analysis tools
+- Develop custom design generation pipelines
+- Integrate with existing AI/ML workflows
+- Ideal for:
+  - Large-scale property management
+  - Real estate companies
+  - Design firms
+  - Property technology startups
+  - Marketing agencies
+
+Start transforming spaces today with Decor8 AI's powerful Python SDK. Whether you're a developer, business owner, or service provider, our SDK provides the tools you need to bring professional virtual staging and interior design capabilities to your platform.
+
 ## <a id="installation"></a>Installation
 
 You can install the Decor8 AI Python SDK using pip:

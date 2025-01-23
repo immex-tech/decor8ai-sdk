@@ -27,4 +27,49 @@ See [complete documentation for Decor8 AI api for Virtual Staging and Interior D
 
 # <a id="rest-api">Rest API
 [Refer to Rest API Docs](http/README.md)
-```
+
+## Use Cases
+
+### Real Estate Virtual Staging
+- Transform empty properties into beautifully staged homes to attract potential buyers
+- Showcase different design possibilities for the same space
+- Reduce physical staging costs while maintaining visual appeal
+- Perfect for real estate listings, property websites, and marketing materials
+
+### Personal Interior Design Chatbots
+- Integrate Decor8 AI into your chatbot to provide instant interior design suggestions
+- Allow users to visualize room transformations through natural conversation
+- Enhance customer engagement with AI-powered design recommendations
+- Ideal for home improvement apps and design consultation services
+
+### Virtual Home Staging Services
+- Start your own virtual staging business with enterprise-grade AI technology
+- Offer quick turnaround times with consistent, high-quality results
+- Scale your business without the overhead of physical furniture inventory
+- Provide multiple design options for each space at a fraction of traditional costs
+
+### Photography Service Enhancement
+- Add value to existing real estate photography services
+- Differentiate your business with AI-powered staging capabilities
+- Offer both traditional and virtually staged photos to clients
+- Increase revenue per property with minimal additional effort
+
+### Website & App Integration
+- Seamlessly integrate virtual staging capabilities into any website or application
+- Enhance user experience with real-time design visualization
+- Provide interactive before/after comparisons
+- Perfect for:
+  - Real estate platforms
+  - Interior design applications
+  - Home improvement websites
+  - Property management systems
+  - E-commerce furniture sites
+
+### Additional Applications
+- Architectural visualization
+- Interior design education
+- Home renovation planning
+- Furniture retail visualization
+- Property development marketing
+
+Start transforming spaces today with Decor8 AI's powerful SDK. Whether you're a developer, business owner, or service provider, our API provides the tools you need to bring professional interior design capabilities to your platform.

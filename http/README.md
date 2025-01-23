@@ -13,6 +13,7 @@
 - [Room Types](#room-types)
 - [Color Schemes](#color-schemes)
 - [Seasonal Décor](#speciality-decor)
+- [Use Cases](#use-cases)
 
 
 Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
@@ -248,3 +249,31 @@ Decor8 AI supports following seasonal décor.
 | SPECIALITY_DECOR_5     | Spring Season Decor                                                   |
 | SPECIALITY_DECOR_6     | Summer Season Decor                                                   |
 | SPECIALITY_DECOR_7     | Winter Season Decor                                                   |
+
+## <a id="use-cases"> Use Cases
+
+### Universal Integration
+- Compatible with any programming language or platform
+- Perfect for custom implementations
+- Ideal for legacy system integration
+- Excellent for microservices architecture
+
+### Real Estate Solutions
+- Virtual staging for property listings
+- Multiple design style visualization
+- Empty space transformation
+- Cost-effective staging alternatives
+
+### Business Applications
+- Virtual home staging services
+- Photography service enhancement
+- Property marketing platforms
+- Interior design consultation tools
+
+### Custom Implementations
+- Web-based design tools
+- Property management systems
+- Real estate platforms
+- E-commerce integration
+
+The HTTP API provides maximum flexibility for integrating Decor8 AI's powerful virtual staging and interior design capabilities into any system or application. Whether you're building a custom solution or enhancing an existing platform, our API provides the foundation for professional design visualization.
