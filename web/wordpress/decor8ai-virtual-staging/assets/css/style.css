@@ -1,0 +1,219 @@
+/* Main Container */
+.decor8-virtual-staging-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* Header */
+.decor8-vs-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.decor8-vs-header h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 0.5rem;
+}
+
+.decor8-vs-header .description {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Upload Area */
+.decor8-vs-upload-area {
+    border: 2px dashed #ddd;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+    background: #fafafa;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+}
+
+.decor8-vs-upload-area:hover,
+.decor8-vs-upload-area.drag-over {
+    border-color: #2271b1;
+    background: #f0f7ff;
+}
+
+.decor8-vs-upload-area input[type="file"] {
+    display: none;
+}
+
+.decor8-vs-upload-placeholder {
+    color: #666;
+}
+
+.decor8-vs-upload-placeholder .dashicons {
+    font-size: 2.5rem;
+    width: auto;
+    height: auto;
+    color: #2271b1;
+}
+
+/* Image Preview */
+.decor8-vs-preview {
+    position: relative;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.decor8-vs-preview img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.decor8-vs-remove-image {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding: 0;
+    color: #666;
+    transition: all 0.2s ease;
+}
+
+.decor8-vs-remove-image:hover {
+    color: #dc3232;
+    transform: scale(1.1);
+}
+
+/* Form Controls */
+.decor8-vs-options-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.decor8-vs-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #1a1a1a;
+}
+
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 1rem;
+}
+
+/* Progress Bar */
+.decor8-vs-progress {
+    margin: 1.5rem 0;
+}
+
+.decor8-vs-progress-bar {
+    height: 4px;
+    background: #f0f0f0;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.decor8-vs-progress-indicator {
+    height: 100%;
+    background: #2271b1;
+    width: 0;
+    animation: progress 2s infinite linear;
+}
+
+@keyframes progress {
+    0% { width: 0; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+}
+
+/* Results Section */
+.decor8-vs-comparison {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 1.5rem 0;
+}
+
+.decor8-vs-original,
+.decor8-vs-staged {
+    text-align: center;
+}
+
+.decor8-vs-original img,
+.decor8-vs-staged img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.decor8-vs-original img:hover,
+.decor8-vs-staged img:hover {
+    transform: scale(1.02);
+}
+
+/* Buttons */
+.decor8-vs-submit,
+.decor8-vs-download,
+.decor8-vs-start-new {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.decor8-vs-submit {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.decor8-vs-download {
+    margin-top: 1rem;
+    text-decoration: none;
+}
+
+.decor8-vs-download .dashicons {
+    margin-right: 0.5rem;
+}
+
+/* Error Messages */
+.decor8-vs-error {
+    background: #fce4e4;
+    border-left: 4px solid #dc3232;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 0 4px 4px 0;
+    color: #dc3232;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .decor8-vs-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .decor8-vs-options-section {
+        grid-template-columns: 1fr;
+    }
+}
