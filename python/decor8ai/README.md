@@ -120,38 +120,81 @@ export DECOR8AI_API_KEY='<YOUR_API_KEY>'
 
 ## <a id="design-with-photo"> Generating Interior Design with a Photo of the room
 
+### Example 1: Using Room Type and Design Style
 ```python
 from decor8ai.client import generate_designs_for_room
 
-# Mandatory Parameters
-input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'  #local-file-path or URL or bytes
-room_type = 'livingroom' # See below for all supported room types
-design_style = 'frenchcountry' # See below for all supported design Styles
-num_images = 1 # Up to 4 images can be generated at a time
+# Basic style-guided generation
+input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'
+room_type = 'livingroom'  # See below for all supported room types
+design_style = 'frenchcountry'  # See below for all supported design styles
+num_images = 1  # Up to 4 images can be generated at a time
 
-# Optional Parameters
-num_captions = None # Choose 1 or 2 for number of image captions to generate
-keep_original_dimensions = False # Optional. True or False. Generated designs retain original image's dimensions (and aspect ratio)
-color_scheme = 'COLOR_SCHEME_5' # Optional
-speciality_decor = 'SPECIALITY_DECOR_5' # Optional
-mask_info = None #Optional. Use mask_info string returned by first invocation of generate_designs_for_room api. Helpful in speeding up api response time.
+# Optional style parameters
+color_scheme = 'COLOR_SCHEME_5'  # Optional
+speciality_decor = 'SPECIALITY_DECOR_5'  # Optional
 
-response_json = generate_designs_for_room(input_image_url=input_image_url, mask_info=mask_info, room_type=room_type, design_style=design_style, num_images=num_images, keep_original_dimensions=True, color_scheme=color_scheme, speciality_decor=speciality_decor)
-
+response_json = generate_designs_for_room(
+    input_image_url=input_image_url,
+    room_type=room_type,
+    design_style=design_style,
+    num_images=num_images,
+    color_scheme=color_scheme,
+    speciality_decor=speciality_decor
+)
 ```
 
+### Example 2: Using Custom Prompt Only
+```python
+from decor8ai.client import generate_designs_for_room
+
+# Prompt-guided generation
+input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'
+prompt = "A modern minimalist living space with Scandinavian influences, featuring clean lines, natural materials, and abundant natural light"
+
+response_json = generate_designs_for_room(
+    input_image_url=input_image_url,
+    prompt=prompt,
+    num_images=1
+)
 ```
-The response is a JSON object containing the generated designs and other information.
 
-Sample response for successful design generation
+### Example 3: Using Advanced Prompt Controls
+```python
+from decor8ai.client import generate_designs_for_room
 
+# Advanced prompt-guided generation
+input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'
+prompt = "A cozy reading nook with built-in bookshelves"
+prompt_prefix = "high quality, photorealistic interior, professional photography"
+prompt_suffix = "warm ambient lighting, detailed textures, interior design magazine quality"
+negative_prompt = "cluttered, dark, cartoon, synthetic, artificial"
+
+# Optional advanced parameters
+seed = 42  # For reproducible results
+guidance_scale = 7.5  # Controls how closely the model follows the prompt
+num_inference_steps = 50  # Number of denoising steps
+
+response_json = generate_designs_for_room(
+    input_image_url=input_image_url,
+    prompt=prompt,
+    prompt_prefix=prompt_prefix,
+    prompt_suffix=prompt_suffix,
+    negative_prompt=negative_prompt,
+    seed=seed,
+    guidance_scale=guidance_scale,
+    num_inference_steps=num_inference_steps,
+    num_images=1
+)
+```
+
+The response is a JSON object containing the generated designs and other information:
+```json
 {
     "error": "",
     "message": "Successfully generated designs.",
-    "info":
-    {
-        "images":
-        [
+    "info": {
+        "images": [
             {
                 "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
                 "url": "http://<generated-image-path>",
@@ -161,14 +204,15 @@ Sample response for successful design generation
         ]
     }
 }
+```
 
-Sample response when unsuccessful. "error" will be non-empty value.
+If unsuccessful, the response will contain an error:
+```json
 {
     "error": "InvalidInput",
     "message": "Invalid input image. Please check the input image and try again.",
 }
 ```
-
 
 ## <a id="design-without-photo"> Generating Inspirational Interior Design Ideas without using a photo of the room
 
