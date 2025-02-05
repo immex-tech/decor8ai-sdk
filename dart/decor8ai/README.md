@@ -48,65 +48,71 @@ dependencies:
 
 ## <a id="design-with-photo"> Generating Interior Design with a Photo of the room
 
-```Dart
-  const decor8aiApiKey= '<DECOR8AI_API_KEY>'; // Get it from https://prod-app.decor8.ai -> Profile
-  var decor8 = Decor8AI(decor8aiApiKey);
+### Example 1: Using Room Type and Design Style
+```dart
+const decor8aiApiKey = '<DECOR8AI_API_KEY>'; // Get it from prod-app.decor8.ai -> Profile
+var decor8 = Decor8AI(decor8aiApiKey);
 
-  // Example using generateDesigns with a file path
-  // NOTE:keep input_image = null if you want Decor8 AI to generate a random design style for given room type
-  // use num_captions = 1, 2 or 3 if you want to generate captions for the design images
-  // use num_images = 1, 2, 3 ,or 4 if you want to generate multiple design images
-  var generateDesignsResponse = await decor8.generateDesigns(
-    'path/to/your/room/photo.png',
-    'livingroom',
-    'modern',
-  );
-  // Save generated image to local directory
-  var designImages = generateDesignsResponse['info']['images'];
-  for (var image in designImages) {
-    var uuid = image['uuid'];
-    var data = image['data'];
-
-    var outputFile = File('output-data/$uuid.jpg');
-    await outputFile.create(recursive: true); // This will create the directory if it does not exist
-    await outputFile.writeAsBytes(base64Decode(data));
-    print('Image saved: output-data/$uuid.jpg');
-  }
-
-  // Generate designs for input image's HTTP URL
-  import 'dart:io';
-  import 'dart:convert';
-  import 'dart:async';
-  import 'package:http/http.dart' as http;
-
-  var generateDesignsResponse = await decor8.generateDesignsForRoom(
-    'https://prod-files.decor8.ai/test-images/sdk_test_image.png',
-    'livingroom',
-    'modern',
-  );
-
-  var designImages = generateDesignsResponse['info']['images'];
-  for (var image in designImages) {
-    var uuid = image['uuid'];
-    var url = image['url'];
-
-    // Define the output file path
-    var outputFile = File('output-data/$uuid.jpg');
-    await outputFile.create(recursive: true); // This will create the directory if it does not exist
-
-    // Fetch the image data from the URL
-    var response = await http.get(Uri.parse(url));
-    if (response.statusCode == 200) {
-      // Write the bytes to the file
-      await outputFile.writeAsBytes(response.bodyBytes);
-      print('Image saved: output-data/$uuid.jpg');
-    } else {
-      print('Failed to download image: $url');
-    }
-  }
-
+// Basic style-guided generation
+var generateDesignsResponse = await decor8.generateDesignsForRoom(
+  input_image_url: 'https://prod-files.decor8.ai/test-images/sdk_test_image.png',
+  room_type: 'livingroom',
+  design_style: 'minimalist',
+  num_images: 1,
+  color_scheme: 'COLOR_SCHEME_5',
+  speciality_decor: 'SPECIALITY_DECOR_5'
+);
 ```
 
+### Example 2: Using Custom Prompt Only
+```dart
+const decor8aiApiKey = '<DECOR8AI_API_KEY>';
+var decor8 = Decor8AI(decor8aiApiKey);
+
+// Prompt-guided generation
+var generateDesignsResponse = await decor8.generateDesignsForRoom(
+  input_image_url: 'https://prod-files.decor8.ai/test-images/sdk_test_image.png',
+  prompt: "A modern minimalist living space with Scandinavian influences, featuring clean lines, natural materials, and abundant natural light",
+  num_images: 1
+);
+```
+
+### Example 3: Using Advanced Prompt Controls
+```dart
+const decor8aiApiKey = '<DECOR8AI_API_KEY>';
+var decor8 = Decor8AI(decor8aiApiKey);
+
+// Advanced prompt-guided generation
+var generateDesignsResponse = await decor8.generateDesignsForRoom(
+  input_image_url: 'https://prod-files.decor8.ai/test-images/sdk_test_image.png',
+  prompt: "A cozy reading nook with built-in bookshelves",
+  prompt_prefix: "high quality, photorealistic interior, professional photography",
+  prompt_suffix: "warm ambient lighting, detailed textures, interior design magazine quality",
+  negative_prompt: "cluttered, dark, cartoon, synthetic, artificial",
+  seed: 42,
+  guidance_scale: 7.5,
+  num_inference_steps: 50,
+  num_images: 1
+);
+```
+
+The response is a JSON object containing the generated designs and other information:
+```json
+{
+    "error": "",
+    "message": "Successfully generated designs.",
+    "info": {
+        "images": [
+            {
+                "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
+                "url": "http://<generated-image-path>",
+                "width": 768,
+                "height": 512
+            }
+        ]
+    }
+}
+```
 
 ## <a id="design-without-photo"> Generating Inspirational Interior Design Ideas without using a photo of the room
 
