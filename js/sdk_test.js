@@ -6,15 +6,118 @@ const https = require('https');
 // Make sure DECOR8AI_API_KEY is set in your environment variables before running this script
 const decor8 = new Decor8AI();
 
-const input_image_path = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png';
-const num_images = 1;
-const keep_original_dimensions = false;
+const testImageUrl = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png';
 
-// Refer to https://github.com/immex-tech/decor8ai-sdk/edit/main/js/decor8ai/README.md for all supported values
-const room_type = 'bedroom';
-const design_style = 'farmhouse';
-const color_scheme = 'COLOR_SCHEME_2'; 
-const speciality_decor = 'SPECIALITY_DECOR_5'; 
+// Test 1: Original parameter usage
+console.log("Test 1: Testing generateDesignsForRoom with basic parameters");
+decor8.generateDesignsForRoom(
+    testImageUrl,
+    'bedroom',
+    'frenchcountry',
+    null,
+    null,
+    1,
+    false,
+    'COLOR_SCHEME_0',
+    'SPECIALITY_DECOR_0'
+)
+.then(response => {
+    if (response.error) {
+        console.error("Test 1 failed:", response.error);
+    } else {
+        console.log("Test 1 passed. Message:", response.message);
+        handleDesignResponse(response);
+    }
+})
+.catch(error => {
+    console.error("Test 1 failed with error:", error);
+});
+
+// Test 2: New parameters usage
+console.log("Test 2: Testing generateDesignsForRoom with advanced parameters");
+decor8.generateDesignsForRoom(
+    testImageUrl,
+    'bedroom',
+    'modern',
+    null,
+    null,
+    2,
+    false,
+    null,
+    null,
+    null,
+    'Modern minimalist room with sleek wardrobe, contemporary Table Lamps, and floating Dresser',
+    'high end, professional photo',
+    'clean lines, ambient lighting',
+    'cluttered, traditional, ornate',
+    42,
+    15.0,
+    50
+)
+.then(response => {
+    if (response.error) {
+        console.error("Test 2 failed:", response.error);
+    } else {
+        console.log("Test 2 passed. Message:", response.message);
+        handleDesignResponse(response);
+    }
+})
+.catch(error => {
+    console.error("Test 2 failed with error:", error);
+});
+
+// Test 3: Custom prompt with some standard parameters
+console.log("Test 3: Testing generateDesignsForRoom with custom prompt");
+decor8.generateDesignsForRoom(
+    testImageUrl,
+    null,
+    null,
+    null,
+    null,
+    1,
+    false,
+    null,
+    null,
+    null,
+    'A cozy reading nook with built-in bookshelves',
+    null,
+    null,
+    null,
+    null,
+    15.0
+)
+.then(response => {
+    if (response.error) {
+        console.error("Test 3 failed:", response.error);
+    } else {
+        console.log("Test 3 passed. Message:", response.message);
+        handleDesignResponse(response);
+    }
+})
+.catch(error => {
+    console.error("Test 3 failed with error:", error);
+});
+
+// Helper function to handle design responses
+function handleDesignResponse(response) {
+    const designs = response.info.images;
+    designs.forEach((design, index) => {
+        console.log(`Design ${index + 1}:`);
+        console.log(`UUID: ${design.uuid}`);
+        console.log(`Width: ${design.width}`);
+        console.log(`Height: ${design.height}`);
+
+        const outputDir = path.join(__dirname, 'output-data');
+        if (!fs.existsSync(outputDir)) {
+            fs.mkdirSync(outputDir, { recursive: true });
+        }
+
+        const filename = `design_${design.uuid}.jpg`;
+        downloadAndSaveImage(design.url, outputDir, filename).catch(err => {
+            console.error(err);
+        });
+    });
+}
 
 // Function to download an image from a URL and save it locally
 function downloadAndSaveImage(url, outputDir, filename) {
@@ -49,38 +152,6 @@ function downloadAndSaveImage(url, outputDir, filename) {
       });
     });
   }
-
-// Example using generateDesigns with a file path
-console.log ("Generating designs for image at path " + input_image_path);
-// Assuming decor8.generateDesigns() returns a promise
-    decor8.generateDesignsForRoom(input_image_path, room_type, design_style, null, null, num_images, keep_original_dimensions, color_scheme, speciality_decor, scale_factor = 1)
-    .then(response => {
-        if (response.error) {
-        console.error("An error occurred:", response.error);
-        } else {
-        console.log("Message:", response.message);
-        const designs = response.info.images;
-        designs.forEach((design, index) => {
-            console.log(`Design ${index + 1}:`);
-            console.log(`UUID: ${design.uuid}`);
-            console.log(`Width: ${design.width}`);
-            console.log(`Height: ${design.height}`);
-
-            const outputDir = path.join(__dirname, 'output-data');
-            if (!fs.existsSync(outputDir)) {
-            fs.mkdirSync(outputDir, { recursive: true });
-            }
-
-            const filename = `design_${design.uuid}.jpg`;
-            downloadAndSaveImage(design.url, outputDir, filename).catch(err => {
-            console.error(err);
-            });
-        });
-        }
-    })
-    .catch(error => {
-        console.error("An error occurred while generating designs:", error);
-    });
 
 // Example using primeTheRoomWalls with a file path
 // Priming operation applies white paint to the room walls. This is useful if the input image has dark walls or unfinished walls.
@@ -160,7 +231,7 @@ decor8.upscaleImage(input_image_path_for_upscaling, scale_factor)
 
 // Example using generateImageCaptions
 // console.log ("Generating captions for room type " + room_type + " and design style " + design_style);
-decor8.generateImageCaptions(room_type, design_style, num_captions = 2)
+decor8.generateImageCaptions('livingroom', 'modern', 2)
     .then(response => {
         if (response.error) {
             console.error("An error occurred:", response.error);

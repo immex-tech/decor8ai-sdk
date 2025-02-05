@@ -1,4 +1,4 @@
-# Decor8 AI Javascript SDK
+# Decor8 AI JavaScript SDK
 
 ## Table of Contents
 - [Overview](#javascript-sdk-overview)
@@ -33,8 +33,6 @@ See [complete documentation for Decor8 AI api for Virtual Staging and Interior D
 
 ## <a id="installation"></a>Installation
 
-You can install the Decor8 AI Javascript SDK using pip:
-
 ```bash
 npm install decor8ai
 ```
@@ -53,8 +51,9 @@ npm install decor8ai
 
 ## <a id="using-this-sdk">Usage
 
+Set your API key as an environment variable:
 ```bash
-export DECOR8AI_API_KEY='<YOUR_API_KEY>'
+export DECOR8AI_API_KEY='your-api-key-here'
 ```
 
 ## <a id="design-with-photo"> Generating Interior Design with a Photo of the room
@@ -353,5 +352,144 @@ Decor8 AI supports following seasonal décor.
   - Home staging businesses
 
 Start transforming spaces today with Decor8 AI's JavaScript SDK. Whether you're building a web application, service, or platform, our SDK provides the tools you need to integrate professional virtual staging and interior design capabilities into your JavaScript environment.
+
+## Usage Examples
+
+### Basic Room Design Generation (Using Room Type and Style)
+```javascript
+const Decor8AI = require('decor8ai');
+const decor8 = new Decor8AI();
+
+// Basic usage with room type and style
+decor8.generateDesignsForRoom(
+    'https://example.com/room.jpg',
+    'bedroom',
+    'frenchcountry',
+    null,
+    null,
+    1,
+    null,
+    'COLOR_SCHEME_0',
+    'SPECIALITY_DECOR_0'
+)
+.then(response => {
+    console.log(response);
+})
+.catch(error => {
+    console.error(error);
+});
+```
+
+### Advanced Design Generation with Custom Prompt
+```javascript
+// Advanced usage with custom prompt and parameters
+decor8.generateDesignsForRoom(
+    'https://example.com/room.jpg',
+    null,  // room_type not needed with custom prompt
+    null,  // design_style not needed with custom prompt
+    null,
+    null,
+    2,
+    null,
+    null,
+    null,
+    null,
+    'Modern minimalist room with sleek wardrobe, contemporary Table Lamps, and floating Dresser',
+    'high end, professional photo',
+    'clean lines, ambient lighting',
+    'cluttered, traditional, ornate',
+    42,
+    15.0,
+    50
+)
+.then(response => {
+    console.log(response);
+});
+```
+
+### Simple Prompt-Only Design Generation
+```javascript
+// Using only custom prompt
+decor8.generateDesignsForRoom(
+    'https://example.com/room.jpg',
+    null,  // room_type not needed
+    null,  // design_style not needed
+    null,
+    null,
+    1,
+    null,
+    null,
+    null,
+    null,
+    'Room with wardrobe, Table Lamps, Dresser',
+    null,
+    null,
+    null,
+    null,
+    15.0
+)
+.then(response => {
+    console.log(response);
+});
+```
+
+### Inspirational Designs (Without Input Image)
+```javascript
+// Generate designs without an input image
+decor8.generateInspirationalDesigns(
+    'bedroom',
+    'modern',
+    2,
+    'Luxurious bedroom with ocean view',
+    'high end, professional photo',
+    'natural lighting',
+    'cluttered, dark',
+    42,
+    15.0,
+    50
+)
+.then(response => {
+    console.log(response);
+});
+```
+
+### Prime Room Walls
+```javascript
+// Prime walls to prepare for design generation
+decor8.primeWallsForRoom('https://example.com/room.jpg')
+    .then(response => {
+        console.log(response);
+    });
+```
+
+### Generate Image Captions
+```javascript
+// Generate captions for a specific room type and style
+decor8.generateImageCaptions('livingroom', 'modern', 2)
+    .then(response => {
+        console.log(response);
+    });
+```
+
+## Response Handling
+
+Example
+
+## Parameters Reference
+
+### Common Parameters
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| input_image_url | string | URL of the input image |
+| room_type | string | Type of room (e.g., 'bedroom', 'livingroom') |
+| design_style | string | Design style (e.g., 'modern', 'frenchcountry') |
+| num_images | number | Number of images to generate (default: 1) |
+| prompt | string | Custom prompt describing desired outcome |
+| prompt_prefix | string | Text to prepend to the prompt |
+| prompt_suffix | string | Text to append to the prompt |
+| negative_prompt | string | Things to avoid in generation |
+| seed | number | Random seed for reproducible results |
+| guidance_scale | number | Controls how closely to follow the prompt (default: 7.5) |
+| num_inference_steps | number | Number of de
 
 
