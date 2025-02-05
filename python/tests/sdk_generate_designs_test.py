@@ -2,72 +2,80 @@ from decor8ai.client import generate_designs
 import os
 import base64
 
-# Mandatory Parameters
-input_image = './sdk_test_image.png'  # or URL or bytes
-num_images = 4
-keep_original_dimensions = False
+def save_generated_images(response_json):
+    if response_json['error'] != '': 
+        print('Error : ' + response_json['error'] + ' : ' + response_json['message'])
+    else:
+        # Show the images
+        images = response_json.get("info", {}).get("images", [])
+        for image in images:
+            uuid = image.get("uuid")
+            data = image.get("data")
+            
+            if uuid and data:
+                # Decode the base64 data
+                image_data = base64.b64decode(data)
+                
+                # Save the image in the specified directory
+                output_directory = "output-data"
+                if not os.path.exists(output_directory):
+                    os.makedirs(output_directory)
+                
+                with open(f"{output_directory}/{uuid}.jpg", "wb") as image_file:
+                    image_file.write(image_data)
 
-# Refer to https://github.com/immex-tech/decor8ai-sdk/tree/main/python/decor8ai for supported values
+                print(f"Saved Image  : {output_directory}/{uuid}.jpg")
+
+# Test 1: Original usage (backward compatibility)
+print("\nTest 1: Original parameter usage")
+input_image = './sdk_test_image.png'
 room_type = 'livingroom'
 design_style = 'frenchcountry'
-color_scheme = 'COLOR_SCHEME_5'; 
-speciality_decor = 'SPECIALITY_DECOR_5'; 
+num_images = 1
+keep_original_dimensions = False
+color_scheme = 'COLOR_SCHEME_0'
+speciality_decor = 'SPECIALITY_DECOR_0'
 
-response_json = generate_designs(input_image=input_image, room_type=room_type, design_style=design_style, num_images=num_images, num_captions=1, keep_original_dimensions=keep_original_dimensions, color_scheme=color_scheme, speciality_decor=speciality_decor)
-# Sample response when successful
-# {
-#     "error": "",
-#     "message": "Successfully generated designs.",
-#     "info":
-#     {
-#         "images":
-#         [
-#             {
-#                 "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
-#                 "data": "<base64-encoded_data>",
-#                 "width": 768,
-#                 "height": 512,
-#                 "captions":
-#                 [
-#                     "Unveiling the art of rustic elegance in this French Country haven, where warmth and sophistication meet effortlessly."
-#                 ]
-#             }
-#         ]
-#     }
-# }
+response_json = generate_designs(
+    input_image=input_image,
+    room_type=room_type,
+    design_style=design_style,
+    num_images=num_images,
+    num_captions=1,
+    keep_original_dimensions=keep_original_dimensions,
+    color_scheme=color_scheme,
+    speciality_decor=speciality_decor
+)
+save_generated_images(response_json)
 
-# Sample response when unsuccessful. "error" will be non-empty value.
-# {
-#     "error": "InvalidInput",
-#     "message": "Invalid input image. Please check the input image and try again.",
-# }
-if response_json['error'] != '': 
-    print('Error : ' + response_json['error'] + ' : ' + response_json['message'])
-else:
-    # Show the images
-    images = response_json.get("info", {}).get("images", [])
-    for image in images:
-        uuid = image.get("uuid")
-        data = image.get("data")
-        
-        if uuid and data:
-            # Decode the base64 data
-            image_data = base64.b64decode(data)
-            
-            # Save the image in the specified directory
-            output_directory = "output-data"
-            if not os.path.exists(output_directory):
-                os.makedirs(output_directory)
-            
-            with open(f"{output_directory}/{uuid}.jpg", "wb") as image_file:
-                image_file.write(image_data)
+# Test 2: New parameters usage
+print("\nTest 2: New parameter usage")
+response_json = generate_designs(
+    input_image=input_image,
+    room_type='bedroom',
+    design_style='modern',
+    num_images=2,
+    # New parameters
+    prompt="A luxurious bedroom with ocean view",
+    prompt_prefix="high end, professional photo",
+    prompt_suffix="natural lighting, detailed textures",
+    negative_prompt="cluttered, dark, cartoon",
+    seed=42,
+    guidance_scale=15.0,
+    num_inference_steps=50
+)
+save_generated_images(response_json)
 
-            print (f"Saved Image  : {output_directory}/{uuid}.jpg")
-
-    # Show the captions
-    captions = response_json.get("info", {}).get("captions", [])
-    for caption in captions:
-        print(caption)
+# Test 3: Mixed usage with custom prompt overriding style
+print("\nTest 3: Custom prompt with some standard parameters")
+response_json = generate_designs(
+    input_image=input_image,
+    num_images=1,
+    keep_original_dimensions=True,
+    prompt="A cozy reading nook with built-in bookshelves",
+    guidance_scale=15.0
+)
+save_generated_images(response_json)
 
 
 
