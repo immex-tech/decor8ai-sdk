@@ -48,87 +48,85 @@ export DECOR8AI_API_KEY='<Your Decor8AI API Key>'
 
 ## <a id="design-with-photo"> Generating Interior Design with a Photo of the room
 
+### Example 1: Using Room Type and Design Style
 ```bash
 export ROOM_TYPE="livingroom"
 export DESIGN_STYLE="minimalist"
 export NUM_IMAGES="1"
-export INPUT_IMAGE_PATH="/path/to/your/input-image.png"
-export SERVER_URL="https://api.decor8.ai/generate_designs"
+export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
+export SERVER_URL="https://api.decor8.ai/generate_designs_for_room"
 export COLOR_SCHEME="COLOR_SCHEME_5"
 export SPECIALITY_DECOR="SPECIALITY_DECOR_5"
-export SCALE_FACTOR="2"
 
-# Base curl command
+# Basic style-guided generation
 curl -X POST $SERVER_URL \
      -H "Authorization: Bearer $DECOR8AI_API_KEY" \
-     -F "room_type=$ROOM_TYPE" \
-     -F "design_style=$DESIGN_STYLE" \
-     -F "num_images=$NUM_IMAGES" \
-     -F "input_image=@$INPUT_IMAGE_PATH" \
-     -F "color_scheme=@$COLOR_SCHEME" \
-     -F "speciality_decor=@$SPECIALITY_DECOR" \
-     -F "keep_original_dimensions=false"
-
-
-# Using input_image_url parameter
-export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
-export SERVER_URL="https://api.decor8.ai/generate_designs_for_room"
-curl -X POST $SERVER_URLL \
-     -H "Authorization: Bearer $DECOR8AI_API_KEY" \
-     -F "room_type=$ROOM_TYPE" \
-     -F "design_style=$DESIGN_STYLE" \
-     -F "num_images=$NUM_IMAGES" \
-     -F "input_image_url=@$INPUT_IMAGE_URL" \
-     -F "color_scheme=@$COLOR_SCHEME" \
-     -F "speciality_decor=@$SPECIALITY_DECOR" \
-     -F "keep_original_dimensions=false" 
-
-
-# Using input_image_url parameter and scale_factor
-export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
-export SERVER_URL="https://api.decor8.ai/generate_designs_for_room"
-curl -X POST $SERVER_URLL \
-     -H "Authorization: Bearer $DECOR8AI_API_KEY" \
-     -F "room_type=$ROOM_TYPE" \
-     -F "design_style=$DESIGN_STYLE" \
-     -F "num_images=$NUM_IMAGES" \
-     -F "input_image_url=@$INPUT_IMAGE_URL" \
-     -F "color_scheme=@$COLOR_SCHEME" \
-     -F "speciality_decor=@$SPECIALITY_DECOR" \
-     -F "scale_factor=@$SCALE_FACTOR" 
-
-
+     -H "Content-Type: application/json" \
+     -d '{
+       "input_image_url": "'$INPUT_IMAGE_URL'",
+       "room_type": "'$ROOM_TYPE'",
+       "design_style": "'$DESIGN_STYLE'",
+       "num_images": '$NUM_IMAGES',
+       "color_scheme": "'$COLOR_SCHEME'",
+       "speciality_decor": "'$SPECIALITY_DECOR'"
+     }'
 ```
 
+### Example 2: Using Custom Prompt Only
+```bash
+export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
+export SERVER_URL="https://api.decor8.ai/generate_designs_for_room"
+
+# Prompt-guided generation
+curl -X POST $SERVER_URL \
+     -H "Authorization: Bearer $DECOR8AI_API_KEY" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "input_image_url": "'$INPUT_IMAGE_URL'",
+       "prompt": "A modern minimalist living space with Scandinavian influences, featuring clean lines, natural materials, and abundant natural light",
+       "num_images": 1
+     }'
 ```
-The response is a JSON object containing the generated designs and other information.
 
-Sample response for successful design generation
+### Example 3: Using Advanced Prompt Controls
+```bash
+export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
+export SERVER_URL="https://api.decor8.ai/generate_designs_for_room"
 
+# Advanced prompt-guided generation
+curl -X POST $SERVER_URL \
+     -H "Authorization: Bearer $DECOR8AI_API_KEY" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "input_image_url": "'$INPUT_IMAGE_URL'",
+       "prompt": "A cozy reading nook with built-in bookshelves",
+       "prompt_prefix": "high quality, photorealistic interior, professional photography",
+       "prompt_suffix": "warm ambient lighting, detailed textures, interior design magazine quality",
+       "negative_prompt": "cluttered, dark, cartoon, synthetic, artificial",
+       "seed": 42,
+       "guidance_scale": 7.5,
+       "num_inference_steps": 50,
+       "num_images": 1
+     }'
+```
+
+The response is a JSON object containing the generated designs and other information:
+```json
 {
     "error": "",
     "message": "Successfully generated designs.",
-    "info":
-    {
-        "images":
-        [
+    "info": {
+        "images": [
             {
                 "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
-                "data": "<base64-encoded_data>",
+                "url": "http://<generated-image-path>",
                 "width": 768,
                 "height": 512
             }
         ]
     }
 }
-
-Sample response when unsuccessful. "error" will be non-empty value.
-{
-    "error": "InvalidInput",
-    "message": "Invalid input image. Please check the input image and try again.",
-}
 ```
-
 
 ## <a id="design-without-photo"> Generating Inspirational Interior Design Ideas without using a photo of the room
 
