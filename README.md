@@ -11,10 +11,27 @@ See [complete documentation for Decor8 AI api for Virtual Staging and Interior D
 
 
 ## Table of Contents
+- [What's Under the Hood?](#whats-under-the-hood)
 - [Python SDK](#python-sdk)    
 - [Javascript SDK](#javascript-sdk)
 - [Flutter/Dart SDK](#dart-sdk)
 - [HTTP/Rest API](#rest-api)
+
+## What's Under the Hood?
+
+This SDK provides seamless access to Decor8 AI's powerful virtual staging and interior design platform. It empowers developers with enterprise-grade interior design capabilities without requiring deep expertise in machine learning or computer vision.
+
+While traditional Stable Diffusion and ControlNet approaches can work for basic interior design tasks, they often fall short when dealing with real-world room photos, especially for virtual staging. Decor8 AI solves this by combining:
+
+- Advanced image segmentation to understand room layout
+- Specialized Stable Diffusion models fine-tuned for interior design and virtual staging
+- Enhanced ControlNet implementations for precise furniture placement
+- Intelligent empty room detection and furniture filling algorithms
+- Upscaler to add fine details to the generated images and improve quality
+
+The platform handles the complex orchestration of these components, allowing developers to focus on building their applications rather than wrestling with model implementations, maintenance, and scalability. Whether you're looking to fill empty rooms with furniture or create complete interior design transformations, the API provides granular control through its parameters while ensuring consistent, production-ready results.
+
+For developers who have experimented with various Stable Diffusion approaches for virtual staging, Decor8 AI offers a reliable, scalable alternative that just works. The platform's robust architecture ensures high availability and consistent performance, enabling rapid application development and deployment.
 
 # <a id="python-sdk">Python SDK
 [Refer to Python SDK Docs](python/decor8ai/README.md)
