@@ -1,0 +1,33 @@
+[project]
+name = "decor8ai-comfyui"
+description = "Decor8 AI nodes for ComfyUI - Virtual Staging, Interior Design, and Design Inspirations"
+version = "1.0.0"
+license = {file = "LICENSE"}
+requires-python = ">=3.8"
+dependencies = [
+    "requests>=2.31.0",
+]
+
+[project.urls]
+Repository = "https://github.com/immex-tech/decor8ai-sdk"
+Documentation = "https://api-docs.decor8.ai"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = "decor8ai-virtual-staging-interior-design"
+DisplayName = "Decor8 AI Virtual Staging"
+Description = """
+Transform empty spaces into beautifully staged interiors using AI. Features:
+- Virtual Staging for empty rooms
+- New interior design for already furnished rooms
+- Design Inspirations for creative ideas (doesn't require a room photo) 
+- Multiple design styles and room types
+- Customizable with prompts and parameters
+- Professional-quality results
+"""
+Icon = "🏠"
+Tags = ["virtual-staging", "interior-design", "real-estate"]  # Adding tags for better discoverability
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
