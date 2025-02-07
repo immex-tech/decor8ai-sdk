@@ -24,22 +24,35 @@ class VirtualStagingNode:
                 "room_type": (["livingroom", "kitchen", "diningroom", "bedroom", "bathroom", 
                              "kidsroom", "familyroom", "readingnook", "sunroom", "walkincloset",
                              "mudroom", "toyroom", "office", "foyer", "powderroom", "laundryroom",
-                             "gym", "basement", "garage", "balcony", "cafe", "homebar"],),
+                             "gym", "basement", "garage", "balcony", "cafe", "homebar", 
+                             "study_room", "front_porch", "back_porch", "back_patio", "openplan",
+                             "boardroom", "meetingroom", "openworkspace", "privateoffice"],),
                 "design_style": (["minimalist", "scandinavian", "industrial", "boho", "traditional",
                                 "artdeco", "midcenturymodern", "coastal", "tropical", "eclectic",
                                 "contemporary", "frenchcountry", "rustic", "shabbychic", "vintage",
-                                "country", "modern", "asian_zen", "hollywoodregency", "bauhaus"],),
+                                "country", "modern", "asian_zen", "hollywoodregency", "bauhaus",
+                                "mediterranean", "farmhouse", "victorian", "gothic", "moroccan",
+                                "southwestern", "transitional", "maximalist", "arabic", "japandi",
+                                "retrofuturism", "artnouveau"],),
                 "prompt_prefix": ("STRING", {"default": ""}),
                 "prompt_suffix": ("STRING", {"default": ""}),
                 "negative_prompt": ("STRING", {"default": ""}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 4294967295}),
                 "color_scheme": (["COLOR_SCHEME_0", "COLOR_SCHEME_1", "COLOR_SCHEME_2", 
-                                "COLOR_SCHEME_3", "COLOR_SCHEME_4", "COLOR_SCHEME_5"],),
+                                "COLOR_SCHEME_3", "COLOR_SCHEME_4", "COLOR_SCHEME_5",
+                                "COLOR_SCHEME_6", "COLOR_SCHEME_7", "COLOR_SCHEME_8",
+                                "COLOR_SCHEME_9", "COLOR_SCHEME_10", "COLOR_SCHEME_11",
+                                "COLOR_SCHEME_12", "COLOR_SCHEME_13", "COLOR_SCHEME_14",
+                                "COLOR_SCHEME_15", "COLOR_SCHEME_16", "COLOR_SCHEME_17",
+                                "COLOR_SCHEME_18", "COLOR_SCHEME_19", "COLOR_SCHEME_20"],),
                 "speciality_decor": (["SPECIALITY_DECOR_0", "SPECIALITY_DECOR_1", 
-                                    "SPECIALITY_DECOR_2", "SPECIALITY_DECOR_3"],),
-                "guidance_scale": ("FLOAT", {"default": 15.0, "min": 1.0, "max": 20.0}),
-                "num_inference_steps": ("INT", {"default": 50, "min": 1, "max": 75}),
+                                    "SPECIALITY_DECOR_2", "SPECIALITY_DECOR_3",
+                                    "SPECIALITY_DECOR_4", "SPECIALITY_DECOR_5",
+                                    "SPECIALITY_DECOR_6", "SPECIALITY_DECOR_7"],),
+                "guidance_scale": ("FLOAT", {"default": None, "min": 1.0, "max": 20.0}),
+                "num_inference_steps": ("INT", {"default": None, "min": 1, "max": 75}),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
+                "scale_factor": ("INT", {"default": 1, "min": 1, "max": 8}),
             }
         }
 
@@ -101,10 +114,11 @@ class VirtualStagingNode:
             self.logger.error(f"Error processing image from {url}: {str(e)}")
             raise RuntimeError(f"Failed to process image: {str(e)}")
 
-    def generate_design(self, image, api_key, prompt="", room_type=None, design_style=None,
-                       prompt_prefix="", prompt_suffix="", negative_prompt="",
+    def generate_design(self, image, api_key, prompt=None, room_type=None, design_style=None,
+                       prompt_prefix=None, prompt_suffix=None, negative_prompt=None,
                        seed=0, color_scheme=None, speciality_decor=None,
-                       guidance_scale=15.0, num_inference_steps=50, num_images=1):
+                       guidance_scale=None, num_inference_steps=None, num_images=1,
+                       scale_factor=1):
         """Generate virtual staging design"""
         try:
             # Validate inputs
@@ -117,20 +131,27 @@ class VirtualStagingNode:
 
             # Convert tensor to file
             image_file = self._tensor_to_file(image)
+
+            # locally dump file for testing
+            with open("image.png", "wb") as f:
+                f.write(image_file.getvalue())
             
             # Prepare request data
             data = {
-                "guidance_scale": guidance_scale,
-                "num_inference_steps": num_inference_steps,
-                "num_images": num_images
+                "num_images": num_images,
+                "scale_factor": scale_factor
             }
             
             if prompt:
                 data["prompt"] = prompt
-                if room_type:
-                    data["room_type"] = room_type
-                if design_style:
-                    data["design_style"] = design_style
+
+                if prompt_prefix:
+                    data["prompt_prefix"] = prompt_prefix
+                if prompt_suffix:
+                    data["prompt_suffix"] = prompt_suffix
+                if negative_prompt:
+                    data["negative_prompt"] = negative_prompt
+
             else:
                 data["room_type"] = room_type
                 data["design_style"] = design_style
@@ -139,14 +160,14 @@ class VirtualStagingNode:
                 if speciality_decor:
                     data["speciality_decor"] = speciality_decor
 
-            if prompt_prefix:
-                data["prompt_prefix"] = prompt_prefix
-            if prompt_suffix:
-                data["prompt_suffix"] = prompt_suffix
-            if negative_prompt:
-                data["negative_prompt"] = negative_prompt
             if seed > 0:
                 data["seed"] = seed
+
+            if guidance_scale:
+                data["guidance_scale"] = guidance_scale
+            if num_inference_steps:
+                data["num_inference_steps"] = num_inference_steps
+                
 
             # Prepare files
             files = {
