@@ -6,9 +6,9 @@ license = {file = "LICENSE"}
 requires-python = ">=3.8"
 dependencies = [
     "requests>=2.31.0",
-    "torch>=2.6.0",
-    "Pillow>=9.5.0",
-    "numpy>=1.26.4",
+    "torch",
+    "Pillow",
+    "numpy",
 ]
 
 [project.urls]
