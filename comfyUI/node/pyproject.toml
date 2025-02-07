@@ -1,7 +1,7 @@
 [project]
 name = "decor8ai-comfyui"
 description = "Decor8 AI Virtual Staging, Interior Design, and Design Inspirations (Requires API key from www.decor8.ai)"
-version = "1.0.4"
+version = "1.0.6"
 license = {file = "LICENSE"}
 requires-python = ">=3.8"
 dependencies = [
