@@ -1,11 +1,14 @@
 [project]
 name = "decor8ai-comfyui"
-description = "Decor8 AI nodes for ComfyUI - Virtual Staging, Interior Design, and Design Inspirations"
-version = "1.0.0"
+description = "Decor8 AI Virtual Staging, Interior Design, and Design Inspirations (Requires API key from www.decor8.ai)"
+version = "1.0.4"
 license = {file = "LICENSE"}
 requires-python = ">=3.8"
 dependencies = [
     "requests>=2.31.0",
+    "torch>=2.6.0",
+    "Pillow>=9.5.0",
+    "numpy>=1.26.4",
 ]
 
 [project.urls]
@@ -17,13 +20,21 @@ Documentation = "https://api-docs.decor8.ai"
 PublisherId = "decor8ai-virtual-staging-interior-design"
 DisplayName = "Decor8 AI Virtual Staging"
 Description = """
-Transform empty spaces into beautifully staged interiors using AI. Features:
+Transform empty spaces into beautifully staged interiors using Decor8 AI's professional API service.
+
+⚠️ This node requires an API key from https://www.decor8.ai
+- Purchase prepaid plans or subscribe to pay-as-you-go
+- Get your API key from the Decor8 AI dashboard
+
+Features:
 - Virtual Staging for empty rooms
 - New interior design for already furnished rooms
 - Design Inspirations for creative ideas (doesn't require a room photo) 
 - Multiple design styles and room types
 - Customizable with prompts and parameters
 - Professional-quality results
+
+Visit www.decor8.ai for pricing and plans.
 """
 Icon = "🏠"
 Tags = ["virtual-staging", "interior-design", "real-estate"]  # Adding tags for better discoverability

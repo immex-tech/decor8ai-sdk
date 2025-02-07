@@ -4,9 +4,18 @@ import torch
 from PIL import Image
 import io
 import logging
-
+import numpy as np
 class VirtualStagingNode:
-    """Decor8 AI Virtual Staging node for ComfyUI - Transforms empty spaces into staged interiors"""
+    """Decor8 AI Virtual Staging node for ComfyUI - Transforms empty spaces into staged interiors
+
+    This node requires a Decor8 AI API key to function. 
+    To use this node:
+    1. Visit www.decor8.ai to purchase a prepaid plan or subscribe to pay-as-you-go
+    2. Get your API key from the dashboard
+    3. Set the API key in the node parameters
+
+    API pricing and plans are available at www.decor8.ai
+    """
     
     def __init__(self):
         self.api_base = "https://api.decor8.ai"
@@ -49,10 +58,10 @@ class VirtualStagingNode:
                                     "SPECIALITY_DECOR_2", "SPECIALITY_DECOR_3",
                                     "SPECIALITY_DECOR_4", "SPECIALITY_DECOR_5",
                                     "SPECIALITY_DECOR_6", "SPECIALITY_DECOR_7"],),
-                "guidance_scale": ("FLOAT", {"default": None, "min": 1.0, "max": 20.0}),
-                "num_inference_steps": ("INT", {"default": None, "min": 1, "max": 75}),
+                "guidance_scale": ("FLOAT", {"default": 0.0, "min": 0.0, "max": 20.0, "step": 0.1}),
+                "num_inference_steps": ("INT", {"default": 0, "min": 0, "max": 75}),
                 "num_images": ("INT", {"default": 1, "min": 1, "max": 4}),
-                "scale_factor": ("INT", {"default": 1, "min": 1, "max": 8}),
+                "scale_factor": ("INT", {"default": 2, "min": 1, "max": 8}),
             }
         }
 
@@ -79,7 +88,7 @@ class VirtualStagingNode:
             image_tensor = image_tensor.squeeze(0)
             
             # Convert to PIL Image directly from tensor
-            image_pil = Image.fromarray((image_tensor.cpu() * 255).byte().numpy(), mode='RGB')
+            image_pil = Image.fromarray((image_tensor.numpy() * 255).astype(np.uint8))            
             
             # Save to bytes buffer
             buffer = io.BytesIO()
@@ -117,7 +126,7 @@ class VirtualStagingNode:
     def generate_design(self, image, api_key, prompt=None, room_type=None, design_style=None,
                        prompt_prefix=None, prompt_suffix=None, negative_prompt=None,
                        seed=0, color_scheme=None, speciality_decor=None,
-                       guidance_scale=None, num_inference_steps=None, num_images=1,
+                       guidance_scale=0.0, num_inference_steps=0, num_images=1,
                        scale_factor=1):
         """Generate virtual staging design"""
         try:
@@ -159,9 +168,16 @@ class VirtualStagingNode:
             if seed > 0:
                 data["seed"] = seed
 
-            if guidance_scale:
+            # Only include guidance_scale if it's greater than 0
+            if guidance_scale > 0:
+                if guidance_scale < 1.0:
+                    raise ValueError("guidance_scale must be at least 1.0 when specified")
                 data["guidance_scale"] = guidance_scale
-            if num_inference_steps:
+
+            # Only include num_inference_steps if it's greater than 0
+            if num_inference_steps > 0:
+                if num_inference_steps < 1:
+                    raise ValueError("num_inference_steps must be at least 1 when specified")
                 data["num_inference_steps"] = num_inference_steps
                 
 
@@ -178,7 +194,7 @@ class VirtualStagingNode:
                 },
                 data=data,
                 files=files,
-                timeout=30  # 30 second timeout
+                timeout=300  # 300 second timeout
             )
             
             response.raise_for_status()
