@@ -132,10 +132,6 @@ class VirtualStagingNode:
             # Convert tensor to file
             image_file = self._tensor_to_file(image)
 
-            # locally dump file for testing
-            with open("image.png", "wb") as f:
-                f.write(image_file.getvalue())
-            
             # Prepare request data
             data = {
                 "num_images": num_images,
