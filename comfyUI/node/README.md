@@ -4,34 +4,26 @@ Transform empty spaces into beautifully staged interiors using Decor8 AI's virtu
 
 ## Installation
 
-1. Install the node:
 ```bash
-cd ComfyUI/custom_nodes
-git clone https://github.com/immex-tech/decor8ai-sdk.git
-cd decor8ai-sdk/comfyUI
-pip install -r requirements.txt
+comfy node registry-install decor8ai-comfyui
 ```
 
-2. Get your API key from [Decor8 AI Platform](https://prod-app.decor8.ai)
-3. Set your API key:
-```bash
-export DECOR8AI_API_KEY=your_api_key_here
-```
-4. Restart ComfyUI
+## API Key Required
+
+⚠️ This node requires an API key from [Decor8 AI Platform](https://prod-app.decor8.ai)
+- Purchase prepaid plans or subscribe to pay-as-you-go
+- Get your API key from the dashboard
 
 ## Usage
 
 1. Add "Decor8 AI Virtual Staging" node to your workflow
 2. Connect an image input
-3. Select:
+3. Enter your API key
+4. Select:
    - Room type (e.g., livingroom, bedroom)
    - Design style (e.g., modern, minimalist)
-4. Optional: Configure additional parameters
-   - Custom prompt
-   - Color scheme
-   - Seasonal décor
-   - Guidance scale
-   - Inference steps
+
+Visit [www.decor8.ai](https://www.decor8.ai) for pricing and plans.
 
 ## Example Workflow
 
