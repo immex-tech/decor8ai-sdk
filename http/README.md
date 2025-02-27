@@ -182,16 +182,21 @@ curl -X POST $SERVER_URL \
 
 Decor8 AI supports following design styles. Learn more about these styles at [Decor8 AI Decoration Styles](https://www.decor8.ai/interior-decoration-styles/)
 
-| **Design Styles**           |                    |                    |                    |
-|---------------------|--------------------|--------------------|--------------------|
-| minimalist          | scandinavian       | industrial         | boho               |
-| traditional         | artdeco            | midcenturymodern   | coastal            |
-| tropical            | eclectic           | contemporary       | frenchcountry      |
-| rustic              | shabbychic         | vintage            | country            |
-| modern              | asian_zen          | hollywoodregency   | bauhaus            |
-| mediterranean       | farmhouse          | victorian          | gothic             |
-| moroccan            | southwestern       | transitional       | maximalist         |
-| arabic              | japandi            | retrofuturism      | artnouveau         |
+| **Design Styles**    |                    |                    |                    |
+|---------------------|--------------------|--------------------|-------------------|
+| minimalist          | scandinavian       | industrial         | boho              |
+| traditional         | artdeco            | midcenturymodern   | coastal           |
+| tropical            | eclectic           | contemporary       | frenchcountry     |
+| rustic              | shabbychic         | vintage            | country           |
+| modern              | asian_zen          | hollywoodregency   | bauhaus           |
+| mediterranean       | farmhouse          | victorian          | gothic            |
+| moroccan            | southwestern       | transitional       | maximalist        |
+| arabic              | japandi            | retrofuturism      | artnouveau        |
+| urbanmodern         | wabi_sabi          | grandmillennial    | coastalgrandmother|
+| newtraditional      | cottagecore        | luxemodern         | high_tech         |
+| organicmodern       | tuscan             | cabin              | desertmodern      |
+| global              | industrialchic     | modernfarmhouse    | europeanclassic   |
+| neotraditional      | warmminimalist     |                    |                   |
 
 ## <a id="room-types"> Supported Room Types
 Decor8 AI supports following room types. Learn more about these room types at [Decor8 AI Room Types](https://www.decor8.ai/rooms)

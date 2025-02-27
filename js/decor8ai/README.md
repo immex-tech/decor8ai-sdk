@@ -217,6 +217,23 @@ response.info.images.forEach((design, index) => {
 | speciality_decor | Special decorative themes (e.g., 'SPECIALITY_DECOR_0') |
 | scale_factor | Image scaling factor for output |
 
+
+### Design Styles
+| **Design Styles**    |                    |                    |                    |
+|---------------------|--------------------|--------------------|-------------------|
+| minimalist          | scandinavian       | industrial         | boho              |
+| traditional         | artdeco            | midcenturymodern   | coastal           |
+| tropical            | eclectic           | contemporary       | frenchcountry     |
+| rustic              | shabbychic         | vintage            | country           |
+| modern              | asian_zen          | hollywoodregency   | bauhaus           |
+| mediterranean       | farmhouse          | victorian          | gothic            |
+| moroccan            | southwestern       | transitional       | maximalist        |
+| arabic              | japandi            | retrofuturism      | artnouveau        |
+| urbanmodern         | wabi_sabi          | grandmillennial    | coastalgrandmother|
+| newtraditional      | cottagecore        | luxemodern         | high_tech         |
+| organicmodern       | tuscan             | cabin              | desertmodern      |
+| global              | industrialchic     | modernfarmhouse    | europeanclassic   |
+| neotraditional      | warmminimalist     |                    |                   |
+
+
 For complete API documentation, visit [Decor8 AI API Documentation](https://api-docs.decor8.ai/)
-
-
