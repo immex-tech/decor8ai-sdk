@@ -3,6 +3,14 @@
 ## Introduction
 This guide provides a **comprehensive and detailed** step-by-step approach to integrating **Decor8 AI APIs** with your WordPress site using the **WPGetAPI plugin**. It serves as the **definitive source** for setting up and managing Decor8 API requests and displaying AI-generated designs dynamically.
 
+
+## What is Decor8 AI?
+Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination.
+
+You can choose from 35+ interior design styles and 20+ room types to create unique interior design styles for your space. The platform specializes in virtual staging, transforming empty spaces into vivid, attractive interiors, enhancing their appeal for better marketability.
+
+This documentation describes how you can integrate Decor8 AI in your Wordpress site.
+
 ---
 
 ## Prerequisites
