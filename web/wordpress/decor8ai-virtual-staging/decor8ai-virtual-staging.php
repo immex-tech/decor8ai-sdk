@@ -3,7 +3,7 @@
  * Plugin Name: Decor8 AI Virtual Staging
  * Plugin URI: https://decor8.ai
  * Description: Add AI-powered virtual staging capabilities to your real estate website
- * Version: 1.0.0
+ * Version: 1.0.1
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Author: Decor8 AI
@@ -18,8 +18,20 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+/**
+ * Write to plugin's debug log
+ *
+ * @param string $message The message to log
+ * @param string $type Optional. The type of message (info, error, debug). Default 'info'.
+ */
+function decor8_log($message, $type = 'info') {
+    $timestamp = date('Y-m-d H:i:s');
+    $formatted_message = sprintf("[%s] [%s] %s\n", $timestamp, strtoupper($type), $message);
+    file_put_contents(WP_CONTENT_DIR . '/debug.log', $formatted_message, FILE_APPEND);
+}
+
 // Define plugin constants
-define('DECOR8_VS_VERSION', '1.0.0');
+define('DECOR8_VS_VERSION', '1.0.1');
 define('DECOR8_VS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('DECOR8_VS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('DECOR8_VS_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -62,7 +74,8 @@ class Decor8_Virtual_Staging {
 
         // Initialize components
         add_action('init', array($this, 'init'));
-        add_action('admin_init', array($this, 'admin_init'));
+        // Initialize admin functionality
+        $admin = new Decor8_VS_Admin();
         add_action('wp_enqueue_scripts', array($this, 'enqueue_scripts'));
         
         // Add settings link on plugin page
@@ -81,11 +94,36 @@ class Decor8_Virtual_Staging {
     }
 
     public function init() {
+        // Initialize error handler first
+        Decor8_VS_Error_Handler::get_instance();
+        
+        // Initialize security
+        Decor8_VS_Security::get_instance();
+        
+        // Initialize cache
+        Decor8_VS_Cache::get_instance();
+        
+        // Initialize bulk processor
+        Decor8_VS_Bulk_Processor::get_instance();
+        
         // Initialize frontend functionality
         new Decor8_VS_Frontend();
         
         // Initialize API handler
         new Decor8_VS_API();
+        
+        // Set up error handling for uncaught exceptions
+        set_exception_handler(function($exception) {
+            Decor8_VS_Error_Handler::get_instance()->log_error(
+                $exception->getMessage(),
+                array(
+                    'severity' => 'critical',
+                    'file' => $exception->getFile(),
+                    'line' => $exception->getLine(),
+                    'trace' => $exception->getTraceAsString()
+                )
+            );
+        });
     }
 
     public function admin_init() {
@@ -129,7 +167,7 @@ class Decor8_Virtual_Staging {
             return sprintf(
                 /* translators: %s: URL to plugin settings page */
                 __('Please <a href="%s">configure your API key</a> to use virtual staging.', 'decor8ai-virtual-staging'),
-                admin_url('admin.php?page=decor8-virtual-staging')
+                admin_url('admin.php?page=decor8ai-virtual-staging')
             );
         }
 
@@ -141,7 +179,7 @@ class Decor8_Virtual_Staging {
     public function add_settings_link($links) {
         $settings_link = sprintf(
             '<a href="%s">%s</a>',
-            admin_url('admin.php?page=decor8-virtual-staging'),
+            admin_url('admin.php?page=decor8ai-virtual-staging'),
             __('Settings', 'decor8ai-virtual-staging')
         );
         array_unshift($links, $settings_link);
@@ -177,4 +215,7 @@ register_activation_hook(__FILE__, array('Decor8_Virtual_Staging', 'activate'));
 register_deactivation_hook(__FILE__, array('Decor8_Virtual_Staging', 'deactivate'));
 
 // Start the plugin
-decor8_virtual_staging();
+add_action('plugins_loaded', function() {
+    error_log('Initializing Decor8 Virtual Staging plugin');
+    decor8_virtual_staging();
+});

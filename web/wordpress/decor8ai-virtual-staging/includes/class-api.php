@@ -6,9 +6,13 @@ if (!defined('ABSPATH')) {
 class Decor8_VS_API {
     private $api_key;
     private $api_url = 'https://api.decor8.ai/generate_designs_for_room';
+    private $logger;
 
     public function __construct() {
         $this->api_key = get_option('decor8_vs_api_key');
+        $this->logger = Decor8_VS_Logger::get_instance();
+        
+        decor8_log("=== DECOR8 API: Registering AJAX handlers ===");
         
         // Register AJAX handlers
         add_action('wp_ajax_decor8_process_image', array($this, 'handle_image_processing'));
@@ -19,6 +23,7 @@ class Decor8_VS_API {
      * Handle image processing AJAX request
      */
     public function handle_image_processing() {
+        decor8_log("=== API: Image processing started ===", 'debug');
         try {
             // Verify nonce
             if (!check_ajax_referer('decor8_vs_nonce', 'nonce', false)) {
@@ -85,6 +90,9 @@ class Decor8_VS_API {
      * Process image with Decor8 AI API
      */
     private function process_with_api($image_url, $room_type, $design_style) {
+        error_log("Decor8 API Request - Image URL: " . $image_url);
+        error_log("Decor8 API Request - Room Type: " . $room_type);
+        error_log("Decor8 API Request - Design Style: " . $design_style);
         $body = array(
             'input_image_url' => $image_url,
             'room_type' => $room_type,
@@ -104,27 +112,46 @@ class Decor8_VS_API {
         ));
 
         if (is_wp_error($response)) {
-            throw new Exception($response->get_error_message());
+            $error_message = $response->get_error_message();
+            $this->logger->log("API Error: " . $error_message, 'error');
+            error_log("Decor8 API Error Details: " . print_r($response->get_error_data(), true));
+            throw new Exception($error_message);
         }
 
         $http_code = wp_remote_retrieve_response_code($response);
+        $response_body = wp_remote_retrieve_body($response);
+        
+        error_log("Decor8 API Response Code: " . $http_code);
+        error_log("Decor8 API Response Body: " . $response_body);
+        
         if ($http_code !== 200) {
-            throw new Exception(sprintf(
+            $error_message = sprintf(
                 /* translators: %d: HTTP response code */
                 __('API request failed with code: %d', 'decor8ai-virtual-staging'),
                 $http_code
-            ));
+            );
+            $this->logger->log("API Error: " . $error_message, 'error');
+            throw new Exception($error_message);
         }
 
         $body = json_decode(wp_remote_retrieve_body($response), true);
         
+        $this->logger->log("API Response Body: " . print_r($body, true), 'debug');
+        
+        // Check for API error even with 200 status
+        if (!empty($body['error'])) {
+            decor8_log("API Error (200 status): " . $body['error'], 'error');
+            throw new Exception($body['error']);
+        }
+        
         if (!isset($body['info']['images'][0]['url'])) {
-            throw new Exception(__('Invalid API response', 'decor8ai-virtual-staging'));
+            decor8_log("API Error: Missing image URL in response", 'error');
+            throw new Exception(__('Invalid API response - Missing image URL', 'decor8ai-virtual-staging'));
         }
 
         return array(
             'staged_image_url' => $body['info']['images'][0]['url'],
-            'message' => __('Virtual staging completed successfully', 'decor8ai-virtual-staging')
+            'message' => !empty($body['message']) ? $body['message'] : __('Virtual staging completed successfully', 'decor8ai-virtual-staging')
         );
     }
 
