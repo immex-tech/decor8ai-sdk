@@ -18,6 +18,13 @@
         }
 
         initializeEvents() {
+            // Click to browse
+            $('.decor8-vs-upload-placeholder').on('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.fileInput.click();
+            });
+
             // Drag and drop handling
             this.uploadArea.on('dragenter dragover', (e) => {
                 e.preventDefault();

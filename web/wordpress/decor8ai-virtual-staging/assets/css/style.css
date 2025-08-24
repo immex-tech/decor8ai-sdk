@@ -1,45 +1,71 @@
-/* Main Container */
+/* Modern styling for Virtual Staging */
 .decor8-virtual-staging-container {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    max-width: 1000px;
+    margin: 3em auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
 }
 
-/* Header */
 .decor8-vs-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3em;
 }
 
 .decor8-vs-header h2 {
-    font-size: 2rem;
+    font-size: 2.4em;
     font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 0.5rem;
+    color: #1e1e1e;
+    margin-bottom: 0.5em;
 }
 
 .decor8-vs-header .description {
+    font-size: 1.1em;
     color: #666;
-    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Upload Area */
+.decor8-vs-form {
+    margin-bottom: 3em;
+}
+
+.decor8-vs-upload-section {
+    margin-bottom: 3em;
+}
+
+.decor8-vs-label {
+    display: block;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 1em;
+    color: #1e1e1e;
+}
+
 .decor8-vs-upload-area {
-    border: 2px dashed #ddd;
-    border-radius: 8px;
-    padding: 2rem;
+    border: 2px dashed #e0e0e0;
+    border-radius: 12px;
+    padding: 3em 2em;
     text-align: center;
     background: #fafafa;
-    transition: all 0.3s ease;
     cursor: pointer;
-    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-.decor8-vs-upload-area:hover,
+.decor8-vs-upload-area:hover {
+    border-color: #2271b1;
+    background: #f8f9fa;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
 .decor8-vs-upload-area.drag-over {
     border-color: #2271b1;
     background: #f0f7ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 113, 177, 0.1);
 }
 
 .decor8-vs-upload-area input[type="file"] {
@@ -48,110 +74,191 @@
 
 .decor8-vs-upload-placeholder {
     color: #666;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .decor8-vs-upload-placeholder .dashicons {
-    font-size: 2.5rem;
+    font-size: 3.5em;
     width: auto;
     height: auto;
     color: #2271b1;
+    margin-bottom: 0.5em;
+    transition: transform 0.3s ease;
 }
 
-/* Image Preview */
+.decor8-vs-upload-area:hover .dashicons {
+    transform: translateY(-5px);
+}
+
+.decor8-vs-upload-placeholder p {
+    margin: 0.5em 0;
+    font-size: 1.2em;
+    color: #1e1e1e;
+}
+
+.decor8-vs-upload-placeholder small {
+    color: #888;
+    display: block;
+    margin-top: 0.5em;
+}
+
 .decor8-vs-preview {
     position: relative;
     max-width: 100%;
-    margin: 0 auto;
+    margin-top: 1em;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .decor8-vs-preview img {
     max-width: 100%;
     height: auto;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: block;
 }
 
 .decor8-vs-remove-image {
     position: absolute;
-    top: -10px;
-    right: -10px;
-    background: #fff;
+    top: 15px;
+    right: 15px;
+    background: rgba(0, 0, 0, 0.6);
     border: none;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    color: white;
+    width: 32px;
+    height: 32px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    padding: 0;
-    color: #666;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
 }
 
 .decor8-vs-remove-image:hover {
-    color: #dc3232;
+    background: rgba(0, 0, 0, 0.8);
     transform: scale(1.1);
 }
 
-/* Form Controls */
 .decor8-vs-options-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 3em;
 }
 
-.decor8-vs-label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #1a1a1a;
-}
-
-select {
+.decor8-vs-option select {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
     background-color: #fff;
-    font-size: 1rem;
+    font-size: 1em;
+    color: #1e1e1e;
+    transition: all 0.3s ease;
 }
 
-/* Progress Bar */
+.decor8-vs-option select:hover {
+    border-color: #2271b1;
+}
+
+.decor8-vs-option select:focus {
+    border-color: #2271b1;
+    box-shadow: 0 0 0 1px #2271b1;
+    outline: none;
+}
+
+.decor8-vs-submit-section {
+    text-align: center;
+}
+
+.decor8-vs-submit {
+    padding: 12px 30px !important;
+    font-size: 1.1em !important;
+    height: auto !important;
+    min-height: 48px !important;
+    transition: all 0.3s ease !important;
+    border-radius: 8px !important;
+}
+
+.decor8-vs-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(34, 113, 177, 0.2) !important;
+}
+
 .decor8-vs-progress {
-    margin: 1.5rem 0;
+    margin: 3em 0;
+    text-align: center;
 }
 
 .decor8-vs-progress-bar {
-    height: 4px;
+    height: 6px;
     background: #f0f0f0;
-    border-radius: 2px;
+    border-radius: 3px;
     overflow: hidden;
+    margin-bottom: 1em;
 }
 
 .decor8-vs-progress-indicator {
     height: 100%;
-    background: #2271b1;
-    width: 0;
+    width: 100%;
+    background: linear-gradient(90deg, #2271b1, #4f94d4);
     animation: progress 2s infinite linear;
+    transform-origin: 0% 50%;
 }
 
 @keyframes progress {
-    0% { width: 0; }
-    50% { width: 70%; }
-    100% { width: 100%; }
+    0% { transform: scaleX(0); }
+    50% { transform: scaleX(0.5); }
+    100% { transform: scaleX(1); }
 }
 
-/* Results Section */
+.decor8-vs-progress-text {
+    color: #666;
+    font-size: 1.1em;
+}
+
+.decor8-vs-error {
+    background: #fff2f0;
+    color: #d32f2f;
+    padding: 1.2em;
+    border-radius: 8px;
+    margin: 1.5em 0;
+    border-left: 4px solid #d32f2f;
+}
+
+.decor8-vs-results {
+    text-align: center;
+}
+
+.decor8-vs-results h3 {
+    font-size: 2em;
+    color: #1e1e1e;
+    margin-bottom: 1.5em;
+}
+
 .decor8-vs-comparison {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin: 1.5rem 0;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin: 2em 0;
 }
 
 .decor8-vs-original,
 .decor8-vs-staged {
-    text-align: center;
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.decor8-vs-original h4,
+.decor8-vs-staged h4 {
+    font-size: 1.2em;
+    color: #1e1e1e;
+    margin-bottom: 1em;
 }
 
 .decor8-vs-original img,
@@ -159,61 +266,181 @@ select {
     max-width: 100%;
     height: auto;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.decor8-vs-original img:hover,
-.decor8-vs-staged img:hover {
-    transform: scale(1.02);
-}
-
-/* Buttons */
-.decor8-vs-submit,
-.decor8-vs-download,
-.decor8-vs-start-new {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.5rem;
-    border-radius: 4px;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.decor8-vs-submit {
-    width: 100%;
-    margin-top: 1rem;
+    display: block;
 }
 
 .decor8-vs-download {
-    margin-top: 1rem;
-    text-decoration: none;
+    margin-top: 1.5em !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.5em;
+    padding: 10px 20px !important;
+    border-radius: 6px !important;
+    transition: all 0.3s ease !important;
 }
 
-.decor8-vs-download .dashicons {
-    margin-right: 0.5rem;
+.decor8-vs-download:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Error Messages */
-.decor8-vs-error {
-    background: #fce4e4;
-    border-left: 4px solid #dc3232;
-    padding: 1rem;
-    margin: 1rem 0;
-    border-radius: 0 4px 4px 0;
-    color: #dc3232;
+.decor8-vs-start-new {
+    margin-top: 3em !important;
+    padding: 12px 25px !important;
+    font-size: 1.1em !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+.decor8-vs-start-new:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    .decor8-vs-header h2 {
-        font-size: 1.5rem;
+@media (max-width: 1024px) {
+    .decor8-virtual-staging-container {
+        max-width: 90%;
+        margin: 2em auto;
     }
-    
+}
+
+@media (max-width: 768px) {
+    .decor8-virtual-staging-container {
+        max-width: 95%;
+        padding: 20px;
+        margin: 1em auto;
+    }
+
+    .decor8-vs-header h2 {
+        font-size: 2em;
+    }
+
     .decor8-vs-options-section {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .decor8-vs-comparison {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .decor8-vs-upload-area {
+        padding: 2em 1em;
+    }
+
+    .decor8-vs-upload-placeholder p {
+        font-size: 1.1em;
+    }
+
+    .decor8-vs-submit {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .decor8-virtual-staging-container {
+        max-width: 100%;
+        padding: 15px;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .decor8-vs-header {
+        margin-bottom: 2em;
+    }
+
+    .decor8-vs-header h2 {
+        font-size: 1.8em;
+    }
+
+    .decor8-vs-header .description {
+        font-size: 1em;
+    }
+
+    .decor8-vs-upload-area {
+        padding: 1.5em 1em;
+        border-radius: 8px;
+    }
+
+    .decor8-vs-upload-placeholder .dashicons {
+        font-size: 2.5em;
+    }
+
+    .decor8-vs-upload-placeholder p {
+        font-size: 1em;
+    }
+
+    .decor8-vs-upload-placeholder small {
+        font-size: 0.9em;
+    }
+
+    .decor8-vs-label {
+        font-size: 1em;
+    }
+
+    .decor8-vs-option select {
+        padding: 10px;
+        font-size: 0.95em;
+    }
+
+    .decor8-vs-submit {
+        padding: 10px 20px !important;
+        font-size: 1em !important;
+        min-height: 44px !important;
+        width: 100%;
+    }
+
+    .decor8-vs-results h3 {
+        font-size: 1.6em;
+    }
+
+    .decor8-vs-original,
+    .decor8-vs-staged {
+        padding: 10px;
+        border-radius: 8px;
+    }
+
+    .decor8-vs-original h4,
+    .decor8-vs-staged h4 {
+        font-size: 1.1em;
+    }
+
+    .decor8-vs-download,
+    .decor8-vs-start-new {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Touch Device Optimizations */
+@media (hover: none) {
+    .decor8-vs-upload-area:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .decor8-vs-upload-area:active {
+        background: #f0f7ff;
+        border-color: #2271b1;
+    }
+
+    .decor8-vs-submit:hover,
+    .decor8-vs-download:hover,
+    .decor8-vs-start-new:hover {
+        transform: none;
+    }
+
+    .decor8-vs-submit:active,
+    .decor8-vs-download:active,
+    .decor8-vs-start-new:active {
+        transform: translateY(1px);
+    }
+
+    .decor8-vs-remove-image {
+        width: 40px;
+        height: 40px;
     }
 }
