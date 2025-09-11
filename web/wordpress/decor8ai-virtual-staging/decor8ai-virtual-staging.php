@@ -18,20 +18,11 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Write to plugin's debug log
- *
- * @param string $message The message to log
- * @param string $type Optional. The type of message (info, error, debug). Default 'info'.
- */
-function decor8_log($message, $type = 'info') {
-    $timestamp = date('Y-m-d H:i:s');
-    $formatted_message = sprintf("[%s] [%s] %s\n", $timestamp, strtoupper($type), $message);
-    file_put_contents(WP_CONTENT_DIR . '/debug.log', $formatted_message, FILE_APPEND);
-}
+// Include common functions
+require_once plugin_dir_path(__FILE__) . 'includes/functions.php';
 
 // Define plugin constants
-define('DECOR8_VS_VERSION', '1.0.1');
+define('DECOR8_VS_VERSION', '1.0.2');
 define('DECOR8_VS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('DECOR8_VS_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('DECOR8_VS_PLUGIN_BASENAME', plugin_basename(__FILE__));
@@ -94,23 +85,31 @@ class Decor8_Virtual_Staging {
     }
 
     public function init() {
+        decor8_log("=== Initializing Decor8 Virtual Staging ===", 'debug');
+        
         // Initialize error handler first
         Decor8_VS_Error_Handler::get_instance();
+        decor8_log("Error Handler initialized", 'debug');
         
         // Initialize security
         Decor8_VS_Security::get_instance();
+        decor8_log("Security module initialized", 'debug');
         
         // Initialize cache
         Decor8_VS_Cache::get_instance();
+        decor8_log("Cache module initialized", 'debug');
         
         // Initialize bulk processor
         Decor8_VS_Bulk_Processor::get_instance();
+        decor8_log("Bulk Processor initialized", 'debug');
         
         // Initialize frontend functionality
         new Decor8_VS_Frontend();
+        decor8_log("Frontend module initialized", 'debug');
         
         // Initialize API handler
         new Decor8_VS_API();
+        decor8_log("API Handler initialized", 'debug');
         
         // Set up error handling for uncaught exceptions
         set_exception_handler(function($exception) {
@@ -188,20 +187,32 @@ class Decor8_Virtual_Staging {
 
     // Activation hook
     public static function activate() {
+        decor8_log("=== Activating Decor8 Virtual Staging ===", 'info');
+        
         // Add default options
         add_option('decor8_vs_api_key', '');
+        decor8_log("Default API key option added", 'debug');
         
         // Set version
         add_option('decor8_vs_version', DECOR8_VS_VERSION);
+        decor8_log("Plugin version set to: " . DECOR8_VS_VERSION, 'debug');
         
         // Clear permalinks
         flush_rewrite_rules();
+        decor8_log("Rewrite rules flushed", 'debug');
+        
+        decor8_log("=== Plugin activation completed ===", 'info');
     }
 
     // Deactivation hook
     public static function deactivate() {
+        decor8_log("=== Deactivating Decor8 Virtual Staging ===", 'info');
+        
         // Clear any scheduled hooks, temporary data, etc.
         flush_rewrite_rules();
+        decor8_log("Rewrite rules flushed", 'debug');
+        
+        decor8_log("=== Plugin deactivation completed ===", 'info');
     }
 }
 

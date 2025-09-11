@@ -6,13 +6,11 @@ if (!defined('ABSPATH')) {
 class Decor8_VS_API {
     private $api_key;
     private $api_url = 'https://api.decor8.ai/generate_designs_for_room';
-    private $logger;
 
     public function __construct() {
         $this->api_key = get_option('decor8_vs_api_key');
-        $this->logger = Decor8_VS_Logger::get_instance();
         
-        decor8_log("=== DECOR8 API: Registering AJAX handlers ===");
+        decor8_log("=== DECOR8 API: Registering AJAX handlers ===", 'info', __FILE__, __LINE__);
         
         // Register AJAX handlers
         add_action('wp_ajax_decor8_process_image', array($this, 'handle_image_processing'));
@@ -23,7 +21,7 @@ class Decor8_VS_API {
      * Handle image processing AJAX request
      */
     public function handle_image_processing() {
-        decor8_log("=== API: Image processing started ===", 'debug');
+        decor8_log("=== API: Image processing started ===", 'debug', __FILE__, __LINE__);
         try {
             // Verify nonce
             if (!check_ajax_referer('decor8_vs_nonce', 'nonce', false)) {
@@ -113,7 +111,7 @@ class Decor8_VS_API {
 
         if (is_wp_error($response)) {
             $error_message = $response->get_error_message();
-            $this->logger->log("API Error: " . $error_message, 'error');
+            decor8_log("API Error: " . $error_message, 'error');
             error_log("Decor8 API Error Details: " . print_r($response->get_error_data(), true));
             throw new Exception($error_message);
         }
@@ -130,22 +128,22 @@ class Decor8_VS_API {
                 __('API request failed with code: %d', 'decor8ai-virtual-staging'),
                 $http_code
             );
-            $this->logger->log("API Error: " . $error_message, 'error');
+            decor8_log("API Error: " . $error_message, 'error');
             throw new Exception($error_message);
         }
 
         $body = json_decode(wp_remote_retrieve_body($response), true);
         
-        $this->logger->log("API Response Body: " . print_r($body, true), 'debug');
+        decor8_log("API Response Body: " . print_r($body, true), 'debug', __FILE__, __LINE__);
         
         // Check for API error even with 200 status
         if (!empty($body['error'])) {
-            decor8_log("API Error (200 status): " . $body['error'], 'error');
+            decor8_log("API Error (200 status): " . $body['error'], 'error', __FILE__, __LINE__);
             throw new Exception($body['error']);
         }
         
         if (!isset($body['info']['images'][0]['url'])) {
-            decor8_log("API Error: Missing image URL in response", 'error');
+            decor8_log("API Error: Missing image URL in response", 'error', __FILE__, __LINE__);
             throw new Exception(__('Invalid API response - Missing image URL', 'decor8ai-virtual-staging'));
         }
 

@@ -96,6 +96,7 @@
         processImage() {
             // Validate form
             if (!this.validateForm()) {
+                console.log('Form validation failed');
                 return;
             }
 
@@ -116,12 +117,15 @@
                 contentType: false,
                 success: (response) => {
                     if (response.success) {
+                        console.log('Image processing completed successfully');
                         this.showResults(response.data);
                     } else {
+                        console.log('Server returned error:', response.data.message);
                         this.showError(response.data.message);
                     }
                 },
                 error: (xhr, status, error) => {
+                    console.log('AJAX error:', status, error);
                     this.showError(decor8VS.i18n.processingError);
                 },
                 complete: () => {

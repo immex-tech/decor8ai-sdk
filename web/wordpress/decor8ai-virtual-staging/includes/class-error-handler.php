@@ -17,6 +17,7 @@ class Decor8_VS_Error_Handler {
     }
 
     private function __construct() {
+        decor8_log("Initializing Error Handler", 'debug', __FILE__, __LINE__);
         add_action('admin_init', array($this, 'schedule_cleanup'));
         add_action('decor8_vs_error_cleanup', array($this, 'cleanup_errors'));
         add_action('admin_notices', array($this, 'display_admin_notices'));
@@ -29,27 +30,53 @@ class Decor8_VS_Error_Handler {
     }
 
     public function log_error($error, $context = array()) {
+        $start_time = microtime(true);
+        
         if (empty($error)) {
+            decor8_log("Attempted to log empty error message", 'warning', __FILE__, __LINE__);
             return false;
         }
 
         $errors = $this->get_errors();
+        $severity = isset($context['severity']) ? $context['severity'] : 'error';
         
         // Add new error
-        $errors[] = array(
+        $error_entry = array(
             'message' => $error,
             'context' => $context,
             'time' => current_time('timestamp'),
             'user_id' => get_current_user_id(),
             'ip' => $this->get_client_ip(),
             'url' => isset($_SERVER['REQUEST_URI']) ? esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'])) : '',
-            'severity' => isset($context['severity']) ? $context['severity'] : 'error'
+            'severity' => $severity
         );
-
+        
+        $errors[] = $error_entry;
+        
         // Keep only recent errors
         $errors = array_slice($errors, -$this->max_errors);
+        
+        // Log to debug log based on severity
+        decor8_log(
+            sprintf(
+                "Error logged [%s]: %s",
+                strtoupper($severity),
+                $error
+            ),
+            $severity,
+            __FILE__,
+            __LINE__
+        );
 
-        return update_option($this->error_option, $errors);
+        $result = update_option($this->error_option, $errors);
+        
+        if (!$result) {
+            decor8_log("Failed to save error to database", 'error', __FILE__, __LINE__);
+        }
+        
+        decor8_log_performance('Error logging operation', $start_time);
+        
+        return $result;
     }
 
     public function get_errors($limit = null, $severity = null) {
@@ -69,19 +96,47 @@ class Decor8_VS_Error_Handler {
     }
 
     public function cleanup_errors() {
+        $start_time = microtime(true);
+        decor8_log("Starting error cleanup process", 'debug', __FILE__, __LINE__);
+        
         $errors = $this->get_errors();
+        $initial_count = count($errors);
         $current_time = current_time('timestamp');
 
         // Remove old errors
         $errors = array_filter($errors, function($error) use ($current_time) {
             return ($current_time - $error['time']) < $this->error_lifetime;
         });
-
-        update_option($this->error_option, $errors);
+        
+        $removed_count = $initial_count - count($errors);
+        
+        $result = update_option($this->error_option, $errors);
+        
+        if ($result) {
+            decor8_log(
+                sprintf("Cleaned up %d old error entries", $removed_count),
+                'info',
+                __FILE__,
+                __LINE__
+            );
+        } else {
+            decor8_log("Failed to update errors during cleanup", 'error', __FILE__, __LINE__);
+        }
+        
+        decor8_log_performance('Error cleanup operation', $start_time);
     }
 
     public function clear_errors() {
-        return delete_option($this->error_option);
+        decor8_log("Clearing all error entries", 'info', __FILE__, __LINE__);
+        $result = delete_option($this->error_option);
+        
+        if ($result) {
+            decor8_log("Successfully cleared all error entries", 'info', __FILE__, __LINE__);
+        } else {
+            decor8_log("Failed to clear error entries", 'error', __FILE__, __LINE__);
+        }
+        
+        return $result;
     }
 
     public function display_admin_notices() {
@@ -159,7 +214,16 @@ class Decor8_VS_Error_Handler {
     }
 
     public function has_critical_errors() {
-        return $this->get_error_count('critical') > 0;
+        $count = $this->get_error_count('critical');
+        if ($count > 0) {
+            decor8_log(
+                sprintf("Found %d critical error(s)", $count),
+                'warning',
+                __FILE__,
+                __LINE__
+            );
+        }
+        return $count > 0;
     }
 
     public function get_last_error() {
