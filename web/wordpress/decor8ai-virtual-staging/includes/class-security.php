@@ -6,7 +6,7 @@ if (!defined('ABSPATH')) {
 class Decor8_VS_Security {
     private static $instance = null;
     private $rate_limit_transient_prefix = 'decor8_vs_rate_limit_';
-    private $rate_limit_max_requests = 10;
+    private $rate_limit_max_requests = 1000;
     private $rate_limit_time_window = 300; // 5 minutes
 
     public static function get_instance() {
