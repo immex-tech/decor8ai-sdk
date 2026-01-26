@@ -9,6 +9,14 @@
   - [Design Without Photo](#design-without-photo)
   - [Priming the walls](#prime-the-walls)
   - [Upscale the image](#upscale-the-image)
+  - [Change Wall Color](#change-wall-color) (NEW)
+  - [Change Kitchen Cabinet Color](#change-kitchen-cabinet-color) (NEW)
+  - [Remodel Kitchen](#remodel-kitchen) (NEW)
+  - [Remodel Bathroom](#remodel-bathroom) (NEW)
+  - [Landscaping Designs](#landscaping-designs) (NEW)
+  - [Replace Sky](#replace-sky) (NEW)
+  - [Sketch to 3D Render](#sketch-to-3d-render) (NEW)
+  - [Remove Objects from Room](#remove-objects-from-room) (NEW)
   - [Generate Captions for the image](#generate-captions-for-the-interior-image)
 - [Design Styles](#design-styles)
 - [Room Types](#room-types)
@@ -248,7 +256,7 @@ response_json = prime_walls_for_room(input_image_url=input_image_url)
 
 ```
 ## <a id="upscale-the-image">Upscale the image
-AI generated designs may have a smaller resolution for some use-cases. Use this API to get upto 4x the original resolution of the image. Original images of upto maximum 1024px width or height or both are supported. 
+AI generated designs may have a smaller resolution for some use-cases. Use this API to get upto 4x the original resolution of the image. Original images of upto maximum 1024px width or height or both are supported.
 
 ```Python
 from decor8ai.client import upscale_image
@@ -257,6 +265,125 @@ input_image = 'path/to/your/image.png'  #local-file-path or URL or bytes
 scale_factor = 2
 
 response = upscale_image(input_image, scale_factor)
+```
+
+## <a id="change-wall-color">Change Wall Color (NEW)
+
+Change wall paint colors in room images with a simple hex color code.
+
+```Python
+from decor8ai import change_wall_color
+
+input_image_url = 'https://example.com/room.jpg'
+wall_color_hex = '#D4A574'  # Warm beige
+
+response = change_wall_color(input_image_url, wall_color_hex)
+```
+
+## <a id="change-kitchen-cabinet-color">Change Kitchen Cabinet Color (NEW)
+
+Recolor kitchen cabinets to visualize different cabinet finishes.
+
+```Python
+from decor8ai import change_kitchen_cabinets_color
+
+input_image_url = 'https://example.com/kitchen.jpg'
+cabinet_color_hex = '#FFFFFF'  # White cabinets
+
+response = change_kitchen_cabinets_color(input_image_url, cabinet_color_hex)
+```
+
+## <a id="remodel-kitchen">Remodel Kitchen (NEW)
+
+Generate kitchen remodel designs with different design styles.
+
+```Python
+from decor8ai import remodel_kitchen
+
+input_image_url = 'https://example.com/kitchen.jpg'
+design_style = 'modern'
+num_images = 2
+scale_factor = 2  # Optional
+
+response = remodel_kitchen(input_image_url, design_style, num_images, scale_factor)
+```
+
+## <a id="remodel-bathroom">Remodel Bathroom (NEW)
+
+Generate bathroom remodel designs with different design styles.
+
+```Python
+from decor8ai import remodel_bathroom
+
+input_image_url = 'https://example.com/bathroom.jpg'
+design_style = 'contemporary'
+num_images = 2
+
+response = remodel_bathroom(input_image_url, design_style, num_images)
+```
+
+## <a id="landscaping-designs">Landscaping Designs (NEW - Beta)
+
+Generate landscaping designs for yards and outdoor spaces.
+
+```Python
+from decor8ai import generate_landscaping_designs
+
+input_image_url = 'https://example.com/yard.jpg'
+yard_type = 'Front Yard'  # Options: 'Front Yard', 'Backyard', 'Side Yard'
+garden_style = 'japanese_zen'  # See garden styles below
+num_images = 2
+
+response = generate_landscaping_designs(input_image_url, yard_type, garden_style, num_images)
+```
+
+### Garden Styles
+| Style | Style | Style |
+|-------|-------|-------|
+| japanese_zen | mediterranean | english_cottage |
+| tropical | desert | modern_minimalist |
+| french_formal | coastal | woodland |
+| prairie | rock_garden | water_garden |
+
+## <a id="replace-sky">Replace Sky (NEW)
+
+Replace the sky in exterior property photos with different times of day.
+
+```Python
+from decor8ai import replace_sky_behind_house
+
+input_image_url = 'https://example.com/house.jpg'
+sky_type = 'dusk'  # Options: 'day', 'dusk', 'night'
+
+response = replace_sky_behind_house(input_image_url, sky_type)
+```
+
+## <a id="sketch-to-3d-render">Sketch to 3D Render (NEW)
+
+Convert sketches or floor plans to photorealistic 3D rendered images.
+
+```Python
+from decor8ai import sketch_to_3d_render
+
+input_image_url = 'https://example.com/sketch.jpg'
+design_style = 'modern'
+num_images = 2
+render_type = 'perspective'  # Options: 'perspective', 'isometric'
+
+response = sketch_to_3d_render(input_image_url, design_style, num_images, render_type=render_type)
+```
+
+## <a id="remove-objects-from-room">Remove Objects from Room (NEW)
+
+Remove furniture and objects from room images. Optionally use a mask to specify areas.
+
+```Python
+from decor8ai import remove_objects_from_room
+
+input_image_url = 'https://example.com/room.jpg'
+mask_image_url = 'https://example.com/mask.png'  # Optional
+
+response = remove_objects_from_room(input_image_url, mask_image_url)
 ```
 
 ## <a id="image-caption-generator">Generate captions for the interior image
@@ -321,7 +448,8 @@ Decor8 AI supports following room types. Learn more about these room types at [D
 | office         | foyer         | powderroom    | laundryroom   |
 | gym            | basement      | garage        | balcony       |
 | cafe           | homebar       | study_room    | front_porch   |
-| back_porch     | back_patio    |               |               |
+| back_porch     | back_patio    | openplan      | boardroom     |
+| meetingroom    | openworkspace | privateoffice |               |
 
 
 ## <a id="color-schemes"> Supported Color Schemes
