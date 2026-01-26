@@ -1,207 +1,406 @@
-# Decor8 AI Dart SDK
+# Decor8 AI Dart SDK - AI Interior Design & Virtual Staging API
 
-## Table of Contents
-- [Overview](#dart-sdk-overview)
-- [Installation](#installation)
-- [Configuration](#configure-sdk)
-- [Usage](#using-this-sdk)
-  - [Design With Photo](#design-with-photo)
-  - [Design Without Photo](#design-without-photo)
-  - [Priming the walls](#prime-the-walls)
-- [Design Styles](#design-styles)
-- [Room Types](#room-types)
+[![pub version](https://img.shields.io/pub/v/decor8ai.svg)](https://pub.dev/packages/decor8ai)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Dart SDK](https://img.shields.io/badge/Dart-%3E%3D3.0.0-blue)](https://dart.dev)
 
+The official Dart/Flutter SDK for **[Decor8 AI](https://www.decor8.ai)** - a powerful **AI interior design** and **AI virtual staging** platform. Build mobile **AI room design** applications, **AI home decorations** tools, and **interior design by AI** services with Flutter.
 
-## <a id="dart-sdk-overview"></a>Overview
+## Features
 
-Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
+- **AI Virtual Staging** - Transform empty rooms into beautifully furnished spaces
+- **AI Interior Design** - Generate designs in 50+ styles for 25+ room types
+- **AI Landscaping** - Create outdoor and garden designs (Beta)
+- **AI Kitchen Remodeling** - Visualize kitchen renovations
+- **AI Bathroom Remodeling** - Preview bathroom transformations
+- **AI Wall Color Change** - Virtually repaint walls with any color
+- **AI Cabinet Color Change** - Preview new cabinet finishes
+- **AI Sky Replacement** - Enhance exterior photos with beautiful skies
+- **Sketch to 3D Render** - Convert sketches into photorealistic renders
+- **Object Removal** - Remove unwanted items from photos
+- **Image Upscaling** - Enhance resolution up to 8x
 
-You can choose from 35+ interior design styles and 20+ room types to create unique interior design styles for your space.
+## Installation
 
-The app specializes in virtual property staging, transforming empty spaces into vivid, attractive interiors, enhancing their appeal for better marketability. 
+Add the dependency to your `pubspec.yaml`:
 
-Equipped with a powerful Dart SDK, Decor8 AI facilitates seamless integrations, enabling enhanced design generation capabilities directly within your Flutter/Dart apps. 
+```yaml
+dependencies:
+  decor8ai: ^2.0.0
+```
 
-This documentation describes how you can use Decor8 AI Dart SDK to integrate Decor8 AI's powerful features in your application. 
-
-See [complete documentation for Decor8 AI api for Virtual Staging and Interior Design](https://api-docs.decor8.ai/). Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions. 
-
-## <a id="installation"></a>Installation
-
-Add 'decor8ai' package dependency in pubspec.yaml
+Then run:
 
 ```bash
-dependencies:
-  decor8ai: ^x.y.z
+flutter pub get
 ```
 
-## <a id="configure-sdk"></a>Configure Decor8 AI API key
+**Requirements:** Dart SDK >= 3.0.0
 
-### Sign in to [Decor8 AI](https://prod-app.decor8.ai)
+## Configuration
 
-### Click on Profile Photo on Top Left
+Get your API key at [Decor8 AI Platform](https://prod-app.decor8.ai):
 
-![](https://github.com/immex-tech/decor8ai-sdk/blob/main/media/step_1.jpg?raw=true)
+1. Sign in to [Decor8 AI](https://prod-app.decor8.ai)
+2. Click on Profile Photo on Top Left
+3. Click "Generate API Key"
 
-### Click Generate API Key
-![](https://github.com/immex-tech/decor8ai-sdk/blob/main/media/step_2.jpg?raw=true)
+![Step 1](https://github.com/immex-tech/decor8ai-sdk/blob/main/media/step_1.jpg?raw=true)
+![Step 2](https://github.com/immex-tech/decor8ai-sdk/blob/main/media/step_2.jpg?raw=true)
 
-## <a id="design-with-photo"> Generating Interior Design with a Photo of the room
+## Quick Start
 
-### Example 1: Using Room Type and Design Style
 ```dart
-const decor8aiApiKey = '<DECOR8AI_API_KEY>'; // Get it from prod-app.decor8.ai -> Profile
-var decor8 = Decor8AI(decor8aiApiKey);
+import 'package:decor8ai/decor8ai.dart';
 
-// Basic style-guided generation
-var generateDesignsResponse = await decor8.generateDesignsForRoom(
-  input_image_url: 'https://prod-files.decor8.ai/test-images/sdk_test_image.png',
-  room_type: 'livingroom',
-  design_style: 'minimalist',
-  num_images: 1,
-  color_scheme: 'COLOR_SCHEME_5',
-  speciality_decor: 'SPECIALITY_DECOR_5'
+final client = Decor8AI('your-api-key');
+
+// AI Virtual Staging
+final result = await client.generateDesignsForRoom(
+  inputImageUrl: 'https://example.com/empty-room.jpg',
+  roomType: 'LIVINGROOM',
+  designStyle: 'MODERN',
+  numImages: 2,
+);
+
+print(result['info']['images']);
+```
+
+## Table of Contents
+
+- [AI Virtual Staging](#ai-virtual-staging)
+- [AI Interior Design (Inspirational)](#ai-interior-design-inspirational)
+- [AI Wall Color Change](#ai-wall-color-change)
+- [AI Cabinet Color Change](#ai-cabinet-color-change)
+- [AI Kitchen Remodeling](#ai-kitchen-remodeling)
+- [AI Bathroom Remodeling](#ai-bathroom-remodeling)
+- [AI Landscaping](#ai-landscaping)
+- [AI Sky Replacement](#ai-sky-replacement)
+- [Sketch to 3D Render](#sketch-to-3d-render)
+- [Object Removal](#object-removal)
+- [Image Upscaling](#image-upscaling)
+- [Wall Priming](#wall-priming)
+- [Design Styles Reference](#design-styles-reference)
+- [Room Types Reference](#room-types-reference)
+
+---
+
+## AI Virtual Staging
+
+Transform empty rooms into beautifully furnished spaces using **AI virtual staging** technology.
+
+### Using Room Type and Design Style
+
+```dart
+import 'package:decor8ai/decor8ai.dart';
+
+final client = Decor8AI('your-api-key');
+
+final result = await client.generateDesignsForRoom(
+  inputImageUrl: 'https://example.com/empty-room.jpg',
+  roomType: 'BEDROOM',
+  designStyle: 'FRENCHCOUNTRY',
+  numImages: 2,
+  colorScheme: 'COLOR_SCHEME_5',
+  specialityDecor: 'SPECIALITY_DECOR_2',  // Christmas decor
 );
 ```
 
-### Example 2: Using Custom Prompt Only
-```dart
-const decor8aiApiKey = '<DECOR8AI_API_KEY>';
-var decor8 = Decor8AI(decor8aiApiKey);
+### Using Custom Prompt for AI Room Design
 
-// Prompt-guided generation
-var generateDesignsResponse = await decor8.generateDesignsForRoom(
-  input_image_url: 'https://prod-files.decor8.ai/test-images/sdk_test_image.png',
-  prompt: "A modern minimalist living space with Scandinavian influences, featuring clean lines, natural materials, and abundant natural light",
-  num_images: 1
+```dart
+final result = await client.generateDesignsForRoom(
+  inputImageUrl: 'https://example.com/room.jpg',
+  roomType: 'LIVINGROOM',
+  designStyle: 'MODERN',
+  prompt: 'Modern minimalist room with sleek wardrobe and contemporary table lamps',
+  guidanceScale: 15.0,
+  numInferenceSteps: 50,
 );
 ```
 
-### Example 3: Using Advanced Prompt Controls
-```dart
-const decor8aiApiKey = '<DECOR8AI_API_KEY>';
-var decor8 = Decor8AI(decor8aiApiKey);
+### With Style Reference Image
 
-// Advanced prompt-guided generation
-var generateDesignsResponse = await decor8.generateDesignsForRoom(
-  input_image_url: 'https://prod-files.decor8.ai/test-images/sdk_test_image.png',
-  prompt: "A cozy reading nook with built-in bookshelves",
-  prompt_prefix: "high quality, photorealistic interior, professional photography",
-  prompt_suffix: "warm ambient lighting, detailed textures, interior design magazine quality",
-  negative_prompt: "cluttered, dark, cartoon, synthetic, artificial",
-  seed: 42,
-  guidance_scale: 7.5,
-  num_inference_steps: 50,
-  num_images: 1
+```dart
+final result = await client.generateDesignsForRoom(
+  inputImageUrl: 'https://example.com/room.jpg',
+  roomType: 'LIVINGROOM',
+  designStyle: 'MODERN',
+  designStyleImageUrl: 'https://example.com/style-reference.jpg',
+  designStyleImageStrength: 0.8,
 );
 ```
 
-The response is a JSON object containing the generated designs and other information:
+### Response Structure
+
 ```json
 {
-    "error": "",
-    "message": "Successfully generated designs.",
-    "info": {
-        "images": [
-            {
-                "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
-                "url": "http://<generated-image-path>",
-                "width": 768,
-                "height": 512
-            }
-        ]
-    }
+  "error": "",
+  "message": "Successfully generated designs.",
+  "info": {
+    "images": [
+      {
+        "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
+        "url": "https://generated-image-url.jpg",
+        "width": 768,
+        "height": 512
+      }
+    ]
+  }
 }
 ```
 
-## <a id="design-without-photo"> Generating Inspirational Interior Design Ideas without using a photo of the room
+---
 
-```Dart
-const Decor8AI = require('decor8ai');
-const fs = require('fs');
-const path = require('path');
+## AI Interior Design (Inspirational)
 
-// Make sure DECOR8AI_API_KEY is set in your environment variables before running this script
-const decor8 = new Decor8AI();
+Generate **AI interior design** concepts without an input image.
 
-// Example using generateDesigns with a file path
-console.log ("Generating designs for image at path " + input_image_path);
+```dart
+// Using room type and style
+final result = await client.generateInspirationalDesigns(
+  roomType: 'BEDROOM',
+  designStyle: 'SCANDINAVIAN',
+  numImages: 2,
+);
 
-// Note that input_image parameter is null. Decor8 AI server will generate a 
-// new interior design for room_type and design_style.
-var generateDesignsResponse = await decor8.generateDesigns(
-    null,
-    'livingroom',
-    'modern',
-  );
-  ```
-
-## <a id="prime-the-walls">Priming the walls
-
-If your room contains unfinished walls, unpainted walls or walls which need touch-up, use this API to get walls with basic white colored, smooth textured walls or as it's called 'primed walls'. 
-
-You can use the returned image as input to generate_designs API for filling it with furniture. 
-
-```Dart
-  const decor8aiApiKey= '<DECOR8AI_API_KEY>'; // Get it from prod-app.decor8.ai -> Profile
-  var decor8 = Decor8AI(decor8aiApiKey);
-
-  // Example using primeTheRoomWalls with a file path
-  // Priming operation applies white paint to the room walls. This is useful if the input image has dark walls or unfinished walls.
-  var primeWallsResponse = await decor8.primeTheRoomWalls('path/to/your/image.jpg');
-  // Use primeWallsForRoom API if you're using http url for input_image
-  // var primeWallsResponse = await decor8.primeWallsForRoom('https://prod-files.decor8.ai/test-images/sdk_test_image.png');
-
-  // Save generated image to local directory
-  var images = primeWallsResponse['info']['images'];
-  for (var image in images) {
-    var uuid = image['uuid'];
-    var data = image['data'];
-
-    var outputFile = File('output-data/$uuid.jpg');
-    await outputFile.create(recursive: true); // This will create the directory if it does not exist
-    await outputFile.writeAsBytes(base64Decode(data));
-    print('Image saved: output-data/$uuid.jpg');
-  }
-
+// Using custom prompt for AI room design
+final result = await client.generateInspirationalDesigns(
+  roomType: 'LIVINGROOM',
+  designStyle: 'MODERN',
+  prompt: 'Luxurious master bedroom with ocean view',
+  guidanceScale: 15.0,
+  seed: 42,  // For reproducible results
+);
 ```
 
-## <a id="design-styles"> Supported Design Styles
+---
 
-Decor8 AI supports following design styles. Learn more about these styles at [Decor8 AI Decoration Styles](https://www.decor8.ai/interior-decoration-styles/)
+## AI Wall Color Change
 
-| **Design Styles**    |                    |                    |                    |
+Virtually repaint walls with **AI home decorations** technology.
+
+```dart
+final result = await client.changeWallColor(
+  'https://example.com/room.jpg',
+  '#4A90D9',  // Hex color code for the new wall color
+);
+```
+
+---
+
+## AI Cabinet Color Change
+
+Preview new cabinet finishes with **AI kitchen design** capabilities.
+
+```dart
+final result = await client.changeKitchenCabinetsColor(
+  'https://example.com/kitchen.jpg',
+  '#2C3E50',  // Hex color code for the new cabinet color
+);
+```
+
+---
+
+## AI Kitchen Remodeling
+
+Visualize kitchen renovations using **AI interior design** technology.
+
+```dart
+final result = await client.remodelKitchen(
+  'https://example.com/kitchen.jpg',
+  'MODERN',
+  numImages: 2,
+  scaleFactor: 2,
+);
+```
+
+---
+
+## AI Bathroom Remodeling
+
+Preview bathroom transformations with **AI home design** visualization.
+
+```dart
+final result = await client.remodelBathroom(
+  'https://example.com/bathroom.jpg',
+  'CONTEMPORARY',
+  numImages: 2,
+  scaleFactor: 2,
+);
+```
+
+---
+
+## AI Landscaping
+
+Generate **AI landscaping** designs for outdoor spaces (Beta).
+
+```dart
+final result = await client.generateLandscapingDesigns(
+  'https://example.com/yard.jpg',
+  'FRONT_YARD',       // 'FRONT_YARD', 'BACKYARD', or 'SIDE_YARD'
+  'JAPANESE_ZEN',     // Garden style
+  numImages: 2,
+);
+```
+
+### Garden Styles
+
+| Style | Description |
+|-------|-------------|
+| JAPANESE_ZEN | Tranquil Japanese garden design |
+| ENGLISH_COTTAGE | Classic English garden aesthetic |
+| MEDITERRANEAN | Mediterranean-inspired landscaping |
+| MODERN_MINIMALIST | Clean, contemporary outdoor design |
+| TROPICAL | Lush tropical garden style |
+
+---
+
+## AI Sky Replacement
+
+Enhance exterior property photos with beautiful skies.
+
+```dart
+final result = await client.replaceSkyBehindHouse(
+  'https://example.com/house-exterior.jpg',
+  'DUSK',  // 'DAY', 'DUSK', or 'NIGHT'
+);
+```
+
+---
+
+## Sketch to 3D Render
+
+Convert hand-drawn sketches into photorealistic **AI room design** renders.
+
+```dart
+final result = await client.sketchTo3dRender(
+  'https://example.com/floor-plan-sketch.jpg',
+  'MODERN',
+  numImages: 2,
+  scaleFactor: 2,
+  renderType: 'PERSPECTIVE',  // 'PERSPECTIVE' or 'isometric'
+);
+```
+
+---
+
+## Object Removal
+
+Remove unwanted items from photos using **AI interior design** technology.
+
+```dart
+// Auto-detect and remove objects
+final result = await client.removeObjectsFromRoom(
+  'https://example.com/cluttered-room.jpg',
+);
+
+// With custom mask for specific areas
+final result = await client.removeObjectsFromRoom(
+  'https://example.com/room.jpg',
+  maskImageUrl: 'https://example.com/mask.jpg',
+);
+```
+
+---
+
+## Image Upscaling
+
+Enhance image resolution for professional **AI home decorations** output.
+
+```dart
+final result = await client.upscaleImage(
+  '/path/to/local/image.jpg',
+  scaleFactor: 4,  // Scale factor (1-8)
+);
+```
+
+---
+
+## Wall Priming
+
+Prepare walls for **AI virtual staging** by applying uniform wall texture.
+
+```dart
+// From URL
+final result = await client.primeWallsForRoom(
+  'https://example.com/room-with-damaged-walls.jpg',
+);
+
+// From local file
+final result = await client.primeTheRoomWalls(
+  '/path/to/local/image.jpg',
+);
+```
+
+### Saving Generated Images
+
+```dart
+import 'dart:convert';
+import 'dart:io';
+
+// Save images from response
+final images = result['info']['images'] as List;
+for (var image in images) {
+  if (image['data'] != null) {
+    // Base64 encoded image (from multipart endpoints)
+    final outputFile = File('output/${image['uuid']}.jpg');
+    await outputFile.create(recursive: true);
+    await outputFile.writeAsBytes(base64Decode(image['data']));
+    print('Image saved: ${outputFile.path}');
+  } else if (image['url'] != null) {
+    // Download from URL (from JSON endpoints)
+    print('Image URL: ${image['url']}');
+  }
+}
+```
+
+---
+
+## Design Styles Reference
+
+50+ **AI interior design** styles available:
+
+| **Styles**          |                    |                    |                    |
 |---------------------|--------------------|--------------------|-------------------|
-| minimalist          | scandinavian       | industrial         | boho              |
-| traditional         | artdeco            | midcenturymodern   | coastal           |
-| tropical            | eclectic           | contemporary       | frenchcountry     |
-| rustic              | shabbychic         | vintage            | country           |
-| modern              | asian_zen          | hollywoodregency   | bauhaus           |
-| mediterranean       | farmhouse          | victorian          | gothic            |
-| moroccan            | southwestern       | transitional       | maximalist        |
-| arabic              | japandi            | retrofuturism      | artnouveau        |
-| urbanmodern         | wabi_sabi          | grandmillennial    | coastalgrandmother|
-| newtraditional      | cottagecore        | luxemodern         | high_tech         |
-| organicmodern       | tuscan             | cabin              | desertmodern      |
-| global              | industrialchic     | modernfarmhouse    | europeanclassic   |
-| neotraditional      | warmminimalist     |                    |                   |
+| MINIMALIST          | SCANDINAVIAN       | INDUSTRIAL         | BOHO              |
+| TRADITIONAL         | ARTDECO            | MIDCENTURYMODERN   | COASTAL           |
+| TROPICAL            | ECLECTIC           | CONTEMPORARY       | FRENCHCOUNTRY     |
+| RUSTIC              | SHABBYCHIC         | VINTAGE            | COUNTRY           |
+| MODERN              | ASIAN_ZEN          | HOLLYWOODREGENCY   | BAUHAUS           |
+| MEDITERRANEAN       | FARMHOUSE          | VICTORIAN          | GOTHIC            |
+| MOROCCAN            | SOUTHWESTERN       | TRANSITIONAL       | MAXIMALIST        |
+| ARABIC              | JAPANDI            | RETROFUTURISM      | ARTNOUVEAU        |
+| URBANMODERN         | WABI_SABI          | GRANDMILLENNIAL    | COASTALGRANDMOTHER|
+| NEWTRADITIONAL      | COTTAGECORE        | LUXEMODERN         | HIGH_TECH         |
+| ORGANICMODERN       | TUSCAN             | CABIN              | DESERTMODERN      |
+| GLOBAL              | INDUSTRIALCHIC     | MODERNFARMHOUSE    | EUROPEANCLASSIC   |
+| NEOTRADITIONAL      | WARMMINIMALIST     |                    |                   |
 
-## <a id="room-types"> Supported Room Types
-Decor8 AI supports following room types. Learn more about these room types at [Decor8 AI Room Types](https://www.decor8.ai/rooms)
+Learn more at [Decor8 AI Decoration Styles](https://www.decor8.ai/interior-decoration-styles/)
 
-| **Room Type**  |               |               |               |
-|----------------|---------------|---------------|---------------|
-| livingroom     | kitchen       | diningroom    | bedroom       |
-| bathroom       | kidsroom      | familyroom    | readingnook   |
-| sunroom        | walkincloset  | mudroom       | toyroom       |
-| office         | foyer         | powderroom    | laundryroom   |
-| gym            | basement      | garage        | balcony       |
-| cafe           | homebar       | study_room    | front_porch   |
-| back_porch     | back_patio    |               |               |
+---
 
+## Room Types Reference
 
-## <a id="color-schemes"> Supported Color Schemes
-Decor8 AI supports following color schemes.
+25+ room types for **AI room design**:
+
+| **Room Types**  |               |               |               |
+|-----------------|---------------|---------------|---------------|
+| LIVINGROOM      | KITCHEN       | DININGROOM    | BEDROOM       |
+| BATHROOM        | KIDSROOM      | FAMILYROOM    | READINGNOOK   |
+| SUNROOM         | WALKINCLOSET  | MUDROOM       | TOYROOM       |
+| OFFICE          | FOYER         | POWDERROOM    | LAUNDRYROOM   |
+| GYM             | BASEMENT      | GARAGE        | BALCONY       |
+| CAFE            | HOMEBAR       | STUDY_ROOM    | FRONT_PORCH   |
+| BACK_PORCH      | BACK_PATIO    |               |               |
+
+Learn more at [Decor8 AI Room Types](https://www.decor8.ai/rooms)
+
+---
+
+## Color Schemes
 
 | Color Scheme Value | Description                 |
 |--------------------|-----------------------------|
@@ -216,55 +415,55 @@ Decor8 AI supports following color schemes.
 | COLOR_SCHEME_8     | Blue, Beige                 |
 | COLOR_SCHEME_9     | Gray, Brown                 |
 | COLOR_SCHEME_10    | Black, Red                  |
-| COLOR_SCHEME_11    | Gray-Green, White, Black    |
-| COLOR_SCHEME_12    | Blue, Gray, Taupe           |
-| COLOR_SCHEME_13    | Black, Navy                 |
-| COLOR_SCHEME_14    | Emerald, Tan                |
-| COLOR_SCHEME_15    | Forest Green, Light Gray    |
-| COLOR_SCHEME_16    | Yellow, Gray                |
-| COLOR_SCHEME_17    | Pink, Green                 |
-| COLOR_SCHEME_18    | Blush Pink, Black           |
-| COLOR_SCHEME_19    | Black, White                |
-| COLOR_SCHEME_20    | Blue, White                 |
 
-## <a id="speciality-decor"> Supported Seasonal / Special Décor
-Decor8 AI supports following seasonal décor.
+---
 
-| Speciality Decor Value | Description                                                          |
-|------------------------|----------------------------------------------------------------------|
-| SPECIALITY_DECOR_0     | None                                                                 |
-| SPECIALITY_DECOR_1     | Halloween Decor with Spooky Ambiance, Eerie Elements, Dark Colors, and Festive Accents |
-| SPECIALITY_DECOR_2     | Christmas Decor with Christmas Tree, Ornaments, and Lights            |
-| SPECIALITY_DECOR_3     | Thanksgiving Decor, Fall Season Decor                                 |
-| SPECIALITY_DECOR_4     | Fall Season Decor                                                     |
-| SPECIALITY_DECOR_5     | Spring Season Decor                                                   |
-| SPECIALITY_DECOR_6     | Summer Season Decor                                                   |
-| SPECIALITY_DECOR_7     | Winter Season Decor                                                   |
+## Seasonal Decor
+
+| Speciality Decor Value | Description                              |
+|------------------------|------------------------------------------|
+| SPECIALITY_DECOR_0     | None                                     |
+| SPECIALITY_DECOR_1     | Halloween Decor                          |
+| SPECIALITY_DECOR_2     | Christmas Decor                          |
+| SPECIALITY_DECOR_3     | Thanksgiving Decor                       |
+| SPECIALITY_DECOR_4     | Fall Season Decor                        |
+| SPECIALITY_DECOR_5     | Spring Season Decor                      |
+| SPECIALITY_DECOR_6     | Summer Season Decor                      |
+| SPECIALITY_DECOR_7     | Winter Season Decor                      |
+
+---
 
 ## Use Cases
 
 ### Mobile App Integration
-- Perfect for Flutter-based real estate applications
-- Ideal for mobile interior design apps
+- Perfect for Flutter-based **AI interior design** applications
+- Ideal for mobile **AI virtual staging** apps
 - Great for property management mobile solutions
 - Excellent for home improvement retail apps
 
-### Real Estate Virtual Staging
-- Enable real-time virtual staging in your mobile app
-- Allow users to visualize empty spaces with furniture
+### Real Estate AI Virtual Staging
+- Enable real-time **AI virtual staging** in your mobile app
+- Allow users to visualize empty spaces with **AI room design**
 - Provide multiple design style options instantly
 - Reduce the need for physical staging
 
-### Interactive Design Services
-- Build interactive design consultation apps
-- Create virtual room planners
-- Develop mobile-first design visualization tools
-- Enable real-time design previews
+### AI Interior Design Services
+- Build interactive **interior design by AI** consultation apps
+- Create virtual **AI room design** planners
+- Develop mobile-first **AI home decorations** visualization tools
+- Enable real-time **AI interior design** previews
 
-### Business Solutions
-- Add virtual staging to real estate photography services
-- Create value-added services for property listings
-- Enhance property marketing capabilities
-- Develop custom design visualization solutions
+---
 
-Start integrating professional interior design capabilities into your Flutter applications today with Decor8 AI's Dart SDK. Whether you're building a real estate app, design tool, or business solution, our SDK provides the robust functionality you need.
+## Links
+
+- [Decor8 AI Platform](https://www.decor8.ai) - Get started with AI interior design
+- [API Documentation](https://api-docs.decor8.ai/) - Complete API reference
+- [API Playground](https://api-docs.decor8.ai/playground) - Try the API interactively
+- [GitHub Repository](https://github.com/immex-tech/decor8ai-sdk) - SDK source code
+- [pub.dev Package](https://pub.dev/packages/decor8ai) - Package registry
+- [Contact Support](mailto:decor8@immex.tech) - Questions or custom integrations
+
+---
+
+**Keywords:** AI Interior Design, AI Virtual Staging, AI Virtual Staging API, AI decorations, AI Home Decorations, AI room design, Interior design by AI, AI home design, Flutter virtual staging, Dart interior design SDK
