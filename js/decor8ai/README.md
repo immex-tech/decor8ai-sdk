@@ -1,16 +1,24 @@
-# Decor8 AI JavaScript SDK
+# Decor8 AI JavaScript SDK - AI Interior Design & Virtual Staging API
 
-## Table of Contents
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage Examples](#usage-examples)
-  - [Room Design Generation](#room-design-generation)
-  - [Inspirational Designs](#inspirational-designs)
-  - [Wall Priming](#wall-priming)
-  - [Image Captions](#image-captions)
-  - [Image Upscaling](#image-upscaling)
-- [Response Handling](#response-handling)
-- [Parameters Reference](#parameters-reference)
+[![npm version](https://badge.fury.io/js/decor8ai.svg)](https://www.npmjs.com/package/decor8ai)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org)
+
+The official JavaScript/Node.js SDK for **[Decor8 AI](https://www.decor8.ai)** - a powerful **AI interior design** and **AI virtual staging** platform. Build **AI room design** applications, **AI home decorations** tools, and **interior design by AI** services with ease.
+
+## Features
+
+- **AI Virtual Staging** - Transform empty rooms into beautifully furnished spaces
+- **AI Interior Design** - Generate designs in 50+ styles for 25+ room types
+- **AI Landscaping** - Create outdoor and garden designs (Beta)
+- **AI Kitchen Remodeling** - Visualize kitchen renovations
+- **AI Bathroom Remodeling** - Preview bathroom transformations
+- **AI Wall Color Change** - Virtually repaint walls with any color
+- **AI Cabinet Color Change** - Preview new cabinet finishes
+- **AI Sky Replacement** - Enhance exterior photos with beautiful skies
+- **Sketch to 3D Render** - Convert sketches into photorealistic renders
+- **Object Removal** - Remove unwanted items from photos
+- **Image Upscaling** - Enhance resolution up to 8x
 
 ## Installation
 
@@ -18,131 +26,295 @@
 npm install decor8ai
 ```
 
+**Requirements:** Node.js >= 18.0.0
+
 ## Configuration
 
 Set your API key as an environment variable:
+
 ```bash
 export DECOR8AI_API_KEY='your-api-key-here'
 ```
 
-## Usage Examples
+Get your API key at [Decor8 AI Platform](https://prod-app.decor8.ai).
 
-### Room Design Generation
+## Quick Start
 
-#### Using Room Type and Style
 ```javascript
 const Decor8AI = require('decor8ai');
-const decor8 = new Decor8AI();
+const client = new Decor8AI();
 
-decor8.generateDesignsForRoom(
-    'https://example.com/room.jpg',
-    'bedroom',
-    'frenchcountry',
-    null,
-    null,
-    1,
-    'COLOR_SCHEME_0',
-    'SPECIALITY_DECOR_0'
-)
-.then(response => console.log(response))
-.catch(error => console.error(error));
+// AI Virtual Staging
+const result = await client.generateDesignsForRoom({
+    inputImageUrl: 'https://example.com/empty-room.jpg',
+    roomType: 'livingroom',
+    designStyle: 'modern',
+    numImages: 2
+});
+
+console.log(result.info.images);
 ```
 
-#### Using Custom Prompt with Advanced Parameters
+## Table of Contents
+
+- [AI Virtual Staging](#ai-virtual-staging)
+- [AI Interior Design (Inspirational)](#ai-interior-design-inspirational)
+- [AI Wall Color Change](#ai-wall-color-change)
+- [AI Cabinet Color Change](#ai-cabinet-color-change)
+- [AI Kitchen Remodeling](#ai-kitchen-remodeling)
+- [AI Bathroom Remodeling](#ai-bathroom-remodeling)
+- [AI Landscaping](#ai-landscaping)
+- [AI Sky Replacement](#ai-sky-replacement)
+- [Sketch to 3D Render](#sketch-to-3d-render)
+- [Object Removal](#object-removal)
+- [Image Upscaling](#image-upscaling)
+- [Wall Priming](#wall-priming)
+- [Design Styles Reference](#design-styles-reference)
+- [Room Types Reference](#room-types-reference)
+
+---
+
+## AI Virtual Staging
+
+Transform empty rooms into beautifully furnished spaces using **AI virtual staging** technology.
+
+### Using Room Type and Design Style
+
 ```javascript
-decor8.generateDesignsForRoom(
-    'https://example.com/room.jpg',
-    null,  // room_type not needed with custom prompt
-    null,  // design_style not needed with custom prompt
-    null,
-    null,
-    2,
-    null,
-    null,
-    null,
-    'Modern minimalist room with sleek wardrobe, contemporary Table Lamps, and floating Dresser',
-    'high end, professional photo',
-    'clean lines, ambient lighting',
-    'cluttered, traditional, ornate',
-    42,
-    15.0,
-    50
-)
-.then(response => console.log(response));
+const Decor8AI = require('decor8ai');
+const client = new Decor8AI();
+
+const result = await client.generateDesignsForRoom({
+    inputImageUrl: 'https://example.com/empty-room.jpg',
+    roomType: 'bedroom',
+    designStyle: 'frenchcountry',
+    numImages: 2,
+    colorScheme: 'COLOR_SCHEME_5',
+    specialityDecor: 'SPECIALITY_DECOR_2'  // Christmas decor
+});
 ```
 
-#### Using Simple Custom Prompt
+### Using Custom Prompt for AI Room Design
+
 ```javascript
-decor8.generateDesignsForRoom(
-    'https://example.com/room.jpg',
-    null,  // room_type not needed
-    null,  // design_style not needed
-    null,
-    null,
-    1,
-    null,
-    null,
-    null,
-    'Room with wardrobe, Table Lamps, Dresser',
-    null,
-    null,
-    null,
-    null,
-    15.0
-)
-.then(response => console.log(response));
+const result = await client.generateDesignsForRoom({
+    inputImageUrl: 'https://example.com/room.jpg',
+    prompt: 'Modern minimalist room with sleek wardrobe, contemporary table lamps, and floating dresser',
+    numImages: 2,
+    guidanceScale: 15.0,
+    numInferenceSteps: 50
+});
 ```
 
-### Inspirational Designs
+### With Style Reference Image
 
-#### Using Room Type and Style
 ```javascript
-decor8.generateInspirationalDesigns(
-    'bedroom',
+const result = await client.generateDesignsForRoom({
+    inputImageUrl: 'https://example.com/room.jpg',
+    roomType: 'livingroom',
+    designStyle: 'modern',
+    designStyleImageUrl: 'https://example.com/style-reference.jpg',
+    designStyleImageStrength: 0.8,
+    numImages: 1
+});
+```
+
+---
+
+## AI Interior Design (Inspirational)
+
+Generate **AI interior design** concepts without an input image.
+
+```javascript
+// Using room type and style
+const result = await client.generateInspirationalDesigns({
+    roomType: 'bedroom',
+    designStyle: 'scandinavian',
+    numImages: 2
+});
+
+// Using custom prompt for AI room design
+const result = await client.generateInspirationalDesigns({
+    prompt: 'Luxurious master bedroom with ocean view and modern furniture',
+    numImages: 2,
+    guidanceScale: 15.0,
+    seed: 42  // For reproducible results
+});
+```
+
+---
+
+## AI Wall Color Change
+
+Virtually repaint walls with **AI home decorations** technology.
+
+```javascript
+const result = await client.changeWallColor(
+    'https://example.com/room.jpg',
+    '#4A90D9'  // Hex color code for the new wall color
+);
+```
+
+---
+
+## AI Cabinet Color Change
+
+Preview new cabinet finishes with **AI kitchen design** capabilities.
+
+```javascript
+const result = await client.changeKitchenCabinetsColor(
+    'https://example.com/kitchen.jpg',
+    '#2C3E50'  // Hex color code for the new cabinet color
+);
+```
+
+---
+
+## AI Kitchen Remodeling
+
+Visualize kitchen renovations using **AI interior design** technology.
+
+```javascript
+const result = await client.remodelKitchen(
+    'https://example.com/kitchen.jpg',
     'modern',
+    {
+        numImages: 2,
+        scaleFactor: 2
+    }
+);
+```
+
+---
+
+## AI Bathroom Remodeling
+
+Preview bathroom transformations with **AI home design** visualization.
+
+```javascript
+const result = await client.remodelBathroom(
+    'https://example.com/bathroom.jpg',
+    'contemporary',
+    {
+        numImages: 2,
+        scaleFactor: 2
+    }
+);
+```
+
+---
+
+## AI Landscaping
+
+Generate **AI landscaping** designs for outdoor spaces (Beta).
+
+```javascript
+const result = await client.generateLandscapingDesigns(
+    'https://example.com/yard.jpg',
+    'Front Yard',       // 'Front Yard', 'Backyard', or 'Side Yard'
+    'japanese_zen',     // Garden style
+    { numImages: 2 }
+);
+```
+
+### Garden Styles
+
+| Style | Description |
+|-------|-------------|
+| japanese_zen | Tranquil Japanese garden design |
+| english_cottage | Classic English garden aesthetic |
+| mediterranean | Mediterranean-inspired landscaping |
+| modern_minimalist | Clean, contemporary outdoor design |
+| tropical | Lush tropical garden style |
+
+---
+
+## AI Sky Replacement
+
+Enhance exterior property photos with beautiful skies.
+
+```javascript
+const result = await client.replaceSkyBehindHouse(
+    'https://example.com/house-exterior.jpg',
+    'dusk'  // 'day', 'dusk', or 'night'
+);
+```
+
+---
+
+## Sketch to 3D Render
+
+Convert hand-drawn sketches into photorealistic **AI room design** renders.
+
+```javascript
+const result = await client.sketchTo3dRender(
+    'https://example.com/floor-plan-sketch.jpg',
+    'modern',
+    {
+        numImages: 2,
+        scaleFactor: 2,
+        renderType: 'perspective'  // 'perspective' or 'isometric'
+    }
+);
+```
+
+---
+
+## Object Removal
+
+Remove unwanted items from photos using **AI interior design** technology.
+
+```javascript
+// Auto-detect and remove objects
+const result = await client.removeObjectsFromRoom(
+    'https://example.com/cluttered-room.jpg'
+);
+
+// With custom mask for specific areas
+const result = await client.removeObjectsFromRoom(
+    'https://example.com/room.jpg',
+    'https://example.com/mask.jpg'  // Black/white mask
+);
+```
+
+---
+
+## Image Upscaling
+
+Enhance image resolution for professional **AI home decorations** output.
+
+```javascript
+// From URL
+const result = await client.upscaleImage(
+    'https://example.com/room.jpg',
+    4  // Scale factor (1-8)
+);
+
+// From local file
+const result = await client.upscaleImage(
+    '/path/to/local/image.jpg',
     2
-)
-.then(response => console.log(response));
+);
 ```
 
-#### Using Custom Prompt
+---
+
+## Wall Priming
+
+Prepare walls for **AI virtual staging** by applying uniform wall texture.
+
 ```javascript
-decor8.generateInspirationalDesigns(
-    null,  // room_type not needed with custom prompt
-    null,  // design_style not needed with custom prompt
-    2,
-    'Luxurious room with ocean view and modern furniture',
-    'high end, professional photo',
-    'natural lighting',
-    'cluttered, dark',
-    42,
-    15.0,
-    50
-)
-.then(response => console.log(response));
+const result = await client.primeWallsForRoom(
+    'https://example.com/room-with-damaged-walls.jpg'
+);
 ```
 
-### Wall Priming
-```javascript
-decor8.primeWallsForRoom('https://example.com/room.jpg')
-    .then(response => console.log(response));
-```
-
-### Image Captions
-```javascript
-decor8.generateImageCaptions('livingroom', 'modern', 2)
-    .then(response => console.log(response));
-```
-
-### Image Upscaling
-```javascript
-decor8.upscaleImage('https://example.com/room.jpg', 2)
-    .then(response => console.log(response));
-```
+---
 
 ## Response Handling
 
-Example response structure:
+All methods return a Promise with this structure:
+
 ```javascript
 {
     "error": "",
@@ -151,12 +323,10 @@ Example response structure:
         "images": [
             {
                 "uuid": "81133196-4477-4cdd-834a-89f5482bb9d0",
-                "url": "https://example.com/image.jpg",
+                "url": "https://generated-image-url.jpg",
                 "width": 768,
                 "height": 512,
-                "captions": [
-                    "Modern minimalist bedroom with sleek furniture and ambient lighting"
-                ]
+                "captions": ["Modern minimalist bedroom..."]
             }
         ]
     }
@@ -164,62 +334,43 @@ Example response structure:
 ```
 
 ### Saving Generated Images
+
 ```javascript
 const fs = require('fs');
 const https = require('https');
 const path = require('path');
 
-function downloadAndSaveImage(url, outputDir, filename) {
+function downloadImage(url, outputPath) {
     return new Promise((resolve, reject) => {
         https.get(url, (response) => {
             if (response.statusCode === 200) {
-                const fileStream = fs.createWriteStream(path.join(outputDir, filename));
+                const fileStream = fs.createWriteStream(outputPath);
                 response.pipe(fileStream);
                 fileStream.on('finish', () => {
                     fileStream.close();
                     resolve();
                 });
             } else {
-                reject(new Error(`Failed to download image: ${response.statusCode}`));
+                reject(new Error(`Download failed: ${response.statusCode}`));
             }
         });
     });
 }
 
-// Usage in response handling
-response.info.images.forEach((design, index) => {
-    const filename = `design_${design.uuid}.jpg`;
-    downloadAndSaveImage(design.url, './output', filename);
-});
+// Usage
+const result = await client.generateDesignsForRoom({...});
+for (const image of result.info.images) {
+    await downloadImage(image.url, `./output/${image.uuid}.jpg`);
+}
 ```
 
-## Parameters Reference
+---
 
-### Common Parameters
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| input_image_url | string | URL of the input image |
-| room_type | string | Type of room (e.g., 'bedroom', 'livingroom') |
-| design_style | string | Design style (e.g., 'modern', 'frenchcountry') |
-| num_images | number | Number of images to generate (default: 1) |
-| prompt | string | Custom prompt describing desired outcome |
-| prompt_prefix | string | Text to prepend to the prompt |
-| prompt_suffix | string | Text to append to the prompt |
-| negative_prompt | string | Things to avoid in generation |
-| seed | number | Random seed for reproducible results |
-| guidance_scale | number | Controls how closely to follow the prompt (default: 7.5) |
-| num_inference_steps | number | Number of denoising steps (default: 30) |
+## Design Styles Reference
 
-### Additional Features
-| Feature | Description |
-|---------|-------------|
-| color_scheme | Predefined color schemes (e.g., 'COLOR_SCHEME_0') |
-| speciality_decor | Special decorative themes (e.g., 'SPECIALITY_DECOR_0') |
-| scale_factor | Image scaling factor for output |
+50+ **AI interior design** styles available:
 
-
-### Design Styles
-| **Design Styles**    |                    |                    |                    |
+| **Styles**          |                    |                    |                    |
 |---------------------|--------------------|--------------------|-------------------|
 | minimalist          | scandinavian       | industrial         | boho              |
 | traditional         | artdeco            | midcenturymodern   | coastal           |
@@ -235,5 +386,33 @@ response.info.images.forEach((design, index) => {
 | global              | industrialchic     | modernfarmhouse    | europeanclassic   |
 | neotraditional      | warmminimalist     |                    |                   |
 
+---
 
-For complete API documentation, visit [Decor8 AI API Documentation](https://api-docs.decor8.ai/)
+## Room Types Reference
+
+25+ room types for **AI room design**:
+
+| **Room Types**  |               |               |               |
+|-----------------|---------------|---------------|---------------|
+| livingroom      | kitchen       | diningroom    | bedroom       |
+| bathroom        | kidsroom      | familyroom    | readingnook   |
+| sunroom         | walkincloset  | mudroom       | toyroom       |
+| office          | foyer         | powderroom    | laundryroom   |
+| gym             | basement      | garage        | balcony       |
+| cafe            | homebar       | study_room    | front_porch   |
+| back_porch      | back_patio    |               |               |
+
+---
+
+## Links
+
+- [Decor8 AI Platform](https://www.decor8.ai) - Get started with AI interior design
+- [API Documentation](https://api-docs.decor8.ai/) - Complete API reference
+- [API Playground](https://api-docs.decor8.ai/playground) - Try the API interactively
+- [GitHub Repository](https://github.com/immex-tech/decor8ai-sdk) - SDK source code
+- [npm Package](https://www.npmjs.com/package/decor8ai) - Package registry
+- [Contact Support](mailto:decor8@immex.tech) - Questions or custom integrations
+
+---
+
+**Keywords:** AI Interior Design, AI Virtual Staging, AI Virtual Staging API, AI decorations, AI Home Decorations, AI room design, Interior design by AI, AI home design, virtual staging software, real estate virtual staging

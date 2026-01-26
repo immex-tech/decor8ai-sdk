@@ -1,33 +1,59 @@
 {
   "name": "decor8ai",
-  "version": "1.0.11",
-  "description": "Decor8 AI is an AI Interior Design Platform. With Decor8 AI Javascript SDK, you can automate various interior design generation tasks such as virtually staging an empty room or re-designing a room with its photo. You can also use Decor8 AI Javascript SDK to generate interior design ideas for a room based on your preferences.",
+  "version": "2.0.0",
+  "description": "Decor8 AI SDK for virtual staging, interior design generation, landscaping, remodeling, and image processing. Transform empty rooms, change wall colors, remodel kitchens/bathrooms, and more.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "types": "index.d.ts",
+  "engines": {
+    "node": ">=18.0.0"
   },
+  "scripts": {
+    "test": "node ../../tests/test_js_sdk.js",
+    "lint": "echo 'No linter configured'",
+    "prepublishOnly": "npm run lint && npm test",
+    "version": "echo 'Version updated to' $npm_package_version",
+    "postversion": "git push && git push --tags",
+    "publish:login": "npm login",
+    "publish:dry-run": "npm publish --dry-run",
+    "publish:release": "npm publish --access public"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "constants.js",
+    "README.md",
+    "LICENSE"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/immex-tech/decor8ai-sdk.git"
   },
   "keywords": [
-    "Decor8AI",
-    "AI",
-    "Interior",
-    "Design",
-    "Decoration",
-    "Virtual",
-    "Property",
-    "Staging"
+    "decor8ai",
+    "ai",
+    "interior-design",
+    "virtual-staging",
+    "real-estate",
+    "landscaping",
+    "remodeling",
+    "kitchen",
+    "bathroom",
+    "wall-color",
+    "3d-render",
+    "image-processing"
   ],
   "author": "Akhilesh Joshi <akhilesh@immex.tech>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/immex-tech/decor8ai-sdk/issues"
   },
-  "homepage": "https://github.com/immex-tech/decor8ai-sdk#readme",
+  "homepage": "https://www.decor8.ai",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "dependencies": {
-    "axios": "^1.5.1",
+    "axios": "^1.7.0",
     "form-data": "^4.0.0"
   }
 }
