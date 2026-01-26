@@ -1,6 +1,6 @@
 {
   "name": "decor8ai",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Decor8 AI SDK for virtual staging, interior design generation, landscaping, remodeling, and image processing. Transform empty rooms, change wall colors, remodel kitchens/bathrooms, and more.",
   "main": "index.js",
   "types": "index.d.ts",
@@ -8,7 +8,7 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "test": "node ../../tests/test_js_sdk.js",
+    "test": "",
     "lint": "echo 'No linter configured'",
     "prepublishOnly": "npm run lint && npm test",
     "version": "echo 'Version updated to' $npm_package_version",

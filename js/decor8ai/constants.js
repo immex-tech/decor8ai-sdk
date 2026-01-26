@@ -4,27 +4,27 @@
 
 // Room types supported by the API
 const ROOM_TYPES = [
-    "livingroom", "kitchen", "diningroom", "bedroom", "bathroom",
-    "kidsroom", "familyroom", "readingnook", "sunroom", "walkincloset",
-    "mudroom", "toyroom", "office", "foyer", "powderroom", "laundryroom",
-    "gym", "basement", "garage", "balcony", "cafe", "homebar",
-    "study_room", "front_porch", "back_porch", "back_patio", "openplan",
-    "boardroom", "meetingroom", "openworkspace", "privateoffice"
+    "LIVINGROOM", "KITCHEN", "DININGROOM", "BEDROOM", "BATHROOM",
+    "KIDSROOM", "FAMILYROOM", "READINGNOOK", "SUNROOM", "WALKINCLOSET",
+    "MUDROOM", "TOYROOM", "OFFICE", "FOYER", "POWDERROOM", "LAUNDRYROOM",
+    "GYM", "BASEMENT", "GARAGE", "BALCONY", "CAFE", "HOMEBAR",
+    "STUDY_ROOM", "FRONT_PORCH", "BACK_PORCH", "BACK_PATIO", "OPENPLAN",
+    "BOARDROOM", "MEETINGROOM", "OPENWORKSPACE", "PRIVATEOFFICE"
 ];
 
 // Design styles supported by the API
 const DESIGN_STYLES = [
-    "minimalist", "scandinavian", "industrial", "boho", "traditional",
-    "artdeco", "midcenturymodern", "coastal", "tropical", "eclectic",
-    "contemporary", "frenchcountry", "rustic", "shabbychic", "vintage",
-    "country", "modern", "asian_zen", "hollywoodregency", "bauhaus",
-    "mediterranean", "farmhouse", "victorian", "gothic", "moroccan",
-    "southwestern", "transitional", "maximalist", "arabic", "japandi",
-    "retrofuturism", "artnouveau", "urbanmodern", "wabi_sabi",
-    "grandmillennial", "coastalgrandmother", "newtraditional", "cottagecore",
-    "luxemodern", "high_tech", "organicmodern", "tuscan", "cabin",
-    "desertmodern", "global", "industrialchic", "modernfarmhouse",
-    "europeanclassic", "neotraditional", "warmminimalist"
+    "MINIMALIST", "SCANDINAVIAN", "INDUSTRIAL", "BOHO", "TRADITIONAL",
+    "ARTDECO", "MIDCENTURYMODERN", "COASTAL", "TROPICAL", "ECLECTIC",
+    "CONTEMPORARY", "FRENCHCOUNTRY", "RUSTIC", "SHABBYCHIC", "VINTAGE",
+    "COUNTRY", "MODERN", "ASIAN_ZEN", "HOLLYWOODREGENCY", "BAUHAUS",
+    "MEDITERRANEAN", "FARMHOUSE", "VICTORIAN", "GOTHIC", "MOROCCAN",
+    "SOUTHWESTERN", "TRANSITIONAL", "MAXIMALIST", "ARABIC", "JAPANDI",
+    "RETROFUTURISM", "ARTNOUVEAU", "URBANMODERN", "WABI_SABI",
+    "GRANDMILLENNIAL", "COASTALGRANDMOTHER", "NEWTRADITIONAL", "COTTAGECORE",
+    "LUXEMODERN", "HIGH_TECH", "ORGANICMODERN", "TUSCAN", "CABIN",
+    "DESERTMODERN", "GLOBAL", "INDUSTRIALCHIC", "MODERNFARMHOUSE",
+    "EUROPEANCLASSIC", "NEOTRADITIONAL", "WARMMINIMALIST"
 ];
 
 // Color schemes (predefined palettes)
@@ -34,24 +34,24 @@ const COLOR_SCHEMES = Array.from({ length: 21 }, (_, i) => `COLOR_SCHEME_${i}`);
 const SPECIALITY_DECORS = Array.from({ length: 8 }, (_, i) => `SPECIALITY_DECOR_${i}`);
 
 // Sky types for sky replacement
-const SKY_TYPES = ["day", "dusk", "night"];
+const SKY_TYPES = ["DAY", "DUSK", "NIGHT"];
 
 // Yard types for landscaping
-const YARD_TYPES = ["Front Yard", "Backyard", "Side Yard"];
+const YARD_TYPES = ["FRONT_YARD", "BACKYARD", "SIDE_YARD"];
 
 // Garden styles for landscaping
 const GARDEN_STYLES = [
-    "japanese_zen", "mediterranean", "english_cottage", "tropical", "desert",
-    "modern_minimalist", "french_formal", "coastal", "woodland", "prairie",
-    "rock_garden", "water_garden", "herb_garden", "cutting_garden", "pollinator",
-    "xeriscape", "edible_landscape", "moon_garden", "rain_garden", "sensory",
-    "native_plant", "cottage_style", "formal_parterre", "naturalistic",
-    "contemporary", "asian_fusion", "rustic_farmhouse", "urban_modern",
-    "sustainable", "wildlife_habitat", "four_season"
+    "JAPANESE_ZEN", "MEDITERRANEAN", "ENGLISH_COTTAGE", "TROPICAL", "DESERT",
+    "MODERN_MINIMALIST", "FRENCH_FORMAL", "COASTAL", "WOODLAND", "PRAIRIE",
+    "ROCK_GARDEN", "WATER_GARDEN", "HERB_GARDEN", "CUTTING_GARDEN", "POLLINATOR",
+    "XERISCAPE", "EDIBLE_LANDSCAPE", "MOON_GARDEN", "RAIN_GARDEN", "SENSORY",
+    "NATIVE_PLANT", "COTTAGE_STYLE", "FORMAL_PARTERRE", "NATURALISTIC",
+    "CONTEMPORARY", "ASIAN_FUSION", "RUSTIC_FARMHOUSE", "URBAN_MODERN",
+    "SUSTAINABLE", "WILDLIFE_HABITAT", "FOUR_SEASON"
 ];
 
 // Render types for sketch to 3D
-const RENDER_TYPES = ["perspective", "isometric"];
+const RENDER_TYPES = ["PERSPECTIVE", "ISOMETRIC"];
 
 module.exports = {
     ROOM_TYPES,

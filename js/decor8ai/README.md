@@ -47,8 +47,8 @@ const client = new Decor8AI();
 // AI Virtual Staging
 const result = await client.generateDesignsForRoom({
     inputImageUrl: 'https://example.com/empty-room.jpg',
-    roomType: 'livingroom',
-    designStyle: 'modern',
+    roomType: 'LIVINGROOM',
+    designStyle: 'MODERN',
     numImages: 2
 });
 
@@ -86,8 +86,8 @@ const client = new Decor8AI();
 
 const result = await client.generateDesignsForRoom({
     inputImageUrl: 'https://example.com/empty-room.jpg',
-    roomType: 'bedroom',
-    designStyle: 'frenchcountry',
+    roomType: 'BEDROOM',
+    designStyle: 'FRENCHCOUNTRY',
     numImages: 2,
     colorScheme: 'COLOR_SCHEME_5',
     specialityDecor: 'SPECIALITY_DECOR_2'  // Christmas decor
@@ -99,7 +99,7 @@ const result = await client.generateDesignsForRoom({
 ```javascript
 const result = await client.generateDesignsForRoom({
     inputImageUrl: 'https://example.com/room.jpg',
-    prompt: 'Modern minimalist room with sleek wardrobe, contemporary table lamps, and floating dresser',
+    prompt: 'Modern minimalist room with sleek wardrobe, CONTEMPORARY table lamps, and floating dresser',
     numImages: 2,
     guidanceScale: 15.0,
     numInferenceSteps: 50
@@ -111,8 +111,8 @@ const result = await client.generateDesignsForRoom({
 ```javascript
 const result = await client.generateDesignsForRoom({
     inputImageUrl: 'https://example.com/room.jpg',
-    roomType: 'livingroom',
-    designStyle: 'modern',
+    roomType: 'LIVINGROOM',
+    designStyle: 'MODERN',
     designStyleImageUrl: 'https://example.com/style-reference.jpg',
     designStyleImageStrength: 0.8,
     numImages: 1
@@ -128,14 +128,14 @@ Generate **AI interior design** concepts without an input image.
 ```javascript
 // Using room type and style
 const result = await client.generateInspirationalDesigns({
-    roomType: 'bedroom',
-    designStyle: 'scandinavian',
+    roomType: 'BEDROOM',
+    designStyle: 'SCANDINAVIAN',
     numImages: 2
 });
 
 // Using custom prompt for AI room design
 const result = await client.generateInspirationalDesigns({
-    prompt: 'Luxurious master bedroom with ocean view and modern furniture',
+    prompt: 'Luxurious master BEDROOM with ocean view and MODERN furniture',
     numImages: 2,
     guidanceScale: 15.0,
     seed: 42  // For reproducible results
@@ -177,7 +177,7 @@ Visualize kitchen renovations using **AI interior design** technology.
 ```javascript
 const result = await client.remodelKitchen(
     'https://example.com/kitchen.jpg',
-    'modern',
+    'MODERN',
     {
         numImages: 2,
         scaleFactor: 2
@@ -194,7 +194,7 @@ Preview bathroom transformations with **AI home design** visualization.
 ```javascript
 const result = await client.remodelBathroom(
     'https://example.com/bathroom.jpg',
-    'contemporary',
+    'CONTEMPORARY',
     {
         numImages: 2,
         scaleFactor: 2
@@ -211,8 +211,8 @@ Generate **AI landscaping** designs for outdoor spaces (Beta).
 ```javascript
 const result = await client.generateLandscapingDesigns(
     'https://example.com/yard.jpg',
-    'Front Yard',       // 'Front Yard', 'Backyard', or 'Side Yard'
-    'japanese_zen',     // Garden style
+    'FRONT_YARD',       // 'FRONT_YARD', 'BACKYARD', or 'SIDE_YARD'
+    'JAPANESE_ZEN',     // Garden style
     { numImages: 2 }
 );
 ```
@@ -221,11 +221,11 @@ const result = await client.generateLandscapingDesigns(
 
 | Style | Description |
 |-------|-------------|
-| japanese_zen | Tranquil Japanese garden design |
-| english_cottage | Classic English garden aesthetic |
-| mediterranean | Mediterranean-inspired landscaping |
-| modern_minimalist | Clean, contemporary outdoor design |
-| tropical | Lush tropical garden style |
+| JAPANESE_ZEN | Tranquil Japanese garden design |
+| ENGLISH_COTTAGE | Classic English garden aesthetic |
+| MEDITERRANEAN | Mediterranean-inspired landscaping |
+| MODERN_MINIMALIST | Clean, contemporary outdoor design |
+| TROPICAL | Lush tropical garden style |
 
 ---
 
@@ -236,7 +236,7 @@ Enhance exterior property photos with beautiful skies.
 ```javascript
 const result = await client.replaceSkyBehindHouse(
     'https://example.com/house-exterior.jpg',
-    'dusk'  // 'day', 'dusk', or 'night'
+    'DUSK'  // 'DAY', 'DUSK', or 'NIGHT'
 );
 ```
 
@@ -249,11 +249,11 @@ Convert hand-drawn sketches into photorealistic **AI room design** renders.
 ```javascript
 const result = await client.sketchTo3dRender(
     'https://example.com/floor-plan-sketch.jpg',
-    'modern',
+    'MODERN',
     {
         numImages: 2,
         scaleFactor: 2,
-        renderType: 'perspective'  // 'perspective' or 'isometric'
+        renderType: 'PERSPECTIVE'  // 'PERSPECTIVE' or 'isometric'
     }
 );
 ```
@@ -326,7 +326,7 @@ All methods return a Promise with this structure:
                 "url": "https://generated-image-url.jpg",
                 "width": 768,
                 "height": 512,
-                "captions": ["Modern minimalist bedroom..."]
+                "captions": ["Modern minimalist BEDROOM..."]
             }
         ]
     }
@@ -372,19 +372,19 @@ for (const image of result.info.images) {
 
 | **Styles**          |                    |                    |                    |
 |---------------------|--------------------|--------------------|-------------------|
-| minimalist          | scandinavian       | industrial         | boho              |
-| traditional         | artdeco            | midcenturymodern   | coastal           |
-| tropical            | eclectic           | contemporary       | frenchcountry     |
-| rustic              | shabbychic         | vintage            | country           |
-| modern              | asian_zen          | hollywoodregency   | bauhaus           |
-| mediterranean       | farmhouse          | victorian          | gothic            |
-| moroccan            | southwestern       | transitional       | maximalist        |
-| arabic              | japandi            | retrofuturism      | artnouveau        |
-| urbanmodern         | wabi_sabi          | grandmillennial    | coastalgrandmother|
-| newtraditional      | cottagecore        | luxemodern         | high_tech         |
-| organicmodern       | tuscan             | cabin              | desertmodern      |
-| global              | industrialchic     | modernfarmhouse    | europeanclassic   |
-| neotraditional      | warmminimalist     |                    |                   |
+| MINIMALIST          | SCANDINAVIAN       | INDUSTRIAL         | BOHO              |
+| TRADITIONAL         | ARTDECO            | MIDCENTURYMODERN   | COASTAL           |
+| TROPICAL            | ECLECTIC           | CONTEMPORARY       | FRENCHCOUNTRY     |
+| RUSTIC              | SHABBYCHIC         | VINTAGE            | COUNTRY           |
+| MODERN              | ASIAN_ZEN          | HOLLYWOODREGENCY   | BAUHAUS           |
+| MEDITERRANEAN       | FARMHOUSE          | VICTORIAN          | GOTHIC            |
+| MOROCCAN            | SOUTHWESTERN       | TRANSITIONAL       | MAXIMALIST        |
+| ARABIC              | JAPANDI            | RETROFUTURISM      | ARTNOUVEAU        |
+| URBANMODERN         | WABI_SABI          | GRANDMILLENNIAL    | COASTALGRANDMOTHER|
+| NEWTRADITIONAL      | COTTAGECORE        | LUXEMODERN         | HIGH_TECH         |
+| ORGANICMODERN       | TUSCAN             | CABIN              | DESERTMODERN      |
+| GLOBAL              | INDUSTRIALCHIC     | MODERNFARMHOUSE    | EUROPEANCLASSIC   |
+| NEOTRADITIONAL      | WARMMINIMALIST     |                    |                   |
 
 ---
 
@@ -394,13 +394,13 @@ for (const image of result.info.images) {
 
 | **Room Types**  |               |               |               |
 |-----------------|---------------|---------------|---------------|
-| livingroom      | kitchen       | diningroom    | bedroom       |
-| bathroom        | kidsroom      | familyroom    | readingnook   |
-| sunroom         | walkincloset  | mudroom       | toyroom       |
-| office          | foyer         | powderroom    | laundryroom   |
-| gym             | basement      | garage        | balcony       |
-| cafe            | homebar       | study_room    | front_porch   |
-| back_porch      | back_patio    |               |               |
+| LIVINGROOM      | KITCHEN       | DININGROOM    | BEDROOM       |
+| BATHROOM        | KIDSROOM      | FAMILYROOM    | READINGNOOK   |
+| SUNROOM         | WALKINCLOSET  | MUDROOM       | TOYROOM       |
+| OFFICE          | FOYER         | POWDERROOM    | LAUNDRYROOM   |
+| GYM             | BASEMENT      | GARAGE        | BALCONY       |
+| CAFE            | HOMEBAR       | STUDY_ROOM    | FRONT_PORCH   |
+| BACK_PORCH      | BACK_PATIO    |               |               |
 
 ---
 
