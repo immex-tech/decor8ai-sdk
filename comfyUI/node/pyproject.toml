@@ -1,9 +1,9 @@
 [project]
 name = "decor8ai-comfyui"
-description = "Decor8 AI Virtual Staging, Interior Design, and Design Inspirations (Requires API key from www.decor8.ai)"
-version = "1.0.6"
+description = "Decor8 AI Virtual Staging, Interior Design, Landscaping, Remodeling, and more (Requires API key from www.decor8.ai)"
+version = "2.0.0"
 license = {file = "LICENSE"}
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
     "requests>=2.31.0",
     "torch",
@@ -14,30 +14,37 @@ dependencies = [
 [project.urls]
 Repository = "https://github.com/immex-tech/decor8ai-sdk"
 Documentation = "https://api-docs.decor8.ai"
+Homepage = "https://www.decor8.ai"
 #  Used by Comfy Registry https://comfyregistry.org
 
 [tool.comfy]
 PublisherId = "decor8ai-virtual-staging-interior-design"
 DisplayName = "Decor8 AI Virtual Staging"
 Description = """
-Transform empty spaces into beautifully staged interiors using Decor8 AI's professional API service.
+Transform spaces using Decor8 AI's professional API service.
 
-⚠️ This node requires an API key from https://www.decor8.ai
+This node requires an API key from https://www.decor8.ai
 - Purchase prepaid plans or subscribe to pay-as-you-go
 - Get your API key from the Decor8 AI dashboard
 
 Features:
 - Virtual Staging for empty rooms
-- New interior design for already furnished rooms
-- Design Inspirations for creative ideas (doesn't require a room photo) 
+- Interior design generation for furnished rooms
+- Design Inspirations (no room photo required)
+- Kitchen and Bathroom Remodeling
+- Landscaping Design generation
+- Wall Color changes
+- Kitchen Cabinet Color changes
+- Sky Replacement for exteriors
+- Sketch to 3D Render conversion
+- Object Removal from rooms
+- Image Upscaling
 - Multiple design styles and room types
-- Customizable with prompts and parameters
-- Professional-quality results
 
 Visit www.decor8.ai for pricing and plans.
 """
-Icon = "🏠"
-Tags = ["virtual-staging", "interior-design", "real-estate"]  # Adding tags for better discoverability
+Icon = "icon.png"
+Tags = ["virtual-staging", "interior-design", "real-estate", "landscaping", "remodeling", "ai"]
 
 [build-system]
 requires = ["setuptools>=61.0"]
