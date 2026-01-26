@@ -151,8 +151,8 @@ from decor8ai.client import generate_designs_for_room
 
 # Basic style-guided generation
 input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'
-room_type = 'livingroom'  # See below for all supported room types
-design_style = 'frenchcountry'  # See below for all supported design styles
+room_type = 'LIVINGROOM'  # See below for all supported room types
+design_style = 'FRENCHCOUNTRY'  # See below for all supported design styles
 num_images = 1  # Up to 4 images can be generated at a time
 
 # Optional style parameters
@@ -245,8 +245,8 @@ If unsuccessful, the response will contain an error:
 from decor8ai.client import generate_designs
 
 # Here, we don't provide input image. The API generates a new interior design using following parameters.
-room_type = 'livingroom' # See below for all supported room types
-design_style = 'frenchcountry' # See below for all supported design Styles
+room_type = 'LIVINGROOM' # See below for all supported room types
+design_style = 'FRENCHCOUNTRY' # See below for all supported design Styles
 num_images = 1 # Up to 4 images can be generated at a time
 
 # Optional Parameters
@@ -318,7 +318,7 @@ Generate kitchen remodel designs with different design styles.
 from decor8ai import remodel_kitchen
 
 input_image_url = 'https://example.com/kitchen.jpg'
-design_style = 'modern'
+design_style = 'MODERN'
 num_images = 2
 scale_factor = 2  # Optional
 
@@ -333,7 +333,7 @@ Generate bathroom remodel designs with different design styles.
 from decor8ai import remodel_bathroom
 
 input_image_url = 'https://example.com/bathroom.jpg'
-design_style = 'contemporary'
+design_style = 'CONTEMPORARY'
 num_images = 2
 
 response = remodel_bathroom(input_image_url, design_style, num_images)
@@ -347,8 +347,8 @@ Generate landscaping designs for yards and outdoor spaces.
 from decor8ai import generate_landscaping_designs
 
 input_image_url = 'https://example.com/yard.jpg'
-yard_type = 'Front Yard'  # Options: 'Front Yard', 'Backyard', 'Side Yard'
-garden_style = 'japanese_zen'  # See garden styles below
+yard_type = 'FRONT_YARD'  # Options: 'FRONT_YARD', 'BACKYARD', 'SIDE_YARD'
+garden_style = 'JAPANESE_ZEN'  # See garden styles below
 num_images = 2
 
 response = generate_landscaping_designs(input_image_url, yard_type, garden_style, num_images)
@@ -357,10 +357,10 @@ response = generate_landscaping_designs(input_image_url, yard_type, garden_style
 ### Garden Styles
 | Style | Style | Style |
 |-------|-------|-------|
-| japanese_zen | mediterranean | english_cottage |
-| tropical | desert | modern_minimalist |
-| french_formal | coastal | woodland |
-| prairie | rock_garden | water_garden |
+| JAPANESE_ZEN | MEDITERRANEAN | ENGLISH_COTTAGE |
+| TROPICAL | DESERT | MODERN_MINIMALIST |
+| FRENCH_FORMAL | COASTAL | WOODLAND |
+| PRAIRIE | ROCK_GARDEN | WATER_GARDEN |
 
 ## <a id="replace-sky">Replace Sky (NEW)
 
@@ -370,7 +370,7 @@ Replace the sky in exterior property photos with different times of day.
 from decor8ai import replace_sky_behind_house
 
 input_image_url = 'https://example.com/house.jpg'
-sky_type = 'dusk'  # Options: 'day', 'dusk', 'night'
+sky_type = 'DUSK'  # Options: 'DAY', 'DUSK', 'NIGHT'
 
 response = replace_sky_behind_house(input_image_url, sky_type)
 ```
@@ -383,9 +383,9 @@ Convert sketches or floor plans to photorealistic 3D rendered images.
 from decor8ai import sketch_to_3d_render
 
 input_image_url = 'https://example.com/sketch.jpg'
-design_style = 'modern'
+design_style = 'MODERN'
 num_images = 2
-render_type = 'perspective'  # Options: 'perspective', 'isometric'
+render_type = 'PERSPECTIVE'  # Options: 'PERSPECTIVE', 'ISOMETRIC'
 
 response = sketch_to_3d_render(input_image_url, design_style, num_images, render_type=render_type)
 ```
@@ -409,8 +409,8 @@ If you need apt captions for an image depicting a specific interior design style
 ```Python
 from decor8ai.client import generate_image_captions
 
-room_type = 'livingroom'
-design_style = 'frenchcountry'
+room_type = 'LIVINGROOM'
+design_style = 'FRENCHCOUNTRY'
 num_captions = 2
 
 response = generate_image_captions(room_type, design_style, num_captions)
@@ -440,33 +440,33 @@ Decor8 AI supports following design styles. Learn more about these styles at [De
 
 | **Design Styles**    |                    |                    |                    |
 |---------------------|--------------------|--------------------|-------------------|
-| minimalist          | scandinavian       | industrial         | boho              |
-| traditional         | artdeco            | midcenturymodern   | coastal           |
-| tropical            | eclectic           | contemporary       | frenchcountry     |
-| rustic              | shabbychic         | vintage            | country           |
-| modern              | asian_zen          | hollywoodregency   | bauhaus           |
-| mediterranean       | farmhouse          | victorian          | gothic            |
-| moroccan            | southwestern       | transitional       | maximalist        |
-| arabic              | japandi            | retrofuturism      | artnouveau        |
-| urbanmodern         | wabi_sabi          | grandmillennial    | coastalgrandmother|
-| newtraditional      | cottagecore        | luxemodern         | high_tech         |
-| organicmodern       | tuscan             | cabin              | desertmodern      |
-| global              | industrialchic     | modernfarmhouse    | europeanclassic   |
-| neotraditional      | warmminimalist     |                    |                   |
+| MINIMALIST          | SCANDINAVIAN       | INDUSTRIAL         | BOHO              |
+| TRADITIONAL         | ARTDECO            | MIDCENTURYMODERN   | COASTAL           |
+| TROPICAL            | ECLECTIC           | CONTEMPORARY       | FRENCHCOUNTRY     |
+| RUSTIC              | SHABBYCHIC         | VINTAGE            | COUNTRY           |
+| MODERN              | ASIAN_ZEN          | HOLLYWOODREGENCY   | BAUHAUS           |
+| MEDITERRANEAN       | FARMHOUSE          | VICTORIAN          | GOTHIC            |
+| MOROCCAN            | SOUTHWESTERN       | TRANSITIONAL       | MAXIMALIST        |
+| ARABIC              | JAPANDI            | RETROFUTURISM      | ARTNOUVEAU        |
+| URBANMODERN         | WABI_SABI          | GRANDMILLENNIAL    | COASTALGRANDMOTHER|
+| NEWTRADITIONAL      | COTTAGECORE        | LUXEMODERN         | HIGH_TECH         |
+| ORGANICMODERN       | TUSCAN             | CABIN              | DESERTMODERN      |
+| GLOBAL              | INDUSTRIALCHIC     | MODERNFARMHOUSE    | EUROPEANCLASSIC   |
+| NEOTRADITIONAL      | WARMMINIMALIST     |                    |                   |
 
 ## <a id="room-types"> Supported Room Types
 Decor8 AI supports following room types. Learn more about these room types at [Decor8 AI Room Types](https://www.decor8.ai/rooms)
 
 | **Room Type**  |               |               |               |
 |----------------|---------------|---------------|---------------|
-| livingroom     | kitchen       | diningroom    | bedroom       |
-| bathroom       | kidsroom      | familyroom    | readingnook   |
-| sunroom        | walkincloset  | mudroom       | toyroom       |
-| office         | foyer         | powderroom    | laundryroom   |
-| gym            | basement      | garage        | balcony       |
-| cafe           | homebar       | study_room    | front_porch   |
-| back_porch     | back_patio    | openplan      | boardroom     |
-| meetingroom    | openworkspace | privateoffice |               |
+| LIVINGROOM     | KITCHEN       | DININGROOM    | BEDROOM       |
+| BATHROOM       | KIDSROOM      | FAMILYROOM    | READINGNOOK   |
+| SUNROOM        | WALKINCLOSET  | MUDROOM       | TOYROOM       |
+| OFFICE         | FOYER         | POWDERROOM    | LAUNDRYROOM   |
+| GYM            | BASEMENT      | GARAGE        | BALCONY       |
+| CAFE           | HOMEBAR       | STUDY_ROOM    | FRONT_PORCH   |
+| BACK_PORCH     | BACK_PATIO    | OPENPLAN      | BOARDROOM     |
+| MEETINGROOM    | OPENWORKSPACE | PRIVATEOFFICE |               |
 
 
 ## <a id="color-schemes"> Supported Color Schemes

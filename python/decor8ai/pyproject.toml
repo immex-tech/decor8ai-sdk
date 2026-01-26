@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "decor8ai"
-version = "0.33"
+version = "0.34"
 description = "Decor8 AI SDK for virtual staging, interior design generation, landscaping, remodeling, wall/cabinet color changes, sky replacement, and sketch-to-3D rendering."
 authors = ["Akhilesh Joshi <akhilesh@immex.tech>"]
 license = "MIT"
