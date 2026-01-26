@@ -3,7 +3,7 @@
  * Plugin Name: Decor8 AI Virtual Staging
  * Plugin URI: https://decor8.ai
  * Description: Add AI-powered virtual staging capabilities to your real estate website
- * Version: 1.0.1
+ * Version: 1.0.2
  * Requires at least: 5.8
  * Requires PHP: 7.4
  * Author: Decor8 AI
