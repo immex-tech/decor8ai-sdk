@@ -59,20 +59,25 @@ save_generated_images(response_json)
 
 # Test 2: New parameters usage
 print("\nTest 2: New parameter usage")
+
+
+
 response_json = generate_designs_for_room(
     input_image_url=input_image_url,
-    room_type='bedroom',
-    design_style='modern',
     num_images=2,
-    # New parameters
-    prompt="A luxurious bedroom with ocean view",
-    prompt_prefix="high end, professional photo",
-    prompt_suffix="natural lighting, detailed textures",
-    negative_prompt="cluttered, dark, cartoon",
-    seed=42,
+    prompt="bedroom with bed, wardrobe, Table Lamps, Dresser, Minimalist design style with simple lines, neutral colors",
+    prompt_prefix="Real Estate Property Listing, Award Winning photo of ",
+    prompt_suffix="4K, Trending, natural lighting, detailed textures",
+    negative_prompt="cluttered, dark, cartoon, unreal, person, baby, kid, child, pet, animal, human, face, body, limbs",
+    seed=7566969,
     guidance_scale=15.0,
     num_inference_steps=50
 )
+
+
+
+
+
 save_generated_images(response_json)
 
 # Test 3: Mixed usage with custom prompt overriding style

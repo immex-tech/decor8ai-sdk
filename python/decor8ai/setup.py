@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name='decor8ai',
-    version='0.3.0',
+    version='0.3.1',
     author='Akhilesh Joshi',
     author_email='akhilesh@immex.tech',
     description='Decor8 AI SDK for virtual staging, interior design generation, landscaping, remodeling, wall/cabinet color changes, sky replacement, and sketch-to-3D rendering.',

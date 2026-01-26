@@ -1,40 +1,57 @@
-# Decor8 AI Python SDK
+# Decor8 AI Python SDK - AI Interior Design & Virtual Staging API
+
+[![PyPI version](https://badge.fury.io/py/decor8ai.svg)](https://pypi.org/project/decor8ai/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python Version](https://img.shields.io/badge/python-%3E%3D3.10-blue)](https://www.python.org)
+
+The official Python SDK for **[Decor8 AI](https://www.decor8.ai)** - a powerful **AI interior design** and **AI virtual staging** platform. Build **AI room design** applications, **AI home decorations** tools, and **interior design by AI** services with ease.
+
+## Features
+
+- **AI Virtual Staging** - Transform empty rooms into beautifully furnished spaces
+- **AI Interior Design** - Generate designs in 50+ styles for 25+ room types
+- **AI Landscaping** - Create outdoor and garden designs (Beta)
+- **AI Kitchen Remodeling** - Visualize kitchen renovations
+- **AI Bathroom Remodeling** - Preview bathroom transformations
+- **AI Wall Color Change** - Virtually repaint walls with any color
+- **AI Cabinet Color Change** - Preview new cabinet finishes
+- **AI Sky Replacement** - Enhance exterior photos with beautiful skies
+- **Sketch to 3D Render** - Convert sketches into photorealistic renders
+- **Object Removal** - Remove unwanted items from photos
+- **Image Upscaling** - Enhance resolution up to 8x
 
 ## Table of Contents
-- [Overview](#python-sdk-overview)
 - [Installation](#installation)
 - [Configuration](#configure-sdk)
 - [Usage](#using-this-sdk)
-  - [Design With Photo](#design-with-photo)
-  - [Design Without Photo](#design-without-photo)
-  - [Priming the walls](#prime-the-walls)
-  - [Upscale the image](#upscale-the-image)
-  - [Change Wall Color](#change-wall-color) (NEW)
-  - [Change Kitchen Cabinet Color](#change-kitchen-cabinet-color) (NEW)
-  - [Remodel Kitchen](#remodel-kitchen) (NEW)
-  - [Remodel Bathroom](#remodel-bathroom) (NEW)
-  - [Landscaping Designs](#landscaping-designs) (NEW)
-  - [Replace Sky](#replace-sky) (NEW)
-  - [Sketch to 3D Render](#sketch-to-3d-render) (NEW)
-  - [Remove Objects from Room](#remove-objects-from-room) (NEW)
-  - [Generate Captions for the image](#generate-captions-for-the-interior-image)
-- [Design Styles](#design-styles)
-- [Room Types](#room-types)
+  - [AI Virtual Staging](#design-with-photo)
+  - [AI Interior Design (Inspirational)](#design-without-photo)
+  - [Wall Priming](#prime-the-walls)
+  - [Image Upscaling](#upscale-the-image)
+  - [AI Wall Color Change](#change-wall-color)
+  - [AI Cabinet Color Change](#change-kitchen-cabinet-color)
+  - [AI Kitchen Remodeling](#remodel-kitchen)
+  - [AI Bathroom Remodeling](#remodel-bathroom)
+  - [AI Landscaping](#landscaping-designs)
+  - [AI Sky Replacement](#replace-sky)
+  - [Sketch to 3D Render](#sketch-to-3d-render)
+  - [Object Removal](#remove-objects-from-room)
+  - [Image Captions](#generate-captions-for-the-interior-image)
+- [Design Styles Reference](#design-styles)
+- [Room Types Reference](#room-types)
 - [Color Schemes](#color-schemes)
 - [Seasonal Décor](#speciality-decor)
+- [Use Cases](#use-cases)
 
+---
 
-Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
+**[Decor8 AI](https://www.decor8.ai)** is a cutting-edge **AI interior design** platform that revolutionizes your design experience. It offers 50+ design styles and 25+ room types to create unique **AI room design** transformations.
 
-You can choose from 35+ interior design styles and 20+ room types to create unique interior design styles for your space.
+The platform specializes in **AI virtual staging**, transforming empty spaces into vivid, attractive interiors for real estate marketing and **AI home decorations** visualization.
 
-The app specializes in virtual staging, transforming empty spaces into vivid, attractive interiors, enhancing their appeal for better marketability. 
+The Python SDK enables seamless integration of **interior design by AI** capabilities directly within your Python environment for data science, ML pipelines, and backend applications.
 
-Equipped with a powerful Python SDK, Decor8 AI facilitates seamless integrations, enabling enhanced design generation capabilities directly within your Python environment. Its user-friendly interface is optimized for performance on smaller screens, ensuring that your design process is as effortless and efficient as possible.
-
-This documentation describes how you can use Decor8 AI Python SDK to integrate Decor8 AI's powerful features in your application. 
-
-See [complete documentation for Decor8 AI api for Virtual Staging and Interior Design](https://api-docs.decor8.ai/). Please reach out to [Decor8 AI Team](mailto:decor8@immex.tech) with questions or suggestions. 
+See [complete API documentation](https://api-docs.decor8.ai/) | Contact [Decor8 AI Team](mailto:decor8@immex.tech) 
 
 ## Use Cases
 
@@ -492,3 +509,18 @@ Decor8 AI supports following seasonal décor.
 | SPECIALITY_DECOR_5     | Spring Season Decor                                                   |
 | SPECIALITY_DECOR_6     | Summer Season Decor                                                   |
 | SPECIALITY_DECOR_7     | Winter Season Decor                                                   |
+
+---
+
+## Links
+
+- [Decor8 AI Platform](https://www.decor8.ai) - Get started with AI interior design
+- [API Documentation](https://api-docs.decor8.ai/) - Complete API reference
+- [API Playground](https://api-docs.decor8.ai/playground) - Try the API interactively
+- [GitHub Repository](https://github.com/immex-tech/decor8ai-sdk) - SDK source code
+- [PyPI Package](https://pypi.org/project/decor8ai/) - Package registry
+- [Contact Support](mailto:decor8@immex.tech) - Questions or custom integrations
+
+---
+
+**Keywords:** AI Interior Design, AI Virtual Staging, AI Virtual Staging API, AI decorations, AI Home Decorations, AI room design, Interior design by AI, AI home design, Python virtual staging, real estate virtual staging SDK
