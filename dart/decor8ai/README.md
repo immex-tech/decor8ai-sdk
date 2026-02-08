@@ -150,6 +150,21 @@ final result = await client.generateDesignsForRoom(
 }
 ```
 
+### Advanced Parameters Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `seed` | integer | random | For reproducible results (≥ 0) |
+| `guidanceScale` | integer | 15 | Controls prompt adherence (1-20) |
+| `numInferenceSteps` | integer | 50 | Number of denoising steps (1-75) |
+| `designCreativity` | double | 0.39 | Controls creativity level (0-1) |
+| `designStyleImageUrl` | String | null | Reference image URL for style guidance |
+| `designStyleImageStrength` | double | 0.82 | How strongly to follow reference (0-1) |
+| `scaleFactor` | integer | 2 | Output resolution multiplier (1-8) |
+| `maskInfo` | String | null | Masking information for targeted editing |
+| `webhooksData` | String | null | JSON string for webhook URL for async notifications |
+| `decorItems` | String | null | JSON string for specific furniture/accessories to place |
+
 ---
 
 ## AI Interior Design (Inspirational)
@@ -384,7 +399,7 @@ Learn more at [Decor8 AI Decoration Styles](https://www.decor8.ai/interior-decor
 
 ## Room Types Reference
 
-25+ room types for **AI room design**:
+30+ room types for **AI room design**:
 
 | **Room Types**  |               |               |               |
 |-----------------|---------------|---------------|---------------|
@@ -394,7 +409,8 @@ Learn more at [Decor8 AI Decoration Styles](https://www.decor8.ai/interior-decor
 | OFFICE          | FOYER         | POWDERROOM    | LAUNDRYROOM   |
 | GYM             | BASEMENT      | GARAGE        | BALCONY       |
 | CAFE            | HOMEBAR       | STUDY_ROOM    | FRONT_PORCH   |
-| BACK_PORCH      | BACK_PATIO    |               |               |
+| BACK_PORCH      | BACK_PATIO    | OPENPLAN      | BOARDROOM     |
+| MEETINGROOM     | OPENWORKSPACE | PRIVATEOFFICE |               |
 
 Learn more at [Decor8 AI Room Types](https://www.decor8.ai/rooms)
 
@@ -415,6 +431,16 @@ Learn more at [Decor8 AI Room Types](https://www.decor8.ai/rooms)
 | COLOR_SCHEME_8     | Blue, Beige                 |
 | COLOR_SCHEME_9     | Gray, Brown                 |
 | COLOR_SCHEME_10    | Black, Red                  |
+| COLOR_SCHEME_11    | Gray-Green, White, Black    |
+| COLOR_SCHEME_12    | Blue, Gray, Taupe           |
+| COLOR_SCHEME_13    | Black, Navy                 |
+| COLOR_SCHEME_14    | Emerald, Tan                |
+| COLOR_SCHEME_15    | Forest Green, Light Gray    |
+| COLOR_SCHEME_16    | Yellow, Gray                |
+| COLOR_SCHEME_17    | Pink, Green                 |
+| COLOR_SCHEME_18    | Blush Pink, Black           |
+| COLOR_SCHEME_19    | Black, White                |
+| COLOR_SCHEME_20    | Blue, White                 |
 
 ---
 

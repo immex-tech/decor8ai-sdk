@@ -184,31 +184,33 @@ response_json = generate_designs_for_room(
 )
 ```
 
-### Example 3: Using Advanced Prompt Controls
+### Example 3: Using Advanced Generation Controls
 ```python
 from decor8ai.client import generate_designs_for_room
 
-# Advanced prompt-guided generation
+# Advanced generation with style reference image
 input_image_url = 'https://prod-files.decor8.ai/test-images/sdk_test_image.png'
 prompt = "A cozy reading nook with built-in bookshelves"
-prompt_prefix = "high quality, photorealistic interior, professional photography"
-prompt_suffix = "warm ambient lighting, detailed textures, interior design magazine quality"
-negative_prompt = "cluttered, dark, cartoon, synthetic, artificial"
 
 # Optional advanced parameters
 seed = 42  # For reproducible results
-guidance_scale = 7.5  # Controls how closely the model follows the prompt
-num_inference_steps = 50  # Number of denoising steps
+guidance_scale = 15  # Controls prompt adherence (1-20, default: 15)
+num_inference_steps = 50  # Number of denoising steps (1-75, default: 50)
+design_creativity = 0.5  # Controls creativity level (0-1, default: 0.39)
+
+# Optional: Use a reference image for style guidance
+design_style_image_url = 'https://example.com/style-reference.jpg'
+design_style_image_strength = 0.8  # How strongly to follow reference (0-1, default: 0.82)
 
 response_json = generate_designs_for_room(
     input_image_url=input_image_url,
     prompt=prompt,
-    prompt_prefix=prompt_prefix,
-    prompt_suffix=prompt_suffix,
-    negative_prompt=negative_prompt,
     seed=seed,
     guidance_scale=guidance_scale,
     num_inference_steps=num_inference_steps,
+    design_creativity=design_creativity,
+    design_style_image_url=design_style_image_url,
+    design_style_image_strength=design_style_image_strength,
     num_images=1
 )
 ```
@@ -238,6 +240,21 @@ If unsuccessful, the response will contain an error:
     "message": "Invalid input image. Please check the input image and try again.",
 }
 ```
+
+### Advanced Parameters Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `seed` | integer | random | For reproducible results (≥ 0) |
+| `guidance_scale` | integer | 15 | Controls prompt adherence (1-20) |
+| `num_inference_steps` | integer | 50 | Number of denoising steps (1-75) |
+| `design_creativity` | float | 0.39 | Controls creativity level (0-1) |
+| `design_style_image_url` | string | None | Reference image URL for style guidance |
+| `design_style_image_strength` | float | 0.82 | How strongly to follow reference (0-1) |
+| `scale_factor` | integer | 2 | Output resolution multiplier (1-8) |
+| `mask_info` | string | None | Masking information for targeted editing |
+| `webhooks_data` | JSON string | None | Webhook URL for async notifications |
+| `decor_items` | JSON string | None | Specific furniture/accessories to place |
 
 ## <a id="design-without-photo"> Generating Inspirational Interior Design Ideas without using a photo of the room
 

@@ -1,0 +1,27 @@
+{
+  "test_images": {
+    "room": "https://prod-files.decor8.ai/test-images/sdk_test_image.png",
+    "remove_objects": "https://prod-files.decor8.ai/test-images/sdk_test_remove_objects_bedroom_1.jpg",
+    "wall_color": "https://prod-files.decor8.ai/test-images/sdk_test_remove_objects_bedroom_1.jpg",
+    "kitchen_cabinets": "https://prod-files.decor8.ai/test-images/sdk_test_change_kitchen_cabinets_color_1.jpg",
+    "kitchen_remodel": "https://prod-files.decor8.ai/test-images/sdk_test_remodel_kitchen.png",
+    "bathroom_remodel": "https://prod-files.decor8.ai/test-images/sdk_test_remodel_bathroom.png",
+    "landscaping": "https://prod-files.decor8.ai/test-images/sdk_test_landcape_designs_front_yard.jpeg",
+    "sky_replacement": "https://prod-files.decor8.ai/test-images/sdk_replace_sky_test_image.png",
+    "sketch": "https://prod-files.decor8.ai/test-images/sdk_sketch_to_3d_render.png"
+  },
+  "test_params": {
+    "room_type": "livingroom",
+    "design_style": "modern",
+    "wall_color": "#FF5733",
+    "cabinet_color": "#8B4513",
+    "sky_type": "day",
+    "yard_type": "front yard",
+    "garden_style": "california style garden",
+    "render_type": "perspective"
+  },
+  "timeouts": {
+    "default": 120,
+    "long_running": 300
+  }
+}

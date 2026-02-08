@@ -1,0 +1,72 @@
+{
+  "timestamp": "2026-01-26T20:40:37.258Z",
+  "sdk": "javascript",
+  "results": [
+    {
+      "name": "generateDesignsForRoom",
+      "success": true,
+      "duration": 11.643,
+      "error": null
+    },
+    {
+      "name": "generateInspirationalDesigns",
+      "success": true,
+      "duration": 8.875,
+      "error": null
+    },
+    {
+      "name": "primeWallsForRoom",
+      "success": true,
+      "duration": 8.979,
+      "error": null
+    },
+    {
+      "name": "replaceSkyBehindHouse",
+      "success": true,
+      "duration": 16.916,
+      "error": null
+    },
+    {
+      "name": "removeObjectsFromRoom",
+      "success": true,
+      "duration": 1.753,
+      "error": null
+    },
+    {
+      "name": "changeWallColor",
+      "success": true,
+      "duration": 32.847,
+      "error": null
+    },
+    {
+      "name": "changeKitchenCabinetsColor",
+      "success": true,
+      "duration": 19.701,
+      "error": null
+    },
+    {
+      "name": "remodelKitchen",
+      "success": true,
+      "duration": 12.555,
+      "error": null
+    },
+    {
+      "name": "remodelBathroom",
+      "success": true,
+      "duration": 12.75,
+      "error": null
+    },
+    {
+      "name": "generateLandscapingDesigns",
+      "success": true,
+      "duration": 15.801,
+      "error": null
+    },
+    {
+      "name": "sketchTo3dRender",
+      "success": true,
+      "duration": 12.003,
+      "error": null
+    }
+  ]
+}

@@ -18,7 +18,7 @@
 
 Decor8 AI is a cutting-edge interior design app that revolutionizes your design experience. It offers a rich tapestry of customization options allowing you to visualize and craft interiors that echo your style and imagination. 
 
-You can choose from 35+ interior design styles and 20+ room types to create unique interior design styles for your space.
+You can choose from 50+ interior design styles and 25+ room types to create unique interior design styles for your space.
 
 The app specializes in virtual staging, transforming empty spaces into vivid, attractive interiors, enhancing their appeal for better marketability. 
 
@@ -88,24 +88,24 @@ curl -X POST $SERVER_URL \
      }'
 ```
 
-### Example 3: Using Advanced Prompt Controls
+### Example 3: Using Advanced Generation Controls
 ```bash
 export INPUT_IMAGE_URL="https://prod-files.decor8.ai/test-images/sdk_test_image.png"
 export SERVER_URL="https://api.decor8.ai/generate_designs_for_room"
 
-# Advanced prompt-guided generation
+# Advanced generation with style reference
 curl -X POST $SERVER_URL \
      -H "Authorization: Bearer $DECOR8AI_API_KEY" \
      -H "Content-Type: application/json" \
      -d '{
        "input_image_url": "'$INPUT_IMAGE_URL'",
        "prompt": "A cozy reading nook with built-in bookshelves",
-       "prompt_prefix": "high quality, photorealistic interior, professional photography",
-       "prompt_suffix": "warm ambient lighting, detailed textures, interior design magazine quality",
-       "negative_prompt": "cluttered, dark, cartoon, synthetic, artificial",
        "seed": 42,
-       "guidance_scale": 7.5,
+       "guidance_scale": 15,
        "num_inference_steps": 50,
+       "design_creativity": 0.5,
+       "design_style_image_url": "https://example.com/style-reference.jpg",
+       "design_style_image_strength": 0.8,
        "num_images": 1
      }'
 ```
@@ -127,6 +127,21 @@ The response is a JSON object containing the generated designs and other informa
     }
 }
 ```
+
+### Advanced Parameters Reference
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `seed` | integer | random | For reproducible results (≥ 0) |
+| `guidance_scale` | integer | 15 | Controls prompt adherence (1-20) |
+| `num_inference_steps` | integer | 50 | Number of denoising steps (1-75) |
+| `design_creativity` | float | 0.39 | Controls creativity level (0-1) |
+| `design_style_image_url` | string | null | Reference image URL for style guidance |
+| `design_style_image_strength` | float | 0.82 | How strongly to follow reference (0-1) |
+| `scale_factor` | integer | 2 | Output resolution multiplier (1-8) |
+| `mask_info` | string | null | Masking information for targeted editing |
+| `webhooks_data` | JSON string | null | Webhook URL for async notifications |
+| `decor_items` | JSON string | null | Specific furniture/accessories to place |
 
 ## <a id="design-without-photo"> Generating Inspirational Interior Design Ideas without using a photo of the room
 
@@ -209,7 +224,8 @@ Decor8 AI supports following room types. Learn more about these room types at [D
 | office         | foyer         | powderroom    | laundryroom   |
 | gym            | basement      | garage        | balcony       |
 | cafe           | homebar       | study_room    | front_porch   |
-| back_porch     | back_patio    |               |               |
+| back_porch     | back_patio    | openplan      | boardroom     |
+| meetingroom    | openworkspace | privateoffice |               |
 
 
 ## <a id="color-schemes"> Supported Color Schemes
