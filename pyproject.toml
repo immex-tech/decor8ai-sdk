@@ -1,0 +1,14 @@
+[project]
+name = "decor8ai-sdk"
+description = ""
+version = "1.0.0"
+license = {file = "LICENSE"}
+
+[project.urls]
+Repository = "https://github.com/immex-tech/decor8ai-sdk"
+#  Used by Comfy Registry https://comfyregistry.org
+
+[tool.comfy]
+PublisherId = ""
+DisplayName = "decor8ai-sdk"
+Icon = ""
